@@ -1,4 +1,7 @@
 <resources>
-    <string name="app_name">AI</string>
+    <string name="app_name">LemonGroup: Admin App</string>
     <string name="action_settings">Настройки</string>
+    <string name="action_adding">Добавление</string>
+    <string name="action_updating">Редактирование</string>
+    <string name="action_removing">Удаление</string>
 </resources>

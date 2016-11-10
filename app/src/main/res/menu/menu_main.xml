@@ -1,10 +1,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity">
+    tools:context=".view.MainActivity">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:id="@+id/action_adding"
+        android:title="@string/action_adding"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_updating"
+        android:title="@string/action_updating"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_removing"
+        android:title="@string/action_removing"
         app:showAsAction="never" />
 </menu>
