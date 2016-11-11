@@ -10,12 +10,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.slack.geekbrainswork.ai.R;
-import com.slack.geekbrainswork.ai.view.fragments.AddingElementFragment;
+import com.slack.geekbrainswork.ai.view.fragments.CatalogsFragment;
+import com.slack.geekbrainswork.ai.view.fragments.SitesCatalogFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ActivityCallback {
 
     private static String TAG = "TAG";
 
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
 
         Fragment fragment = fragmentManager.findFragmentByTag(TAG);
-        if (fragment == null) replaceFragment(new AddingElementFragment(), false);
+        if (fragment == null) replaceFragment(new CatalogsFragment(), false);
     }
 
     @Override
@@ -45,14 +46,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.action_adding:
-                startAddingElementFragment();
+            case R.id.action_catalogs:
+                startCatalogsFragment();
                 return true;
-            case R.id.action_updating:
-                startUpdatingElementFragment();
-                return true;
-            case R.id.action_removing:
-                startRemovingElementFragment();
+            case R.id.action_users:
+                startUsersFragment();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -65,17 +63,17 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    public void startAddingElementFragment() {
-        //replaceFragment(AddingElementFragment, true);
+    public void startCatalogsFragment() {
+        replaceFragment(new CatalogsFragment(), true);
     }
 
-    public void startUpdatingElementFragment() {
+    public void startUsersFragment() {
         //ToDo updating
-        //replaceFragment(UpdatingElementFragment, true);
+        //replaceFragment(UsersFragment, true);
     }
 
-    public void startRemovingElementFragment() {
-        //ToDo removing
-        //replaceFragment(RemovingElementFragment, true);
+    @Override
+    public void startSitesCatalogFragment() {
+        replaceFragment(new SitesCatalogFragment(), true);
     }
 }

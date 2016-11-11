@@ -3,15 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".view.MainActivity">
     <item
-        android:id="@+id/action_adding"
-        android:title="@string/action_adding"
+        android:id="@+id/action_catalogs"
+        android:title="@string/action_catalogs"
         app:showAsAction="never" />
     <item
-        android:id="@+id/action_updating"
-        android:title="@string/action_updating"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_removing"
-        android:title="@string/action_removing"
+        android:id="@+id/action_users"
+        android:title="@string/action_users"
         app:showAsAction="never" />
 </menu>
