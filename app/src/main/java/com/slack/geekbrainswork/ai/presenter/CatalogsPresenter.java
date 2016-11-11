@@ -1,7 +1,5 @@
 package com.slack.geekbrainswork.ai.presenter;
 
-import android.os.Bundle;
-
 import com.slack.geekbrainswork.ai.presenter.vo.Catalog;
 import com.slack.geekbrainswork.ai.view.fragments.CatalogsView;
 
@@ -28,7 +26,7 @@ public class CatalogsPresenter extends BasePresenter {
     }
 
     public void onItemClick(Catalog catalog) {
-        switch (catalog.getName()){
+        switch (catalog.getName()) {
             case keywordsCatalogName:
                 view.navigateToKeywordsCatalogView();
                 break;
