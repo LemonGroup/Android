@@ -47,6 +47,8 @@ public class SitesCatalogFragment extends BaseFragment implements SitesCatalogVi
         View view = inflater.inflate(R.layout.fragment_catalog_sites, container, false);
         ButterKnife.bind(this, view);
 
+        getActivity().setTitle("Справочник сайтов");
+
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(llm);
         adapter = new SiteListAdapter(new ArrayList<Site>(), presenter);
@@ -60,6 +62,7 @@ public class SitesCatalogFragment extends BaseFragment implements SitesCatalogVi
     @Override
     public void navigateToSiteDetails(Site site) {
         Intent intent = new Intent(getActivity(), SiteDetailsActivity.class);
+        intent.putExtra("site", site);
         startActivityForResult(intent, 10);
     }
 

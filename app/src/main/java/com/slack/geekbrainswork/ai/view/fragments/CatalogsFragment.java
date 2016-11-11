@@ -3,11 +3,13 @@ package com.slack.geekbrainswork.ai.view.fragments;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.slack.geekbrainswork.ai.R;
@@ -23,6 +25,8 @@ import butterknife.ButterKnife;
 
 public class CatalogsFragment extends BaseFragment implements CatalogsView {
 
+    @BindView(R.id.layout)
+    LinearLayout layout;
     @BindView(R.id.list_view)
     ListView catalogsListView;
 
@@ -51,6 +55,8 @@ public class CatalogsFragment extends BaseFragment implements CatalogsView {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_catalog_list, container, false);
         ButterKnife.bind(this, view);
+
+        getActivity().setTitle("Справочники");
 
         //ToDo Dependency Injection
         presenter = new CatalogsPresenter(this);
@@ -81,15 +87,22 @@ public class CatalogsFragment extends BaseFragment implements CatalogsView {
     @Override
     public void navigateToPersonsCatalogView() {
         //ToDo navigateToPersonsCatalogView
+        makeToast("Функционал не реализован");
     }
 
     @Override
     public void navigateToKeywordsCatalogView() {
         //ToDo navigateToKeywordsCatalogView
+        makeToast("Функционал не реализован");
     }
 
     @Override
     public void showError(String error) {
         //ToDo error handling
+        makeToast(error);
+    }
+
+    private void makeToast(String text) {
+        Snackbar.make(layout, text, Snackbar.LENGTH_LONG).show();
     }
 }

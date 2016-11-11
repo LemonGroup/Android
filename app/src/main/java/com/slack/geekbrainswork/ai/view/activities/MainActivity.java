@@ -1,5 +1,7 @@
 package com.slack.geekbrainswork.ai.view.activities;
 
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -21,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
 
     private static String TAG = "TAG";
 
+    @BindView(R.id.coordinator_layout)
+    CoordinatorLayout coordinatorLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
@@ -32,8 +36,8 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        fragmentManager = getSupportFragmentManager();
 
+        fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentByTag(TAG);
         if (fragment == null) replaceFragment(new CatalogsFragment(), false);
     }
@@ -68,13 +72,14 @@ public class MainActivity extends AppCompatActivity implements ActivityCallback 
         replaceFragment(new CatalogsFragment(), true);
     }
 
-    public void startUsersFragment() {
-        //ToDo updating
-        //replaceFragment(UsersFragment, true);
-    }
-
     @Override
     public void startSitesCatalogFragment() {
         replaceFragment(new SitesCatalogFragment(), true);
+    }
+
+    public void startUsersFragment() {
+        //ToDo updating
+        //replaceFragment(UsersFragment, true);
+        Snackbar.make(coordinatorLayout,"Функционал не реализован",Snackbar.LENGTH_LONG).show();
     }
 }
