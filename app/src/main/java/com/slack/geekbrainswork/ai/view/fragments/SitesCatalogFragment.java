@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.*;
 import android.view.View;
 
@@ -13,7 +13,11 @@ import com.slack.geekbrainswork.ai.R;
 import com.slack.geekbrainswork.ai.presenter.BasePresenter;
 import com.slack.geekbrainswork.ai.presenter.SitesCatalogPresenter;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
-import com.slack.geekbrainswork.ai.view.SiteDetailsActivity;
+import com.slack.geekbrainswork.ai.view.activities.SiteDetailsActivity;
+import com.slack.geekbrainswork.ai.view.adapters.SiteListAdapter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,7 +31,10 @@ public class SitesCatalogFragment extends BaseFragment implements SitesCatalogVi
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
 
-    private SitesCatalogPresenter presenter;
+    //ToDo Dependency Injection
+    private SitesCatalogPresenter presenter = new SitesCatalogPresenter(this);
+
+    private SiteListAdapter adapter;
 
     @Override
     protected BasePresenter getPresenter() {
@@ -40,8 +47,11 @@ public class SitesCatalogFragment extends BaseFragment implements SitesCatalogVi
         View view = inflater.inflate(R.layout.fragment_catalog_sites, container, false);
         ButterKnife.bind(this, view);
 
-        //ToDo Dependency Injection
-        presenter = new SitesCatalogPresenter(this);
+        LinearLayoutManager llm = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(llm);
+        adapter = new SiteListAdapter(new ArrayList<Site>(), presenter);
+        recyclerView.setAdapter(adapter);
+
         presenter.onCreate(savedInstanceState);
 
         return view;
@@ -54,9 +64,14 @@ public class SitesCatalogFragment extends BaseFragment implements SitesCatalogVi
     }
 
     @Override
+    public void showSiteList(List<Site> siteList) {
+        adapter.setSiteList(siteList);
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 10){
-            if (resultCode == RESULT_OK){
+        if (requestCode == 10) {
+            if (resultCode == RESULT_OK) {
                 //ToDo on result action
             }
         }

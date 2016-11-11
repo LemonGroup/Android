@@ -1,4 +1,4 @@
-package com.slack.geekbrainswork.ai.view;
+package com.slack.geekbrainswork.ai.view.activities;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.slack.geekbrainswork.ai.R;
+import com.slack.geekbrainswork.ai.view.ActivityCallback;
 import com.slack.geekbrainswork.ai.view.fragments.CatalogsFragment;
 import com.slack.geekbrainswork.ai.view.fragments.SitesCatalogFragment;
 

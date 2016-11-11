@@ -3,7 +3,9 @@ package com.slack.geekbrainswork.ai.presenter.vo;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Site {
+import java.io.Serializable;
+
+public class Site implements Serializable{
 
     private Integer id;
     private String name;

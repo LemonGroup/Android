@@ -28,7 +28,7 @@ public class SiteListAdapter extends BaseAdapter<Site> {
         });
     }
 
-    public void setRepoList(List<Site> list) {
+    public void setSiteList(List<Site> list) {
         this.list = list;
         notifyDataSetChanged();
     }
