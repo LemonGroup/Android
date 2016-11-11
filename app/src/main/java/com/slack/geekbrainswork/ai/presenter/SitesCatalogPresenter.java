@@ -2,7 +2,7 @@ package com.slack.geekbrainswork.ai.presenter;
 
 import android.os.Bundle;
 
-import com.slack.geekbrainswork.ai.presenter.mappers.SitesMapper;
+import com.slack.geekbrainswork.ai.presenter.mappers.SitesDtoToSitesMapper;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
 import com.slack.geekbrainswork.ai.view.fragments.SitesCatalogView;
 
@@ -17,7 +17,7 @@ public class SitesCatalogPresenter extends BasePresenter {
 
     private SitesCatalogView view;
     private List<Site> siteList;
-    private SitesMapper sitesMapper = new SitesMapper();
+    private SitesDtoToSitesMapper mapper = new SitesDtoToSitesMapper();
 
     public SitesCatalogPresenter(SitesCatalogView sitesCatalogView) {
         view = sitesCatalogView;
@@ -37,7 +37,7 @@ public class SitesCatalogPresenter extends BasePresenter {
 
     private void loadData() {
         Subscription subscription = data.getSites()
-                .map(sitesMapper)
+                .map(mapper)
                 .subscribe(new Observer<List<Site>>() {
                     @Override
                     public void onCompleted() {
@@ -70,5 +70,9 @@ public class SitesCatalogPresenter extends BasePresenter {
 
     private boolean isSiteListEmpty() {
         return siteList == null || siteList.isEmpty();
+    }
+
+    public void onActivityResult() {
+        loadData();
     }
 }

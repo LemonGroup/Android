@@ -75,7 +75,7 @@ public class SitesCatalogFragment extends BaseFragment implements SitesCatalogVi
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 10) {
             if (resultCode == RESULT_OK) {
-                //ToDo on result action
+                presenter.onActivityResult();
             }
         }
     }
@@ -83,5 +83,11 @@ public class SitesCatalogFragment extends BaseFragment implements SitesCatalogVi
     @Override
     public void showError(String error) {
 
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        presenter.onSaveInstanceState(outState);
     }
 }
