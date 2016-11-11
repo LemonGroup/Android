@@ -1,0 +1,6 @@
+package com.slack.geekbrainswork.ai.view;
+
+import android.support.v7.app.AppCompatActivity;
+
+public class SiteDetailsActivity extends AppCompatActivity {
+}
