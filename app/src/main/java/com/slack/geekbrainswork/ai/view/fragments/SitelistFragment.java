@@ -11,7 +11,7 @@ import android.view.View;
 
 import com.slack.geekbrainswork.ai.R;
 import com.slack.geekbrainswork.ai.presenter.BasePresenter;
-import com.slack.geekbrainswork.ai.presenter.SitelistPresenter;
+import com.slack.geekbrainswork.ai.presenter.SiteListPresenter;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
 import com.slack.geekbrainswork.ai.view.activities.AddSiteActvity;
 import com.slack.geekbrainswork.ai.view.activities.UpdateSiteActivity;
@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
 
 import static android.app.Activity.RESULT_OK;
 
-public class SitelistFragment extends BaseFragment implements SitelistView {
+public class SiteListFragment extends BaseFragment implements SiteListView {
 
     @BindView(R.id.fab)
     FloatingActionButton addButton;
@@ -33,7 +33,7 @@ public class SitelistFragment extends BaseFragment implements SitelistView {
     RecyclerView recyclerView;
 
     //ToDo Dependency Injection
-    private SitelistPresenter presenter = new SitelistPresenter(this);
+    private SiteListPresenter presenter = new SiteListPresenter(this);
 
     private SiteListAdapter adapter;
 

@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.slack.geekbrainswork.ai.presenter.mappers.SiteDtoToSiteMapper;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
-import com.slack.geekbrainswork.ai.view.activities.SiteDetailsView;
+import com.slack.geekbrainswork.ai.view.activities.SiteView;
 
 import rx.Observer;
 import rx.Subscription;
@@ -13,10 +13,10 @@ public class UpdateSitePresenter extends BasePresenter {
     private static String BUNDLE_SITE_KEY = "BUNDLE_SITE_KEY";
 
     private Site site;
-    private SiteDetailsView view;
+    private SiteView view;
     private SiteDtoToSiteMapper mapper = new SiteDtoToSiteMapper();
 
-    public UpdateSitePresenter(SiteDetailsView view) {
+    public UpdateSitePresenter(SiteView view) {
         this.view = view;
     }
 

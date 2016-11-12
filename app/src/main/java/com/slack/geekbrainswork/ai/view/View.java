@@ -1,4 +1,4 @@
-package com.slack.geekbrainswork.ai.view.fragments;
+package com.slack.geekbrainswork.ai.view;
 
 public interface View {
 

@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.slack.geekbrainswork.ai.presenter.mappers.SitesDtoToSitesMapper;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
-import com.slack.geekbrainswork.ai.view.fragments.SitelistView;
+import com.slack.geekbrainswork.ai.view.fragments.SiteListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,15 +12,15 @@ import java.util.List;
 import rx.Observer;
 import rx.Subscription;
 
-public class SitelistPresenter extends BasePresenter {
+public class SiteListPresenter extends BasePresenter {
     private static String BUNDLE_SITE_LIST_KEY = "BUNDLE_SITE_LIST_KEY";
 
-    private SitelistView view;
+    private SiteListView view;
     private List<Site> siteList;
     private SitesDtoToSitesMapper mapper = new SitesDtoToSitesMapper();
 
-    public SitelistPresenter(SitelistView sitelistView) {
-        view = sitelistView;
+    public SiteListPresenter(SiteListView siteListView) {
+        view = siteListView;
     }
 
     public void onCreate(Bundle savedInstanceState) {

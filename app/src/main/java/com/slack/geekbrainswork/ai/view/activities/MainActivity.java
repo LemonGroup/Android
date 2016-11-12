@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import com.slack.geekbrainswork.ai.R;
 import com.slack.geekbrainswork.ai.view.MainActivityCallback;
 import com.slack.geekbrainswork.ai.view.fragments.CatalogsFragment;
-import com.slack.geekbrainswork.ai.view.fragments.SitelistFragment;
+import com.slack.geekbrainswork.ai.view.fragments.SiteListFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityCallb
 
     @Override
     public void startSitesCatalogFragment() {
-        replaceFragment(new SitelistFragment(), true);
+        replaceFragment(new SiteListFragment(), true);
     }
 
     public void startUsersFragment() {

@@ -6,7 +6,7 @@ import com.slack.geekbrainswork.ai.view.fragments.CatalogsView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CatalogsPresenter extends BasePresenter {
+public class CatalogListPresenter extends BasePresenter {
     //ToDo remove hardcoded data
     private final String keywordsCatalogName = "Ключевые слова";
     private final String personsCatalogName = "Личности";
@@ -14,7 +14,7 @@ public class CatalogsPresenter extends BasePresenter {
 
     private CatalogsView view;
 
-    public CatalogsPresenter(CatalogsView view) {
+    public CatalogListPresenter(CatalogsView view) {
         this.view = view;
     }
 

@@ -13,7 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.slack.geekbrainswork.ai.R;
-import com.slack.geekbrainswork.ai.presenter.CatalogsPresenter;
+import com.slack.geekbrainswork.ai.presenter.CatalogListPresenter;
 import com.slack.geekbrainswork.ai.presenter.BasePresenter;
 import com.slack.geekbrainswork.ai.presenter.vo.Catalog;
 import com.slack.geekbrainswork.ai.view.MainActivityCallback;
@@ -30,7 +30,7 @@ public class CatalogsFragment extends BaseFragment implements CatalogsView {
     @BindView(R.id.list_view)
     ListView catalogsListView;
 
-    private CatalogsPresenter presenter;
+    private CatalogListPresenter presenter;
     private MainActivityCallback callback;
 
     @Override
@@ -59,7 +59,7 @@ public class CatalogsFragment extends BaseFragment implements CatalogsView {
         getActivity().setTitle("Справочники");
 
         //ToDo Dependency Injection
-        presenter = new CatalogsPresenter(this);
+        presenter = new CatalogListPresenter(this);
         presenter.onCreate();
 
         return view;
