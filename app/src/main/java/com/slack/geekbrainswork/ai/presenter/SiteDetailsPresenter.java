@@ -43,7 +43,7 @@ public class SiteDetailsPresenter extends BasePresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        view.showError(e.getMessage());
+                        //view.showError(e.getMessage());
                     }
 
                     @Override

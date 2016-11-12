@@ -20,7 +20,7 @@ import rx.Observable;
 
 public interface ApiInterface {
     //ToDo rest methods
-    @GET("")
+    @GET("/sites")
     Observable<List<SiteDTO>> getSites();
 
     @POST("/sites/{id}")
@@ -29,6 +29,6 @@ public interface ApiInterface {
     @POST("/sites/new")
     Observable<SiteDTO> createSite(@Body Site site);
 
-    @DELETE("/api/item/{id}")
-    Observable<Response> deleteItem(@Path("id") int itemId);
+    @DELETE("/sites/{id}")
+    Observable<Response> deleteSite(@Path("id") int itemId);
 }
