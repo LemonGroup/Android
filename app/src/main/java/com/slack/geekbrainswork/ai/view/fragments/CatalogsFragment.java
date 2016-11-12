@@ -16,7 +16,7 @@ import com.slack.geekbrainswork.ai.R;
 import com.slack.geekbrainswork.ai.presenter.CatalogsPresenter;
 import com.slack.geekbrainswork.ai.presenter.BasePresenter;
 import com.slack.geekbrainswork.ai.presenter.vo.Catalog;
-import com.slack.geekbrainswork.ai.view.ActivityCallback;
+import com.slack.geekbrainswork.ai.view.MainActivityCallback;
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class CatalogsFragment extends BaseFragment implements CatalogsView {
     ListView catalogsListView;
 
     private CatalogsPresenter presenter;
-    private ActivityCallback activityCallback;
+    private MainActivityCallback callback;
 
     @Override
     protected BasePresenter getPresenter() {
@@ -43,10 +43,10 @@ public class CatalogsFragment extends BaseFragment implements CatalogsView {
         super.onAttach(context);
 
         try {
-            activityCallback = (ActivityCallback) context;
+            callback = (MainActivityCallback) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
-                    + " must implement activityCallback");
+                    + " must implement MainActivityCallback");
         }
     }
 
@@ -81,7 +81,7 @@ public class CatalogsFragment extends BaseFragment implements CatalogsView {
 
     @Override
     public void navigateToSitesCatalogView() {
-        activityCallback.startSitesCatalogFragment();
+        callback.startSitesCatalogFragment();
     }
 
     @Override

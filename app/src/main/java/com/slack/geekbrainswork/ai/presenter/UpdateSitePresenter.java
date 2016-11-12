@@ -6,8 +6,6 @@ import com.slack.geekbrainswork.ai.presenter.mappers.SiteDtoToSiteMapper;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
 import com.slack.geekbrainswork.ai.view.activities.SiteDetailsView;
 
-import java.util.ArrayList;
-
 import rx.Observer;
 import rx.Subscription;
 

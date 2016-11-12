@@ -20,16 +20,7 @@ import com.slack.geekbrainswork.ai.presenter.vo.Site;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class UpdateSiteActivity extends AppCompatActivity implements SiteDetailsView {
-
-    @BindView(R.id.layout)
-    LinearLayout layout;
-    @BindView(R.id.site_name_edit_text)
-    EditText siteNameTextView;
-    @BindView(R.id.cancel_button)
-    Button cancelButton;
-    @BindView(R.id.save_button)
-    Button saveButton;
+public class UpdateSiteActivity extends SiteActivity {
 
     private UpdateSitePresenter presenter = new UpdateSitePresenter(this);
 
@@ -63,44 +54,12 @@ public class UpdateSiteActivity extends AppCompatActivity implements SiteDetails
     }
 
     @NonNull
-    private String getTitleFromString() {
+    protected String getTitleFromString() {
         return getResources().getString(R.string.catalog_edit_title);
     }
 
     private Site getSiteVo() {
         return (Site) getIntent().getSerializableExtra("site");
-    }
-
-    @Override
-    public String getSiteNameTextViewText() {
-        return siteNameTextView.getText().toString();
-    }
-
-    @Override
-    public void onClose(Site site) {
-        Intent intent = new Intent();
-        intent.putExtra("site", site);
-        closeKeyboard();
-        setResult(RESULT_OK, intent);
-        finish();
-    }
-
-    @Override
-    public void showError(String error) {
-        closeKeyboard();
-        makeToast(error);
-    }
-
-    private void closeKeyboard() {
-        View view = this.getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-    }
-
-    private void makeToast(String text) {
-        Snackbar.make(layout, text, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
