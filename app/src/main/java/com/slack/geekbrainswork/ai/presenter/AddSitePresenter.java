@@ -9,31 +9,32 @@ import com.slack.geekbrainswork.ai.view.activities.SiteDetailsView;
 import rx.Observer;
 import rx.Subscription;
 
-public class SiteDetailsPresenter extends BasePresenter {
+public class AddSitePresenter extends BasePresenter {
     private static String BUNDLE_SITE_KEY = "BUNDLE_SITE_KEY";
 
     private Site site;
     private SiteDetailsView view;
     private SiteDtoToSiteMapper mapper = new SiteDtoToSiteMapper();
 
-    public SiteDetailsPresenter(SiteDetailsView view) {
+    public AddSitePresenter(SiteDetailsView view) {
         this.view = view;
     }
 
-    public void onCreate(Bundle savedInstanceState, Site site) {
-        if (site != null){
-            this.site = site;
-        }
-
+    public void onCreate(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
             this.site = (Site) savedInstanceState.getSerializable(BUNDLE_SITE_KEY);
         }
     }
 
     public void onSaveButtonClick() {
-        site.setName(view.getSiteNameTextViewText());
 
-        Subscription subscription = data.updateSite(site)
+        String siteName = view.getSiteNameTextViewText();
+        if (siteName == null || siteName.isEmpty()) {
+            view.showError("Название сайта не должно быть пустым");
+            return;
+        }
+
+        Subscription subscription = data.createSite(siteName)
                 .map(mapper)
                 .subscribe(new Observer<Site>() {
                     @Override
@@ -43,7 +44,7 @@ public class SiteDetailsPresenter extends BasePresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        //view.showError(e.getMessage());
+                        view.showError(e.getMessage());
                     }
 
                     @Override
@@ -54,4 +55,11 @@ public class SiteDetailsPresenter extends BasePresenter {
 
         addSubscription(subscription);
     }
+
+    public void onSaveInstanceState(Bundle outState) {
+        if (site != null) {
+            outState.putSerializable(BUNDLE_SITE_KEY, site);
+        }
+    }
 }
+

@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.slack.geekbrainswork.ai.presenter.mappers.SitesDtoToSitesMapper;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
-import com.slack.geekbrainswork.ai.view.fragments.SitesCatalogView;
+import com.slack.geekbrainswork.ai.view.fragments.SitelistView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,15 +12,15 @@ import java.util.List;
 import rx.Observer;
 import rx.Subscription;
 
-public class SitesCatalogPresenter extends BasePresenter {
+public class SitelistPresenter extends BasePresenter {
     private static String BUNDLE_SITE_LIST_KEY = "BUNDLE_SITE_LIST_KEY";
 
-    private SitesCatalogView view;
+    private SitelistView view;
     private List<Site> siteList;
     private SitesDtoToSitesMapper mapper = new SitesDtoToSitesMapper();
 
-    public SitesCatalogPresenter(SitesCatalogView sitesCatalogView) {
-        view = sitesCatalogView;
+    public SitelistPresenter(SitelistView sitelistView) {
+        view = sitelistView;
     }
 
     public void onCreate(Bundle savedInstanceState) {
@@ -59,7 +59,11 @@ public class SitesCatalogPresenter extends BasePresenter {
     }
 
     public void clickSite(Site site) {
-        view.navigateToSiteDetails(site);
+        view.navigateToUpdateSiteView(site);
+    }
+
+    public void onAddButtonClick() {
+        view.navigateToAddSiteView();
     }
 
     public void onSaveInstanceState(Bundle outState) {
@@ -75,4 +79,5 @@ public class SitesCatalogPresenter extends BasePresenter {
     public void onActivityResult() {
         loadData();
     }
+
 }

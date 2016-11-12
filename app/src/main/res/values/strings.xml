@@ -5,5 +5,7 @@
     <string name="action_users">Настройки доступа</string>
     <string name="cancel_button_text">Отмена</string>
     <string name="save_button_text">Сохранить</string>
-    <string name="catalog_edit_title">Редактирование справочника</string>
+    <string name="catalog_edit_title">Редактирование</string>
+    <string name="site_name_hint">Введите сайт</string>
+    <string name="catalog_add_title">Добавление</string>
 </resources>

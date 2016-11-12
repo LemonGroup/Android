@@ -2,16 +2,16 @@ package com.slack.geekbrainswork.ai.view.adapters;
 
 import android.view.View;
 
-import com.slack.geekbrainswork.ai.presenter.SitesCatalogPresenter;
+import com.slack.geekbrainswork.ai.presenter.SitelistPresenter;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
 
 import java.util.List;
 
 public class SiteListAdapter extends BaseAdapter<Site> {
-    private SitesCatalogPresenter presenter;
+    private SitelistPresenter presenter;
 
 
-    public SiteListAdapter(List<Site> list, SitesCatalogPresenter presenter) {
+    public SiteListAdapter(List<Site> list, SitelistPresenter presenter) {
         super(list);
         this.presenter = presenter;
     }

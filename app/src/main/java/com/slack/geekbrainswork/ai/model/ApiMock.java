@@ -1,6 +1,5 @@
 package com.slack.geekbrainswork.ai.model;
 
-
 import com.slack.geekbrainswork.ai.model.dto.SiteDTO;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
 
@@ -18,7 +17,6 @@ public class ApiMock {
     }
 
     public static ApiMock getMock() {
-
         if (mock == null) {
             mock = new ApiMock();
         }
@@ -37,5 +35,25 @@ public class ApiMock {
             }
         }
         return null;
+    }
+
+
+    public SiteDTO createSiteDTO(String siteName) {
+        SiteDTO siteDTO = new SiteDTO(getMaxId() + 1, siteName);
+        siteDTOList.add(siteDTO);
+        return siteDTO;
+    }
+
+    private Integer getMaxId() {
+        Integer maxId = 0;
+        Integer curId;
+        for (SiteDTO siteDTO : siteDTOList) {
+            curId = siteDTO.getId();
+            if (curId > maxId) {
+                maxId = curId;
+            }
+        }
+
+        return maxId;
     }
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CatalogsPresenter extends BasePresenter {
+    //ToDo remove hardcoded data
     private final String keywordsCatalogName = "Ключевые слова";
     private final String personsCatalogName = "Личности";
     private final String sitesCatalogName = "Сайты";

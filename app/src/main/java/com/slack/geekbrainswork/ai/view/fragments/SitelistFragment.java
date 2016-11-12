@@ -11,9 +11,10 @@ import android.view.View;
 
 import com.slack.geekbrainswork.ai.R;
 import com.slack.geekbrainswork.ai.presenter.BasePresenter;
-import com.slack.geekbrainswork.ai.presenter.SitesCatalogPresenter;
+import com.slack.geekbrainswork.ai.presenter.SitelistPresenter;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
-import com.slack.geekbrainswork.ai.view.activities.SiteDetailsActivity;
+import com.slack.geekbrainswork.ai.view.activities.AddSiteActvity;
+import com.slack.geekbrainswork.ai.view.activities.UpdateSiteActivity;
 import com.slack.geekbrainswork.ai.view.adapters.SiteListAdapter;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import butterknife.ButterKnife;
 
 import static android.app.Activity.RESULT_OK;
 
-public class SitesCatalogFragment extends BaseFragment implements SitesCatalogView {
+public class SitelistFragment extends BaseFragment implements SitelistView {
 
     @BindView(R.id.fab)
     FloatingActionButton addButton;
@@ -32,7 +33,7 @@ public class SitesCatalogFragment extends BaseFragment implements SitesCatalogVi
     RecyclerView recyclerView;
 
     //ToDo Dependency Injection
-    private SitesCatalogPresenter presenter = new SitesCatalogPresenter(this);
+    private SitelistPresenter presenter = new SitelistPresenter(this);
 
     private SiteListAdapter adapter;
 
@@ -54,16 +55,29 @@ public class SitesCatalogFragment extends BaseFragment implements SitesCatalogVi
         adapter = new SiteListAdapter(new ArrayList<Site>(), presenter);
         recyclerView.setAdapter(adapter);
 
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.onAddButtonClick();
+            }
+        });
+
         presenter.onCreate(savedInstanceState);
 
         return view;
     }
 
     @Override
-    public void navigateToSiteDetails(Site site) {
-        Intent intent = new Intent(getActivity(), SiteDetailsActivity.class);
+    public void navigateToUpdateSiteView(Site site) {
+        Intent intent = new Intent(getActivity(), UpdateSiteActivity.class);
         intent.putExtra("site", site);
         startActivityForResult(intent, 10);
+    }
+
+    @Override
+    public void navigateToAddSiteView() {
+        Intent intent = new Intent(getActivity(), AddSiteActvity.class);
+        startActivityForResult(intent, 11);
     }
 
     @Override
@@ -73,7 +87,7 @@ public class SitesCatalogFragment extends BaseFragment implements SitesCatalogVi
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 10) {
+        if (requestCode == 10 || requestCode == 11) {
             if (resultCode == RESULT_OK) {
                 presenter.onActivityResult();
             }
