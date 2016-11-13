@@ -39,7 +39,7 @@ public class UpdateSitePresenter extends BasePresenter {
 
         site.setName(siteName);
 
-        Subscription subscription = data.updateSite(site)
+        Subscription subscription = repository.updateSite(site)
                 .map(mapper)
                 .subscribe(new Observer<Site>() {
                     @Override

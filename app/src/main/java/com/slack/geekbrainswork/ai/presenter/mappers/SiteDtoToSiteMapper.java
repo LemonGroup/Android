@@ -1,7 +1,7 @@
 package com.slack.geekbrainswork.ai.presenter.mappers;
 
 
-import com.slack.geekbrainswork.ai.model.dto.SiteDTO;
+import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
 
 import rx.functions.Func1;

@@ -1,26 +1,26 @@
-package com.slack.geekbrainswork.ai.model;
+package com.slack.geekbrainswork.ai.data.api;
 
-import com.slack.geekbrainswork.ai.model.dto.SiteDTO;
+import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ApiMock {
+public class ApiDemo {
 
-    private static ApiMock mock;
+    private static ApiDemo api;
     private static List<SiteDTO> siteDTOList = new ArrayList<>();
 
-    private ApiMock() {
+    private ApiDemo() {
         siteDTOList.add(new SiteDTO(1, "lenta.ru"));
         siteDTOList.add(new SiteDTO(2, "echo.msk.ru"));
     }
 
-    public static ApiMock getMock() {
-        if (mock == null) {
-            mock = new ApiMock();
+    public static ApiDemo getApi() {
+        if (api == null) {
+            api = new ApiDemo();
         }
-        return mock;
+        return api;
     }
 
     public List<SiteDTO> getSiteDTOList() {
@@ -36,7 +36,6 @@ public class ApiMock {
         }
         return null;
     }
-
 
     public SiteDTO createSiteDTO(String siteName) {
         SiteDTO siteDTO = new SiteDTO(getMaxId() + 1, siteName);

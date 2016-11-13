@@ -1,4 +1,4 @@
-package com.slack.geekbrainswork.ai.model.dto;
+package com.slack.geekbrainswork.ai.data.dto;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

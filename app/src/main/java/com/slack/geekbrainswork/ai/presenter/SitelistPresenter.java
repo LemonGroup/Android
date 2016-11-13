@@ -36,7 +36,7 @@ public class SiteListPresenter extends BasePresenter {
     }
 
     private void loadData() {
-        Subscription subscription = data.getSites()
+        Subscription subscription = repository.getSites()
                 .map(mapper)
                 .subscribe(new Observer<List<Site>>() {
                     @Override

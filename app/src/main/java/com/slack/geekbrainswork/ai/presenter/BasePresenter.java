@@ -1,15 +1,17 @@
 package com.slack.geekbrainswork.ai.presenter;
 
 
-import com.slack.geekbrainswork.ai.model.Model;
-import com.slack.geekbrainswork.ai.model.ModelImpl;
+import com.slack.geekbrainswork.ai.data.Repository;
+import com.slack.geekbrainswork.ai.data.RepositoryDemo;
+import com.slack.geekbrainswork.ai.data.RepositoryImpl;
 
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 public abstract class BasePresenter implements Presenter {
 
-    protected Model data = new ModelImpl();;
+    //ToDo replace to RepositoryImpl
+    protected Repository repository = new RepositoryDemo();;
 
     private CompositeSubscription compositeSubscription = new CompositeSubscription();
 

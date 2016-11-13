@@ -1,4 +1,4 @@
-package com.slack.geekbrainswork.ai.model.api;
+package com.slack.geekbrainswork.ai.data.api;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;

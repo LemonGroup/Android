@@ -1,8 +1,7 @@
-package com.slack.geekbrainswork.ai.model;
+package com.slack.geekbrainswork.ai.data;
 
-import com.slack.geekbrainswork.ai.model.api.ApiClient;
-import com.slack.geekbrainswork.ai.model.api.ApiInterface;
-import com.slack.geekbrainswork.ai.model.dto.SiteDTO;
+import com.slack.geekbrainswork.ai.data.api.ApiDemo;
+import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
 
 import java.util.List;
@@ -12,15 +11,12 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class ModelImpl implements Model {
-
-    // Fake Data
-    private ApiMock apiMock = ApiMock.getMock();
+public class RepositoryDemo implements Repository{
 
     private final Observable.Transformer schedulersTransformer;
-    private ApiInterface apiInterface = ApiClient.getApiInterface();
+    private ApiDemo api = ApiDemo.getApi();
 
-    public ModelImpl() {
+    public RepositoryDemo() {
         schedulersTransformer = new Observable.Transformer() {
             @Override
             public Object call(Object o) {
@@ -30,33 +26,21 @@ public class ModelImpl implements Model {
         };
     }
 
-    @Override
+     @Override
     public Observable<List<SiteDTO>> getSites() {
-        //ToDo getSites from Rest
-        //return apiInterface.getSites()
-        // .compose(this.<List<SiteDTO>>applySchedulers());
-
-        return Observable.just(apiMock.getSiteDTOList())
+        return Observable.just(api.getSiteDTOList())
                 .compose(this.<List<SiteDTO>>applySchedulers());
     }
 
     @Override
     public Observable<SiteDTO> updateSite(Site site) {
-        //ToDo updateSite by Rest
-        //return apiInterface.updateSite(site.getId(), site.getName())
-        // .compose(this.<List<SiteDTO>>applySchedulers());
-
-        return Observable.just(apiMock.updateSiteDTO(site))
+        return Observable.just(api.updateSiteDTO(site))
                 .compose(this.<SiteDTO>applySchedulers());
     }
 
     @Override
     public Observable<SiteDTO> createSite(String siteName) {
-        //ToDo createSite by Rest
-        //return apiInterface.createSite(site)
-        // .compose(this.<List<SiteDTO>>applySchedulers());
-
-        return Observable.just(apiMock.createSiteDTO(siteName))
+        return Observable.just(api.createSiteDTO(siteName))
                 .compose(this.<SiteDTO>applySchedulers());
     }
 

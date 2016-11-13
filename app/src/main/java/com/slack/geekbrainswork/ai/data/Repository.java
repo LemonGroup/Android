@@ -1,6 +1,6 @@
-package com.slack.geekbrainswork.ai.model;
+package com.slack.geekbrainswork.ai.data;
 
-import com.slack.geekbrainswork.ai.model.dto.SiteDTO;
+import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
 
 import java.util.List;
@@ -8,7 +8,7 @@ import java.util.List;
 import retrofit2.Response;
 import rx.Observable;
 
-public interface Model {
+public interface Repository {
 
     Observable<List<SiteDTO>> getSites();
 

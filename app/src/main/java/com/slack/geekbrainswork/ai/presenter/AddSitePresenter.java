@@ -34,7 +34,7 @@ public class AddSitePresenter extends BasePresenter {
             return;
         }
 
-        Subscription subscription = data.createSite(siteName)
+        Subscription subscription = repository.createSite(siteName)
                 .map(mapper)
                 .subscribe(new Observer<Site>() {
                     @Override
