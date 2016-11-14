@@ -26,5 +26,5 @@ public interface ApiInterface {
     Observable<SiteDTO> createSite(@Body String site);
 
     @DELETE("/sites/{id}")
-    Observable<Response> deleteSite(@Path("id") int itemId);
+    void deleteSite(@Path("id") int itemId);
 }
