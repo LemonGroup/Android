@@ -50,7 +50,7 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
-    public Observable<Response> deleteSite(Integer siteId) {
+    public Observable<List<SiteDTO>> removeSite(Site site) {
         return null;
     }
 

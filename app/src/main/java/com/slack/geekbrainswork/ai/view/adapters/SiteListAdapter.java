@@ -23,7 +23,15 @@ public class SiteListAdapter extends BaseAdapter<Site> {
         viewHolder.text.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.clickSite(site);
+                presenter.onClickSite(site);
+            }
+        });
+
+        viewHolder.text.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                presenter.onLongClickSite(site);
+                return true;
             }
         });
     }

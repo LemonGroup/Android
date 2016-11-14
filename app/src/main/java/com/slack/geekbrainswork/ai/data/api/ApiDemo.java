@@ -4,7 +4,11 @@ import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+
+import rx.Observable;
 
 public class ApiDemo {
 
@@ -54,5 +58,16 @@ public class ApiDemo {
         }
 
         return maxId;
+    }
+
+    public Observable<List<SiteDTO>> removeSiteDTO(Site site) {
+        for (Iterator<SiteDTO> iterator = siteDTOList.iterator(); iterator.hasNext();) {
+            SiteDTO siteDTO = iterator.next();
+            if (siteDTO.getId().intValue() == site.getId().intValue()) {
+                iterator.remove();
+                return Observable.just(siteDTOList);
+            }
+        }
+        return Observable.just(siteDTOList);
     }
 }

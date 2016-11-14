@@ -11,4 +11,6 @@ public interface SiteListView extends View {
     void showSiteList(List<Site> siteList);
 
     void navigateToAddSiteView();
+
+    void showRemoveSiteDialog(Site site);
 }

@@ -1,9 +1,12 @@
 package com.slack.geekbrainswork.ai.view.fragments;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.*;
@@ -78,6 +81,34 @@ public class SiteListFragment extends BaseFragment implements SiteListView {
     public void navigateToAddSiteView() {
         Intent intent = new Intent(getActivity(), AddSiteActvity.class);
         startActivityForResult(intent, 11);
+    }
+
+    @Override
+    public void showRemoveSiteDialog(final Site site) {
+        final AlertDialog dialog = createDialog(site);
+        dialog.show();
+    }
+
+    @NonNull
+    private AlertDialog createDialog(final Site site) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(site.getName());
+        builder.setCancelable(true);
+        builder.setNeutralButton(R.string.action_delete, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                presenter.onClickRemoveButton(site);
+            }
+        });
+        final AlertDialog dialog = builder.create();
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setTextColor(getResources().getColor(R.color.text_color));
+            }
+        });
+        return dialog;
     }
 
     @Override

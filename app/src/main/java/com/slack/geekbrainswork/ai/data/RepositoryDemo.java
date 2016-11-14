@@ -11,7 +11,7 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class RepositoryDemo implements Repository{
+public class RepositoryDemo implements Repository {
 
     private final Observable.Transformer schedulersTransformer;
     private ApiDemo api = ApiDemo.getApi();
@@ -26,7 +26,7 @@ public class RepositoryDemo implements Repository{
         };
     }
 
-     @Override
+    @Override
     public Observable<List<SiteDTO>> getSites() {
         return Observable.just(api.getSiteDTOList())
                 .compose(this.<List<SiteDTO>>applySchedulers());
@@ -45,8 +45,9 @@ public class RepositoryDemo implements Repository{
     }
 
     @Override
-    public Observable<Response> deleteSite(Integer siteId) {
-        return null;
+    public Observable<List<SiteDTO>> removeSite(Site site) {
+        return api.removeSiteDTO(site)
+                .compose(this.<List<SiteDTO>>applySchedulers());
     }
 
     @SuppressWarnings("unchecked")

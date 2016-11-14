@@ -17,7 +17,7 @@ public class SiteListPresenter extends BasePresenter {
 
     private SiteListView view;
     private List<Site> siteList;
-    private SitesDtoToSitesMapper mapper = new SitesDtoToSitesMapper();
+    private SitesDtoToSitesMapper siteListMapper = new SitesDtoToSitesMapper();
 
     public SiteListPresenter(SiteListView siteListView) {
         view = siteListView;
@@ -37,7 +37,7 @@ public class SiteListPresenter extends BasePresenter {
 
     private void loadData() {
         Subscription subscription = repository.getSites()
-                .map(mapper)
+                .map(siteListMapper)
                 .subscribe(new Observer<List<Site>>() {
                     @Override
                     public void onCompleted() {
@@ -58,7 +58,7 @@ public class SiteListPresenter extends BasePresenter {
         addSubscription(subscription);
     }
 
-    public void clickSite(Site site) {
+    public void onClickSite(Site site) {
         view.navigateToUpdateSiteView(site);
     }
 
@@ -80,4 +80,30 @@ public class SiteListPresenter extends BasePresenter {
         loadData();
     }
 
+    public void onLongClickSite(Site site) {
+        view.showRemoveSiteDialog(site);
+    }
+
+    public void onClickRemoveButton(Site site) {
+        Subscription subscription = repository.removeSite(site)
+                .map(siteListMapper)
+                .subscribe(new Observer<List<Site>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<Site> sites) {
+                        view.showSiteList(sites);
+                    }
+                });
+
+        addSubscription(subscription);
+    }
 }

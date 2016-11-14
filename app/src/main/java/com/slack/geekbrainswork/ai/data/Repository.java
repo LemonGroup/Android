@@ -16,6 +16,6 @@ public interface Repository {
 
     Observable<SiteDTO> createSite(String siteName);
 
-    Observable<Response> deleteSite(Integer siteId);
+    Observable<List<SiteDTO>> removeSite(Site site);
 }
 

@@ -8,4 +8,6 @@
     <string name="catalog_edit_title">Редактирование</string>
     <string name="site_name_hint">Введите сайт</string>
     <string name="catalog_add_title">Добавление</string>
+    <string name="dialog_remove_message">Удалить?</string>
+    <string name="action_delete">Удалить</string>
 </resources>
