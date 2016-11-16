@@ -9,6 +9,7 @@ import java.util.List;
 import retrofit2.Response;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func0;
 import rx.schedulers.Schedulers;
 
 public class RepositoryDemo implements Repository {
@@ -28,25 +29,45 @@ public class RepositoryDemo implements Repository {
 
     @Override
     public Observable<List<SiteDTO>> getSites() {
-        return Observable.just(api.getSiteDTOList())
+        return Observable.defer(new Func0<Observable<List<SiteDTO>>>() {
+            @Override
+            public Observable<List<SiteDTO>> call() {
+                return Observable.just(api.getSiteDTOList());
+            }
+        })
                 .compose(this.<List<SiteDTO>>applySchedulers());
     }
 
     @Override
-    public Observable<SiteDTO> updateSite(Site site) {
-        return Observable.just(api.updateSiteDTO(site))
+    public Observable<SiteDTO> updateSite(final Site site) {
+        return Observable.defer(new Func0<Observable<SiteDTO>>() {
+            @Override
+            public Observable<SiteDTO> call() {
+                return Observable.just(api.updateSiteDTO(site));
+            }
+        })
                 .compose(this.<SiteDTO>applySchedulers());
     }
 
     @Override
-    public Observable<SiteDTO> createSite(String siteName) {
-        return Observable.just(api.createSiteDTO(siteName))
+    public Observable<SiteDTO> createSite(final String siteName) {
+        return Observable.defer(new Func0<Observable<SiteDTO>>() {
+            @Override
+            public Observable<SiteDTO> call() {
+                return Observable.just(api.createSiteDTO(siteName));
+            }
+        })
                 .compose(this.<SiteDTO>applySchedulers());
     }
 
     @Override
-    public Observable<List<SiteDTO>> removeSite(Site site) {
-        return api.removeSiteDTO(site)
+    public Observable<List<SiteDTO>> removeSite(final Site site) {
+        return Observable.defer(new Func0<Observable<List<SiteDTO>>>() {
+            @Override
+            public Observable<List<SiteDTO>> call() {
+                return Observable.just(api.removeSiteDTO(site));
+            }
+        })
                 .compose(this.<List<SiteDTO>>applySchedulers());
     }
 

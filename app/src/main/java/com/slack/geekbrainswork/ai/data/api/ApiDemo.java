@@ -1,14 +1,13 @@
 package com.slack.geekbrainswork.ai.data.api;
 
+import android.util.Log;
+
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-
-import rx.Observable;
 
 public class ApiDemo {
 
@@ -28,10 +27,12 @@ public class ApiDemo {
     }
 
     public List<SiteDTO> getSiteDTOList() {
+        Log.d("GET ", Thread.currentThread().getName());
         return siteDTOList;
     }
 
     public SiteDTO updateSiteDTO(Site site) {
+        Log.d("UPDATE ", Thread.currentThread().getName());
         for (int i = 0; i < siteDTOList.size(); i++) {
             if (siteDTOList.get(i).getId().intValue() == site.getId().intValue()) {
                 siteDTOList.get(i).setName(site.getName());
@@ -42,6 +43,7 @@ public class ApiDemo {
     }
 
     public SiteDTO createSiteDTO(String siteName) {
+        Log.d("CREATE ", Thread.currentThread().getName());
         SiteDTO siteDTO = new SiteDTO(getMaxId() + 1, siteName);
         siteDTOList.add(siteDTO);
         return siteDTO;
@@ -56,18 +58,18 @@ public class ApiDemo {
                 maxId = curId;
             }
         }
-
         return maxId;
     }
 
-    public Observable<List<SiteDTO>> removeSiteDTO(Site site) {
-        for (Iterator<SiteDTO> iterator = siteDTOList.iterator(); iterator.hasNext();) {
+    public List<SiteDTO> removeSiteDTO(Site site) {
+        Log.d("REMOVE ", Thread.currentThread().getName());
+        for (Iterator<SiteDTO> iterator = siteDTOList.iterator(); iterator.hasNext(); ) {
             SiteDTO siteDTO = iterator.next();
             if (siteDTO.getId().intValue() == site.getId().intValue()) {
                 iterator.remove();
-                return Observable.just(siteDTOList);
+                return siteDTOList;
             }
         }
-        return Observable.just(siteDTOList);
+        return siteDTOList;
     }
 }
