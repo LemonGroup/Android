@@ -1,6 +1,7 @@
 package com.slack.geekbrainswork.ai.data;
 
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
+import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
 
 import java.util.List;
@@ -17,5 +18,8 @@ public interface Repository {
     Observable<SiteDTO> createSite(String siteName);
 
     Observable<List<SiteDTO>> removeSite(Site site);
+
+    Observable<String> auth();
+
 }
 

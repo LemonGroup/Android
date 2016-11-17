@@ -12,6 +12,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.slack.geekbrainswork.ai.R;
+import com.slack.geekbrainswork.ai.presenter.MainPresenter;
 import com.slack.geekbrainswork.ai.view.MainActivityCallback;
 import com.slack.geekbrainswork.ai.view.fragments.CatalogsFragment;
 import com.slack.geekbrainswork.ai.view.fragments.SiteListFragment;
@@ -19,7 +20,7 @@ import com.slack.geekbrainswork.ai.view.fragments.SiteListFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainActivityCallback {
+public class MainActivity extends AppCompatActivity implements MainView, MainActivityCallback {
 
     private static String TAG = "TAG";
 
@@ -29,14 +30,20 @@ public class MainActivity extends AppCompatActivity implements MainActivityCallb
     Toolbar toolbar;
 
     private FragmentManager fragmentManager;
+    private MainPresenter presenter = new MainPresenter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        setSupportActionBar(toolbar);
 
+        presenter.checkAuthorization();
+    }
+
+    @Override
+    public void showContent() {
+        setSupportActionBar(toolbar);
         fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentByTag(TAG);
         if (fragment == null) replaceFragment(new CatalogsFragment(), false);
@@ -81,5 +88,10 @@ public class MainActivity extends AppCompatActivity implements MainActivityCallb
         //ToDo updating
         //replaceFragment(UsersFragment, true);
         Snackbar.make(coordinatorLayout,"Функционал не реализован",Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showError(String error) {
+
     }
 }

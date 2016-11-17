@@ -1,14 +1,16 @@
 package com.slack.geekbrainswork.ai.data;
 
+import android.app.Application;
+
+import com.slack.geekbrainswork.ai.LemonStateAdminApp;
 import com.slack.geekbrainswork.ai.data.api.ApiClient;
-import com.slack.geekbrainswork.ai.data.api.ApiDemo;
 import com.slack.geekbrainswork.ai.data.api.ApiInterface;
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
+import com.slack.geekbrainswork.ai.data.local.PreferencesHelper;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
 
 import java.util.List;
 
-import retrofit2.Response;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -16,7 +18,8 @@ import rx.schedulers.Schedulers;
 public class RepositoryImpl implements Repository {
 
     private final Observable.Transformer schedulersTransformer;
-    private ApiInterface apiInterface = ApiClient.getApiInterface();
+    private ApiInterface apiInterface;
+    private PreferencesHelper helper = new PreferencesHelper(LemonStateAdminApp.getContext());
 
     public RepositoryImpl() {
         schedulersTransformer = new Observable.Transformer() {
@@ -26,31 +29,46 @@ public class RepositoryImpl implements Repository {
                         .observeOn(AndroidSchedulers.mainThread());
             }
         };
+
+        apiInterface = ApiClient.getApiInterface(getToken());
+    }
+
+    private String getToken() {
+        return helper.getFromPref();
+    }
+
+    private void updateToken(String token) {
+        helper.writeToPref(token);
     }
 
     @Override
     public Observable<List<SiteDTO>> getSites() {
         //ToDo getSites from Rest
         return apiInterface.getSites()
-         .compose(this.<List<SiteDTO>>applySchedulers());
+                .compose(this.<List<SiteDTO>>applySchedulers());
     }
 
     @Override
     public Observable<SiteDTO> updateSite(Site site) {
         //ToDo updateSite by Rest
         return apiInterface.updateSite(site.getId(), site.getName())
-         .compose(this.<SiteDTO>applySchedulers());
+                .compose(this.<SiteDTO>applySchedulers());
     }
 
     @Override
     public Observable<SiteDTO> createSite(String siteName) {
         //ToDo createSite by Rest
         return apiInterface.createSite(siteName)
-         .compose(this.<SiteDTO>applySchedulers());
+                .compose(this.<SiteDTO>applySchedulers());
     }
 
     @Override
     public Observable<List<SiteDTO>> removeSite(Site site) {
+        return null;
+    }
+
+    @Override
+    public Observable<String> auth() {
         return null;
     }
 
