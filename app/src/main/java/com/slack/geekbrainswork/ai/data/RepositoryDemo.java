@@ -71,6 +71,11 @@ public class RepositoryDemo implements Repository {
                 .compose(this.<List<SiteDTO>>applySchedulers());
     }
 
+    @Override
+    public Observable<String> auth() {
+        return null;
+    }
+
     @SuppressWarnings("unchecked")
     private <T> Observable.Transformer<T, T> applySchedulers() {
         return (Observable.Transformer<T, T>) schedulersTransformer;
