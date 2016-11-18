@@ -13,7 +13,7 @@ public interface Repository {
 
     String getTokenFromStorage();
 
-    void updateToken(String token);
+    Observable<String> updateToken(String token);
 
     Observable<List<SiteDTO>> getSites();
 
@@ -23,7 +23,7 @@ public interface Repository {
 
     Observable<List<SiteDTO>> removeSite(Site site);
 
-    Observable<String> auth();
+    Observable<TokenResponse> auth(String login, String password);
 
 }
 

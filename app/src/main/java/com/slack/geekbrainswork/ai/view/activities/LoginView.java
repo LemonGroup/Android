@@ -13,4 +13,8 @@ public interface LoginView {
     void showProgress(boolean show);
 
     void resetErrors();
+
+    void showAuthorizationError(String message);
+
+    void navigateToMainView();
 }

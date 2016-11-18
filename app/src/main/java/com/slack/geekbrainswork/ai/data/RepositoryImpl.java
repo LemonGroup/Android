@@ -4,6 +4,7 @@ import com.slack.geekbrainswork.ai.LemonStateAdminApp;
 import com.slack.geekbrainswork.ai.data.api.ApiClient;
 import com.slack.geekbrainswork.ai.data.api.ApiInterface;
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
+import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
 import com.slack.geekbrainswork.ai.data.local.PrefHelper;
 import com.slack.geekbrainswork.ai.data.local.PreferencesHelper;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
@@ -12,6 +13,7 @@ import java.util.List;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func0;
 import rx.schedulers.Schedulers;
 
 public class RepositoryImpl implements Repository {
@@ -38,8 +40,14 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
-    public void updateToken(String token) {
-        helper.writeToPref(token);
+    public Observable<String> updateToken(final String token) {
+        return Observable.defer(new Func0<Observable<String>>() {
+            @Override
+            public Observable<String> call() {
+                return Observable.just(helper.writeToPref(token));
+            }
+        })
+                .compose(this.<String>applySchedulers());
     }
 
     @Override
@@ -69,7 +77,7 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
-    public Observable<String> auth() {
+    public Observable<TokenResponse> auth(String login, String password) {
         return null;
     }
 

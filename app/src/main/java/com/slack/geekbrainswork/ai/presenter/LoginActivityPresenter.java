@@ -2,15 +2,24 @@ package com.slack.geekbrainswork.ai.presenter;
 
 import android.text.TextUtils;
 
-import com.slack.geekbrainswork.ai.R;
+import com.slack.geekbrainswork.ai.presenter.mappers.TokenMapper;
 import com.slack.geekbrainswork.ai.view.activities.LoginView;
 
-public class LoginActivityPresenter extends BasePresenter{
+import rx.Observer;
+import rx.Subscription;
+import rx.functions.Action1;
+
+public class LoginActivityPresenter extends BasePresenter {
 
     private LoginView view;
+    private TokenMapper tokenMapper = new TokenMapper();
 
     public LoginActivityPresenter(LoginView view) {
         this.view = view;
+    }
+
+    public void attemptLoginByToken() {
+        //ToDo implement login by Token
     }
 
     public void attemptLogin(String login, String password) {
@@ -30,12 +39,37 @@ public class LoginActivityPresenter extends BasePresenter{
 
         if (!cancel) {
             view.showProgress(true);
-            authorize();
+            authorizeByLoginAndPassword(login, password);
         }
     }
 
-    private void authorize() {
+    private void authorizeByLoginAndPassword(String login, String password) {
+        Subscription subscription = repository.auth(login, password)
+                .map(tokenMapper)
+                .doOnNext(new Action1<String>() {
+                    @Override
+                    public void call(String s) {
+                        repository.updateToken(s);
+                    }
+                })
+                .subscribe(new Observer<String>() {
+                    @Override
+                    public void onCompleted() {
 
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        view.showAuthorizationError(e.getMessage());
+                    }
+
+                    @Override
+                    public void onNext(String s) {
+                        view.navigateToMainView();
+                    }
+                });
+
+        addSubscription(subscription);
     }
 
     private boolean isLoginValid(String email) {
@@ -47,4 +81,6 @@ public class LoginActivityPresenter extends BasePresenter{
         //TODO: Replace this with your own logic
         return password.length() > 4;
     }
+
+
 }

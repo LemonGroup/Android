@@ -3,6 +3,7 @@ package com.slack.geekbrainswork.ai.data.api;
 import android.util.Log;
 
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
+import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ public class ApiDemo {
 
     private static ApiDemo api;
     private static List<SiteDTO> siteDTOList = new ArrayList<>();
+    private static String token = "sa4564asdas4f56af4asasewqjmwer24";
 
     private ApiDemo() {
         siteDTOList.add(new SiteDTO(1, "lenta.ru"));
@@ -71,5 +73,17 @@ public class ApiDemo {
             }
         }
         return siteDTOList;
+    }
+
+    public TokenResponse auth(String login, String password) {
+
+        // Simulate network access.
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        return new TokenResponse(token);
     }
 }
