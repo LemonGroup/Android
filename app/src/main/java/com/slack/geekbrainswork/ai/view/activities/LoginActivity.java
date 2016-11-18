@@ -3,49 +3,116 @@ package com.slack.geekbrainswork.ai.view.activities;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.LoaderManager.LoaderCallbacks;
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.slack.geekbrainswork.ai.R;
+import com.slack.geekbrainswork.ai.presenter.LoginActivityPresenter;
 
-import java.util.ArrayList;
-import java.util.List;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-import static android.Manifest.permission.READ_CONTACTS;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements LoginView {
 
-    private AutoCompleteTextView emailView;
-    private EditText passwordView;
-    private View progressView;
-    private View loginFormView;
+    @BindView(R.id.email)
+    AutoCompleteTextView emailView;
+    @BindView(R.id.password)
+    EditText passwordView;
+    @BindView(R.id.login_progress)
+    View progressView;
+    @BindView(R.id.login_form)
+    View loginFormView;
+    @BindView(R.id.email_sign_in_button)
+    Button button;
+
+    private LoginActivityPresenter presenter = new LoginActivityPresenter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        ButterKnife.bind(this);
 
+        passwordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
+                if (id == R.id.login || id == EditorInfo.IME_NULL) {
+                    presenter.attemptLogin(emailView.getText().toString(), passwordView.getText().toString());
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        button.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.attemptLogin(emailView.getText().toString(),passwordView.getText().toString());
+            }
+        });
+    }
+
+    @Override
+    public void resetErrors() {
+        emailView.setError(null);
+        passwordView.setError(null);
+    }
+
+    @Override
+    public void showPasswordError() {
+        passwordView.setError(getString(R.string.error_invalid_password));
+        passwordView.requestFocus();
+    }
+
+    @Override
+    public void showLoginError() {
+        emailView.setError(getString(R.string.error_invalid_email));
+        emailView.requestFocus();
+    }
+
+    @Override
+    public void showProgress(final boolean show) {
+        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+        hideKeyboard();
+
+        loginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+        loginFormView.animate().setDuration(shortAnimTime).alpha(
+                show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                loginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            }
+        });
+
+        progressView.setVisibility(show ? View.VISIBLE : View.GONE);
+        progressView.animate().setDuration(shortAnimTime).alpha(
+                show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                progressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            }
+        });
+    }
+
+    private void hideKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }
 

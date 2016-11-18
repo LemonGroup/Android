@@ -2,6 +2,8 @@ package com.slack.geekbrainswork.ai.data;
 
 import com.slack.geekbrainswork.ai.data.api.ApiDemo;
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
+import com.slack.geekbrainswork.ai.data.local.PrefHelper;
+import com.slack.geekbrainswork.ai.data.local.PreferencesDemo;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
 
 import java.util.List;
@@ -16,6 +18,7 @@ public class RepositoryDemo implements Repository {
 
     private final Observable.Transformer schedulersTransformer;
     private ApiDemo api = ApiDemo.getApi();
+    private PrefHelper helper = PreferencesDemo.getPreferences();
 
     public RepositoryDemo() {
         schedulersTransformer = new Observable.Transformer() {
@@ -25,6 +28,16 @@ public class RepositoryDemo implements Repository {
                         .observeOn(AndroidSchedulers.mainThread());
             }
         };
+    }
+
+    @Override
+    public String getTokenFromStorage() {
+        return helper.getFromPref();
+    }
+
+    @Override
+    public void updateToken(String token) {
+        helper.writeToPref(token);
     }
 
     @Override

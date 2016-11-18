@@ -3,7 +3,7 @@ package com.slack.geekbrainswork.ai.data.local;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class PreferencesHelper {
+public class PreferencesHelper implements PrefHelper {
     private static final String PREF_FILE_NAME = "lemon_stats_pref_file";
 
     private final SharedPreferences preferences;

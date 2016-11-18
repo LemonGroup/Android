@@ -1,5 +1,6 @@
 package com.slack.geekbrainswork.ai.view.activities;
 
+import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -38,7 +39,13 @@ public class MainActivity extends AppCompatActivity implements MainView, MainAct
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        presenter.checkAuthorization();
+        presenter.auth();
+    }
+
+    @Override
+    public void showLoginView() {
+        Intent intent = new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
     @Override
@@ -87,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements MainView, MainAct
     public void startUsersFragment() {
         //ToDo updating
         //replaceFragment(UsersFragment, true);
-        Snackbar.make(coordinatorLayout,"Функционал не реализован",Snackbar.LENGTH_LONG).show();
+        Snackbar.make(coordinatorLayout, "Функционал не реализован", Snackbar.LENGTH_LONG).show();
     }
 
     @Override

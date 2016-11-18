@@ -10,7 +10,8 @@ public class MainPresenter extends BasePresenter {
         this.view = view;
     }
 
-    public void checkAuthorization() {
-        view.showContent();
+    public void auth() {
+        view.showLoginView();
+        //view.showContent();
     }
 }
