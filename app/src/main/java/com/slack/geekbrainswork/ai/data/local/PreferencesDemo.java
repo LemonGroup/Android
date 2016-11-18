@@ -22,8 +22,9 @@ public class PreferencesDemo implements PrefHelper {
     }
 
     @Override
-    public void writeToPref(String token) {
+    public String writeToPref(String token) {
         PreferencesDemo.token = token;
+        return getFromPref();
     }
 
     @Override

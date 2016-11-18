@@ -4,8 +4,10 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.slack.geekbrainswork.ai.LemonStateAdminApp;
 import com.slack.geekbrainswork.ai.R;
 import com.slack.geekbrainswork.ai.presenter.LoginActivityPresenter;
 
@@ -43,6 +46,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        presenter.attemptLoginByToken();
+
         ButterKnife.bind(this);
 
         passwordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -59,7 +65,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.attemptLogin(emailView.getText().toString(),passwordView.getText().toString());
+                presenter.attemptLogin(emailView.getText().toString(), passwordView.getText().toString());
             }
         });
     }
@@ -68,6 +74,11 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     public void resetErrors() {
         emailView.setError(null);
         passwordView.setError(null);
+    }
+
+    @Override
+    public void showAuthorizationError(String message) {
+        Snackbar.make(loginFormView, message, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -110,9 +121,16 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     private void hideKeyboard() {
         View view = this.getCurrentFocus();
         if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
+    }
+
+    @Override
+    public void navigateToMainView() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 }
 

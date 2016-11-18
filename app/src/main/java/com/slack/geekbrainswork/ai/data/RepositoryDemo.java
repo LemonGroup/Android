@@ -2,13 +2,13 @@ package com.slack.geekbrainswork.ai.data;
 
 import com.slack.geekbrainswork.ai.data.api.ApiDemo;
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
+import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
 import com.slack.geekbrainswork.ai.data.local.PrefHelper;
 import com.slack.geekbrainswork.ai.data.local.PreferencesDemo;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
 
 import java.util.List;
 
-import retrofit2.Response;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func0;
@@ -36,8 +36,16 @@ public class RepositoryDemo implements Repository {
     }
 
     @Override
-    public void updateToken(String token) {
-        helper.writeToPref(token);
+    public Observable<String> updateToken(final String token) {
+        return Observable.defer(new Func0<Observable<String>>() {
+            @Override
+            public Observable<String> call() {
+                return Observable.just(helper.writeToPref(token));
+            }
+        })
+                .compose(this.<String>applySchedulers());
+
+
     }
 
     @Override
@@ -85,8 +93,14 @@ public class RepositoryDemo implements Repository {
     }
 
     @Override
-    public Observable<String> auth() {
-        return null;
+    public Observable<TokenResponse> auth(final String login, final String password) {
+        return Observable.defer(new Func0<Observable<TokenResponse>>() {
+            @Override
+            public Observable<TokenResponse> call() {
+                return Observable.just(api.auth(login, password));
+            }
+        })
+                .compose(this.<TokenResponse>applySchedulers());
     }
 
     @SuppressWarnings("unchecked")

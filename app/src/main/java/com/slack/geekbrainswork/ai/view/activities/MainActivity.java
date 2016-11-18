@@ -1,6 +1,5 @@
 package com.slack.geekbrainswork.ai.view.activities;
 
-import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -13,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.slack.geekbrainswork.ai.R;
-import com.slack.geekbrainswork.ai.presenter.MainPresenter;
 import com.slack.geekbrainswork.ai.view.MainActivityCallback;
 import com.slack.geekbrainswork.ai.view.fragments.CatalogsFragment;
 import com.slack.geekbrainswork.ai.view.fragments.PersonListFragment;
@@ -22,9 +20,11 @@ import com.slack.geekbrainswork.ai.view.fragments.SiteListFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainView, MainActivityCallback {
+public class MainActivity extends AppCompatActivity implements MainActivityCallback {
 
-    private static String TAG = "TAG";
+    private static String TAG_CATALOGS = "TAG_CATALOGS";
+    private static String TAG_SITE_CATALOG = "TAG_SITE_CATALOG";
+    private static String TAG_USERS = "TAG_USERS";
 
     @BindView(R.id.coordinator_layout)
     CoordinatorLayout coordinatorLayout;
@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements MainView, MainAct
     Toolbar toolbar;
 
     private FragmentManager fragmentManager;
-    private MainPresenter presenter = new MainPresenter(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,21 +39,10 @@ public class MainActivity extends AppCompatActivity implements MainView, MainAct
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        presenter.auth();
-    }
-
-    @Override
-    public void showLoginView() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-    }
-
-    @Override
-    public void showContent() {
         setSupportActionBar(toolbar);
         fragmentManager = getSupportFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentByTag(TAG);
-        if (fragment == null) replaceFragment(new CatalogsFragment(), false);
+        Fragment fragment = fragmentManager.findFragmentByTag(TAG_CATALOGS);
+        if (fragment == null) replaceFragment(new CatalogsFragment(), false, TAG_CATALOGS);
     }
 
     @Override
@@ -76,20 +64,22 @@ public class MainActivity extends AppCompatActivity implements MainView, MainAct
         return super.onOptionsItemSelected(item);
     }
 
-    private void replaceFragment(Fragment fragment, boolean addBackStack) {
+    private void replaceFragment(Fragment fragment, boolean addBackStack, String tag) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.container, fragment, TAG);
-        if (addBackStack) transaction.addToBackStack(null);
+        transaction.replace(R.id.container, fragment, tag);
+        if (addBackStack && fragmentManager.findFragmentByTag(tag) == null) {
+            transaction.addToBackStack(tag);
+        }
         transaction.commit();
     }
 
     public void startCatalogsFragment() {
-        replaceFragment(new CatalogsFragment(), true);
+        replaceFragment(new CatalogsFragment(), true, TAG_CATALOGS);
     }
 
     @Override
     public void startSitesCatalogFragment() {
-        replaceFragment(new SiteListFragment(), true);
+        replaceFragment(new SiteListFragment(), true, TAG_SITE_CATALOG);
     }
 
     @Override
@@ -101,10 +91,5 @@ public class MainActivity extends AppCompatActivity implements MainView, MainAct
         //ToDo updating
         //replaceFragment(UsersFragment, true);
         Snackbar.make(coordinatorLayout, "Функционал не реализован", Snackbar.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void showError(String error) {
-
     }
 }

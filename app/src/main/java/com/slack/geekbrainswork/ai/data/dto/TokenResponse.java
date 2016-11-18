@@ -8,6 +8,13 @@ public class TokenResponse {
     @Expose
     private String token;
 
+    public TokenResponse() {
+    }
+
+    public TokenResponse(String token) {
+        this.token = token;
+    }
+
     /**
      *
      * @return
