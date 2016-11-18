@@ -11,6 +11,10 @@ import rx.Observable;
 
 public interface Repository {
 
+    String getTokenFromStorage();
+
+    void updateToken(String token);
+
     Observable<List<SiteDTO>> getSites();
 
     Observable<SiteDTO> updateSite(Site site);

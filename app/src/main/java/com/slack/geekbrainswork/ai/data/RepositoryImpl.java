@@ -1,11 +1,10 @@
 package com.slack.geekbrainswork.ai.data;
 
-import android.app.Application;
-
 import com.slack.geekbrainswork.ai.LemonStateAdminApp;
 import com.slack.geekbrainswork.ai.data.api.ApiClient;
 import com.slack.geekbrainswork.ai.data.api.ApiInterface;
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
+import com.slack.geekbrainswork.ai.data.local.PrefHelper;
 import com.slack.geekbrainswork.ai.data.local.PreferencesHelper;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
 
@@ -19,7 +18,7 @@ public class RepositoryImpl implements Repository {
 
     private final Observable.Transformer schedulersTransformer;
     private ApiInterface apiInterface;
-    private PreferencesHelper helper = new PreferencesHelper(LemonStateAdminApp.getContext());
+    private PrefHelper helper = new PreferencesHelper(LemonStateAdminApp.getContext());
 
     public RepositoryImpl() {
         schedulersTransformer = new Observable.Transformer() {
@@ -30,14 +29,16 @@ public class RepositoryImpl implements Repository {
             }
         };
 
-        apiInterface = ApiClient.getApiInterface(getToken());
+        apiInterface = ApiClient.getApiInterface(getTokenFromStorage());
     }
 
-    private String getToken() {
+    @Override
+    public String getTokenFromStorage() {
         return helper.getFromPref();
     }
 
-    private void updateToken(String token) {
+    @Override
+    public void updateToken(String token) {
         helper.writeToPref(token);
     }
 
