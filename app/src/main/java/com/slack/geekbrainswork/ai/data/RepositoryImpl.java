@@ -38,7 +38,9 @@ public class RepositoryImpl implements Repository {
 
     @Override
     public Observable<TokenResponse> auth(String login, String password) {
-        return loginApiInterface.auth(login, password)
+        //return loginApiInterface.auth(login, password)
+        //ToDo replace test impl
+        return loginApiInterface.auth("testuser", "testpass")
                 .compose(this.<TokenResponse>applySchedulers());
     }
 
