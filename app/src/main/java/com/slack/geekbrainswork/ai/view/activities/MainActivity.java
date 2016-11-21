@@ -74,7 +74,8 @@ public class MainActivity extends AppCompatActivity implements MainActivityCallb
     }
 
     public void startCatalogsFragment() {
-        replaceFragment(new CatalogsFragment(), true, TAG_CATALOGS);
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        replaceFragment(new CatalogsFragment(), false, TAG_CATALOGS);
     }
 
     @Override
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements MainActivityCallb
     public void startUsersFragment() {
         //ToDo updating
         //replaceFragment(UsersFragment, true);
+        //fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         Snackbar.make(coordinatorLayout, "Функционал не реализован", Snackbar.LENGTH_LONG).show();
     }
 }
