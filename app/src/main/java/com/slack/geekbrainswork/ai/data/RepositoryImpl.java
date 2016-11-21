@@ -20,6 +20,7 @@ public class RepositoryImpl implements Repository {
 
     private final Observable.Transformer schedulersTransformer;
     private ApiInterface apiInterface;
+    private ApiInterface loginApiInterface;
     private PrefHelper helper = new PreferencesHelper(LemonStateAdminApp.getContext());
 
     public RepositoryImpl() {
@@ -32,6 +33,13 @@ public class RepositoryImpl implements Repository {
         };
 
         apiInterface = ApiClient.getApiInterface(getTokenFromStorage());
+        loginApiInterface = ApiClient.getApiInterface();
+    }
+
+    @Override
+    public Observable<TokenResponse> auth(String login, String password) {
+        return loginApiInterface.auth(login, password)
+                .compose(this.<TokenResponse>applySchedulers());
     }
 
     @Override
@@ -73,11 +81,6 @@ public class RepositoryImpl implements Repository {
 
     @Override
     public Observable<List<SiteDTO>> removeSite(Site site) {
-        return null;
-    }
-
-    @Override
-    public Observable<TokenResponse> auth(String login, String password) {
         return null;
     }
 

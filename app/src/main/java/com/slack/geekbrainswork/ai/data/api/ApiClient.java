@@ -6,7 +6,7 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiClient {
-    private static final String BASE_URL = "https://api.***.com/";
+    private static final String BASE_URL = "http://yrsoft.cu.cc:8080/";
 
     public static ApiInterface getApiInterface() {
 

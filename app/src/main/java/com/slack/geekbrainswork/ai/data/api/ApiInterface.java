@@ -2,6 +2,7 @@ package com.slack.geekbrainswork.ai.data.api;
 
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
 import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
+import com.slack.geekbrainswork.ai.presenter.vo.Catalog;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
 
 import java.util.List;
@@ -19,7 +20,10 @@ import rx.Observable;
 
 public interface ApiInterface {
     //ToDo rest methods
-    @GET("sites")
+    @GET("catalog/catalogs")
+    Observable<List<Catalog>> getCatalogs();
+
+    @GET("catalog/sites")
     Observable<List<SiteDTO>> getSites();
 
     @PUT("sites/{id}")
@@ -32,8 +36,8 @@ public interface ApiInterface {
     void deleteSite(@Path("id") int itemId);
 
     //Login methods
-    @POST("auth")
-    Observable<TokenResponse> auth(@Query("email") String email, @Query("password") String password);
+    @POST("user/")
+    Observable<TokenResponse> auth(@Query("user") String email, @Query("pass") String password);
 
     @POST("api/{email}/{password}")
     Observable<String> registration(@Path("email") String email, @Path("password") String password);
