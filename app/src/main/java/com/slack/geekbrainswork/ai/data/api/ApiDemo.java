@@ -33,7 +33,7 @@ public class ApiDemo {
         return siteDTOList;
     }
 
-    public SiteDTO updateSiteDTO(Site site) {
+    public SiteDTO updateSiteDTO(SiteDTO site) {
         Log.d("UPDATE ", Thread.currentThread().getName());
         for (int i = 0; i < siteDTOList.size(); i++) {
             if (siteDTOList.get(i).getId().intValue() == site.getId().intValue()) {
@@ -44,10 +44,10 @@ public class ApiDemo {
         return null;
     }
 
-    public SiteDTO createSiteDTO(String siteName) {
+    public SiteDTO createSiteDTO(SiteDTO siteDTO) {
         Log.d("CREATE ", Thread.currentThread().getName());
-        SiteDTO siteDTO = new SiteDTO(getMaxId() + 1, siteName);
-        siteDTOList.add(siteDTO);
+        SiteDTO newSiteDTO = new SiteDTO(getMaxId() + 1, siteDTO.getName());
+        siteDTOList.add(newSiteDTO);
         return siteDTO;
     }
 

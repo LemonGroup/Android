@@ -7,13 +7,17 @@ public class SiteDTO {
     @SerializedName("ID")
     @Expose
     private Integer id;
-    @SerializedName("Name")
+    @SerializedName("site")
     @Expose
     private String name;
 
     public SiteDTO(Integer id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public SiteDTO(String siteName) {
+        name = siteName;
     }
 
     public Integer getId() {

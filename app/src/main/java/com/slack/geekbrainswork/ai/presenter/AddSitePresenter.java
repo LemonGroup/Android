@@ -2,6 +2,7 @@ package com.slack.geekbrainswork.ai.presenter;
 
 import android.os.Bundle;
 
+import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
 import com.slack.geekbrainswork.ai.presenter.mappers.SiteDtoToSiteMapper;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
 import com.slack.geekbrainswork.ai.view.activities.SiteView;
@@ -34,7 +35,8 @@ public class AddSitePresenter extends BasePresenter {
             return;
         }
 
-        Subscription subscription = repository.createSite(siteName)
+        SiteDTO siteDTO = new SiteDTO(siteName);
+        Subscription subscription = repository.createSite(siteDTO)
                 .map(mapper)
                 .subscribe(new Observer<Site>() {
                     @Override

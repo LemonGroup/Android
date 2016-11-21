@@ -17,9 +17,9 @@ public interface Repository {
 
     Observable<List<SiteDTO>> getSites();
 
-    Observable<SiteDTO> updateSite(Site site);
+    Observable<SiteDTO> updateSite(SiteDTO siteDTO);
 
-    Observable<SiteDTO> createSite(String siteName);
+    Observable<SiteDTO> createSite(SiteDTO siteDTO);
 
     Observable<List<SiteDTO>> removeSite(Site site);
 
