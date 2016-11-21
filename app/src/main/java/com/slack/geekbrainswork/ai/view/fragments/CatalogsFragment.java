@@ -105,4 +105,6 @@ public class CatalogsFragment extends BaseFragment implements CatalogsView {
     private void makeToast(String text) {
         Snackbar.make(layout, text, Snackbar.LENGTH_LONG).show();
     }
+
+
 }
