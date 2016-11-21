@@ -60,22 +60,22 @@ public class RepositoryDemo implements Repository {
     }
 
     @Override
-    public Observable<SiteDTO> updateSite(final Site site) {
+    public Observable<SiteDTO> updateSite(final SiteDTO siteDTO) {
         return Observable.defer(new Func0<Observable<SiteDTO>>() {
             @Override
             public Observable<SiteDTO> call() {
-                return Observable.just(api.updateSiteDTO(site));
+                return Observable.just(api.updateSiteDTO(siteDTO));
             }
         })
                 .compose(this.<SiteDTO>applySchedulers());
     }
 
     @Override
-    public Observable<SiteDTO> createSite(final String siteName) {
+    public Observable<SiteDTO> createSite(final SiteDTO siteDTO) {
         return Observable.defer(new Func0<Observable<SiteDTO>>() {
             @Override
             public Observable<SiteDTO> call() {
-                return Observable.just(api.createSiteDTO(siteName));
+                return Observable.just(api.createSiteDTO(siteDTO));
             }
         })
                 .compose(this.<SiteDTO>applySchedulers());

@@ -23,22 +23,24 @@ public interface ApiInterface {
     @GET("catalog/catalogs")
     Observable<List<Catalog>> getCatalogs();
 
+    // Sites
     @GET("catalog/sites")
     Observable<List<SiteDTO>> getSites();
 
-    @PUT("sites/{id}")
-    Observable<SiteDTO> updateSite(@Path("ID") int siteId, @Field("Name") String name);
+    @POST("sites/sites")
+    Observable<SiteDTO> createSite(@Body SiteDTO siteDTO);
 
-    @POST("sites/new")
-    Observable<SiteDTO> createSite(@Body String site);
+    @PUT("sites/{id}")
+    Observable<SiteDTO> updateSite(@Path("id") int siteId, @Body SiteDTO siteDTO);
 
     @DELETE("sites/{id}")
-    void deleteSite(@Path("id") int itemId);
+    Observable<SiteDTO> deleteSite(@Path("id") int siteId);
 
-    //Login methods
+    //Login
+    @POST("user/{user}/{password}")
+    Observable<String> registration(@Path("user") String email, @Path("password") String password);
+
     @POST("user/")
     Observable<TokenResponse> auth(@Query("user") String email, @Query("pass") String password);
 
-    @POST("api/{email}/{password}")
-    Observable<String> registration(@Path("email") String email, @Path("password") String password);
 }
