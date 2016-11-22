@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.slack.geekbrainswork.ai.view.activities.MainActivity"
+            android:name=".view.activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateHidden">
@@ -21,13 +21,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".view.activities.UpdateSiteActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".view.activities.AddSiteActvity"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".view.activities.PersonActivity"
+            android:label="@string/title_activity_person"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

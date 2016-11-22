@@ -86,8 +86,7 @@ public class CatalogsFragment extends BaseFragment implements CatalogsView {
 
     @Override
     public void navigateToPersonsCatalogView() {
-        //ToDo navigateToPersonsCatalogView
-        makeToast("Функционал не реализован");
+        callback.startPersonsCatalogFragment();
     }
 
     @Override
