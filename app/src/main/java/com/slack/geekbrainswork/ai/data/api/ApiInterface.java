@@ -40,7 +40,7 @@ public interface ApiInterface {
     @POST("user/{user}/{password}")
     Observable<String> registration(@Path("user") String email, @Path("password") String password);
 
-    @POST("user/")
+    @GET("user/auth")
     Observable<TokenResponse> auth(@Query("user") String email, @Query("pass") String password);
 
 }

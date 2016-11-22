@@ -60,6 +60,7 @@ public class LoginActivityPresenter extends BasePresenter {
 
                     @Override
                     public void onError(Throwable e) {
+                        view.showProgress(false);
                         view.showAuthorizationError(e.getMessage());
                     }
 
@@ -74,7 +75,7 @@ public class LoginActivityPresenter extends BasePresenter {
 
     private boolean isLoginValid(String email) {
         //TODO: Replace this with your own logic
-        return email.contains("@");
+        return email.contains("");
     }
 
     private boolean isPasswordValid(String password) {

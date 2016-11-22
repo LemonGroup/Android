@@ -13,7 +13,7 @@ public interface Repository {
 
     String getTokenFromStorage();
 
-    Observable<String> updateToken(String token);
+    void updateToken(String token);
 
     Observable<List<SiteDTO>> getSites();
 

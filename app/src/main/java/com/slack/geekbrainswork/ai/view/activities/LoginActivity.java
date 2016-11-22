@@ -48,6 +48,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
 
         ButterKnife.bind(this);
 
+        emailView.setText("testuser");
+        passwordView.setText("testpass");
+
         passwordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
