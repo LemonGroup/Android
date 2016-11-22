@@ -13,7 +13,6 @@ import java.util.List;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func0;
 import rx.schedulers.Schedulers;
 
 public class RepositoryImpl implements Repository {
@@ -32,15 +31,13 @@ public class RepositoryImpl implements Repository {
             }
         };
 
-        apiInterface = ApiClient.getApiInterface(getTokenFromStorage());
         loginApiInterface = ApiClient.getApiInterface();
+        apiInterface = ApiClient.getApiInterface(getTokenFromStorage());
     }
 
     @Override
     public Observable<TokenResponse> auth(String login, String password) {
-        //return loginApiInterface.auth(login, password)
-        //ToDo replace test impl
-        return loginApiInterface.auth("testuser", "testpass")
+        return loginApiInterface.auth(login, password)
                 .compose(this.<TokenResponse>applySchedulers());
     }
 
@@ -50,14 +47,8 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
-    public Observable<String> updateToken(final String token) {
-        return Observable.defer(new Func0<Observable<String>>() {
-            @Override
-            public Observable<String> call() {
-                return Observable.just(helper.writeToPref(token));
-            }
-        })
-                .compose(this.<String>applySchedulers());
+    public void updateToken(final String token) {
+        helper.writeToPref(token);
     }
 
     @Override

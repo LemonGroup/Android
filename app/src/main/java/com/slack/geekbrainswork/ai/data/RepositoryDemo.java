@@ -36,16 +36,16 @@ public class RepositoryDemo implements Repository {
     }
 
     @Override
-    public Observable<String> updateToken(final String token) {
-        return Observable.defer(new Func0<Observable<String>>() {
-            @Override
-            public Observable<String> call() {
-                return Observable.just(helper.writeToPref(token));
-            }
-        })
-                .compose(this.<String>applySchedulers());
+    public void updateToken(final String token) {
+//        return Observable.defer(new Func0<Observable<String>>() {
+//            @Override
+//            public Observable<String> call() {
+//                return Observable.just(helper.writeToPref(token));
+//            }
+//        })
+//                .compose(this.<String>applySchedulers());
 
-
+        helper.writeToPref(token);
     }
 
     @Override
