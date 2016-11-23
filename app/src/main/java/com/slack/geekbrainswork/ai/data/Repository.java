@@ -21,7 +21,7 @@ public interface Repository {
 
     Observable<SiteDTO> createSite(SiteDTO siteDTO);
 
-    Observable<List<SiteDTO>> removeSite(Site site);
+    Observable<Void> deleteSite(Site site);
 
     Observable<TokenResponse> auth(String login, String password);
 

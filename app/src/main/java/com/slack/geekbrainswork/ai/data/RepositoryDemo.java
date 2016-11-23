@@ -82,14 +82,14 @@ public class RepositoryDemo implements Repository {
     }
 
     @Override
-    public Observable<List<SiteDTO>> removeSite(final Site site) {
-        return Observable.defer(new Func0<Observable<List<SiteDTO>>>() {
+    public Observable<Void> deleteSite(final Site site) {
+        return Observable.defer(new Func0<Observable<Void>>() {
             @Override
-            public Observable<List<SiteDTO>> call() {
+            public Observable<Void> call() {
                 return Observable.just(api.removeSiteDTO(site));
             }
         })
-                .compose(this.<List<SiteDTO>>applySchedulers());
+                .compose(this.<Void>applySchedulers());
     }
 
     @Override

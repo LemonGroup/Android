@@ -23,6 +23,7 @@ public interface ApiInterface {
     @GET("catalog/catalogs")
     Observable<List<Catalog>> getCatalogs();
 
+
     // Sites
     @GET("catalog/sites")
     Observable<List<SiteDTO>> getSites();
@@ -30,11 +31,12 @@ public interface ApiInterface {
     @POST("catalog/sites")
     Observable<SiteDTO> createSite(@Body SiteDTO siteDTO);
 
-    @PUT("sites/{id}")
-    Observable<SiteDTO> updateSite(@Path("id") int siteId, @Body SiteDTO siteDTO);
+    @PUT("catalog/sites")
+    Observable<SiteDTO> updateSite(@Body SiteDTO siteDTO);
 
-    @DELETE("sites/{id}")
-    Observable<SiteDTO> deleteSite(@Path("id") int siteId);
+    @DELETE("catalog/sites/{id}")
+    Observable<Void> deleteSite(@Path("id") int siteId);
+
 
     //Login
     @POST("user/{user}/{password}")

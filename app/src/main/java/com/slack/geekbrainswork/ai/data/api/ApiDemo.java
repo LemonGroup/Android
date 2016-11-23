@@ -63,16 +63,15 @@ public class ApiDemo {
         return maxId;
     }
 
-    public List<SiteDTO> removeSiteDTO(Site site) {
+    public Void removeSiteDTO(Site site) {
         Log.d("REMOVE ", Thread.currentThread().getName());
         for (Iterator<SiteDTO> iterator = siteDTOList.iterator(); iterator.hasNext(); ) {
             SiteDTO siteDTO = iterator.next();
             if (siteDTO.getId().intValue() == site.getId().intValue()) {
                 iterator.remove();
-                return siteDTOList;
             }
         }
-        return siteDTOList;
+        return null;
     }
 
     public TokenResponse auth(String login, String password) {
