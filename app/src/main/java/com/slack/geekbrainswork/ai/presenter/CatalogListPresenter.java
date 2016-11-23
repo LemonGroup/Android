@@ -19,6 +19,7 @@ public class CatalogListPresenter extends BasePresenter {
     }
 
     public void onCreate() {
+
         List<Catalog> catalogList = new ArrayList<>();
         catalogList.add(new Catalog(keywordsCatalogName));
         catalogList.add(new Catalog(personsCatalogName));
