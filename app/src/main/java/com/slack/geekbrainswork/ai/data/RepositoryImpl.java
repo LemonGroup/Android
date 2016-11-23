@@ -53,7 +53,6 @@ public class RepositoryImpl implements Repository {
 
     @Override
     public Observable<List<SiteDTO>> getSites() {
-        //ToDo getSites from Rest
         return apiInterface.getSites()
                 .compose(this.<List<SiteDTO>>applySchedulers());
     }
