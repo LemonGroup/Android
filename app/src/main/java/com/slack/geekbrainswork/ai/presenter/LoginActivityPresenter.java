@@ -19,7 +19,10 @@ public class LoginActivityPresenter extends BasePresenter {
     }
 
     public void attemptLoginByToken() {
-        //ToDo implement login by Token
+        String token = repository.getTokenFromStorage();
+        if (token != null && !token.isEmpty()){
+            view.navigateToMainView();
+        }
     }
 
     public void attemptLogin(String login, String password) {
