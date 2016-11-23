@@ -27,7 +27,7 @@ public interface ApiInterface {
     @GET("catalog/sites")
     Observable<List<SiteDTO>> getSites();
 
-    @POST("sites/sites")
+    @POST("catalog/sites")
     Observable<SiteDTO> createSite(@Body SiteDTO siteDTO);
 
     @PUT("sites/{id}")

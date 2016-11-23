@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class SiteDTO {
-    @SerializedName("ID")
+    @SerializedName("id")
     @Expose
     private Integer id;
     @SerializedName("site")
