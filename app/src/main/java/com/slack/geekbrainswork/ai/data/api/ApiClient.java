@@ -44,7 +44,7 @@ public class ApiClient {
                                 Request original = chain.request();
 
                                 Request.Builder requestBuilder = original.newBuilder()
-                                        .header("Auth-Token", "111")
+                                        .header("Auth-Token", token)
                                         .method(original.method(), original.body());
 
                                 Request request = requestBuilder.build();
