@@ -59,21 +59,20 @@ public class RepositoryImpl implements Repository {
 
     @Override
     public Observable<SiteDTO> updateSite(SiteDTO siteDTO) {
-        //ToDo updateSite by Rest
-        return apiInterface.updateSite(siteDTO.getId(), siteDTO)
+        return apiInterface.updateSite(siteDTO)
                 .compose(this.<SiteDTO>applySchedulers());
     }
 
     @Override
     public Observable<SiteDTO> createSite(SiteDTO siteDTO) {
-        //ToDo createSite by Rest
         return apiInterface.createSite(siteDTO)
                 .compose(this.<SiteDTO>applySchedulers());
     }
 
     @Override
-    public Observable<List<SiteDTO>> removeSite(Site site) {
-        return null;
+    public Observable<Void> deleteSite(Site site) {
+        return apiInterface.deleteSite(site.getId())
+                .compose(this.<Void>applySchedulers());
     }
 
     @SuppressWarnings("unchecked")
