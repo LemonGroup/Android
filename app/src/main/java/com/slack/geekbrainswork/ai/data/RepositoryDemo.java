@@ -115,6 +115,17 @@ public class RepositoryDemo implements Repository {
                 .compose(this.<List<UserDTO>>applySchedulers());
     }
 
+    @Override
+    public Observable<UserDTO> updateUser(final Integer id, final String pass) {
+        return Observable.defer(new Func0<Observable<UserDTO>>() {
+            @Override
+            public Observable<UserDTO> call() {
+                return Observable.just(api.updateUserDTO(id, pass));
+            }
+        })
+                .compose(this.<UserDTO>applySchedulers());
+    }
+
     @SuppressWarnings("unchecked")
     private <T> Observable.Transformer<T, T> applySchedulers() {
         return (Observable.Transformer<T, T>) schedulersTransformer;

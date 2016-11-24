@@ -11,7 +11,7 @@ import rx.subscriptions.CompositeSubscription;
 public abstract class BasePresenter implements Presenter {
 
     //ToDo replace to RepositoryImpl
-    protected Repository repository = new RepositoryImpl();
+    protected Repository repository = new RepositoryDemo();
 
     private CompositeSubscription compositeSubscription = new CompositeSubscription();
 

@@ -9,4 +9,5 @@ public interface UserListView extends View{
     void showUserList(List<User> userList);
 
 
+    void navigateToUserDetailsView(User user);
 }

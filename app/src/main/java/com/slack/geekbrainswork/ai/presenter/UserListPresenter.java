@@ -19,8 +19,6 @@ import rx.Subscription;
 public class UserListPresenter extends BasePresenter {
     private static final String BUNDLE_USER_LIST_KEY = "BUNDLE_USER_LIST_KEY";
 
-    protected Repository repository = new RepositoryDemo();
-
     private UserListView view;
     private List<User> userList;
 
@@ -70,7 +68,7 @@ public class UserListPresenter extends BasePresenter {
     }
 
     public void onClickUser(User user) {
-
+        view.navigateToUserDetailsView(user);
     }
 
     public void onAddButtonClick() {

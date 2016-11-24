@@ -49,6 +49,12 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
+    public Observable<UserDTO> updateUser(Integer id, String pass) {
+        return apiInterface.updateUser(id, pass)
+                .compose(this.<UserDTO>applySchedulers());
+    }
+
+    @Override
     public String getTokenFromStorage() {
         return helper.getFromPref();
     }

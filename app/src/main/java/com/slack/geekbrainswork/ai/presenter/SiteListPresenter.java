@@ -69,12 +69,6 @@ public class SiteListPresenter extends BasePresenter {
         view.navigateToAddSiteView();
     }
 
-    public void onSaveInstanceState(Bundle outState) {
-        if (!isSiteListEmpty()) {
-            outState.putSerializable(BUNDLE_SITE_LIST_KEY, new ArrayList<>(siteList));
-        }
-    }
-
     private boolean isSiteListEmpty() {
         return siteList == null || siteList.isEmpty();
     }
@@ -114,5 +108,11 @@ public class SiteListPresenter extends BasePresenter {
                 });
 
         addSubscription(subscription);
+    }
+
+    public void onSaveInstanceState(Bundle outState) {
+        if (!isSiteListEmpty()) {
+            outState.putSerializable(BUNDLE_SITE_LIST_KEY, new ArrayList<>(siteList));
+        }
     }
 }
