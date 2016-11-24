@@ -2,7 +2,6 @@ package com.slack.geekbrainswork.ai.view.activities;
 
 import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -17,6 +16,7 @@ import com.slack.geekbrainswork.ai.presenter.MainPresenter;
 import com.slack.geekbrainswork.ai.view.MainActivityCallback;
 import com.slack.geekbrainswork.ai.view.fragments.CatalogsFragment;
 import com.slack.geekbrainswork.ai.view.fragments.SiteListFragment;
+import com.slack.geekbrainswork.ai.view.fragments.UserListFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements MainView, MainAct
                 startCatalogsFragment();
                 return true;
             case R.id.action_users:
-                startUsersFragment();
+                startUserListFragment();
                 return true;
             case R.id.action_logout:
                 presenter.onActionLogOutClick();
@@ -88,11 +88,9 @@ public class MainActivity extends AppCompatActivity implements MainView, MainAct
         replaceFragment(new SiteListFragment(), true, TAG_SITE_CATALOG);
     }
 
-    public void startUsersFragment() {
-        //ToDo updating
-        //replaceFragment(UsersFragment, true);
-        //fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        Snackbar.make(coordinatorLayout, "Функционал не реализован", Snackbar.LENGTH_LONG).show();
+    public void startUserListFragment() {
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        replaceFragment(new UserListFragment(), false, TAG_USERS);
     }
 
     @Override

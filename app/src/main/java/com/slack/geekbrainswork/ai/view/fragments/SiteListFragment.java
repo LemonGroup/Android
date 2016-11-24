@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.*;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 import com.slack.geekbrainswork.ai.R;
 import com.slack.geekbrainswork.ai.presenter.BasePresenter;
@@ -30,6 +33,8 @@ import static android.app.Activity.RESULT_OK;
 
 public class SiteListFragment extends BaseFragment implements SiteListView {
 
+    @BindView(R.id.layout)
+    FrameLayout layout;
     @BindView(R.id.fab)
     FloatingActionButton addButton;
     @BindView(R.id.recycler_view)
@@ -127,7 +132,11 @@ public class SiteListFragment extends BaseFragment implements SiteListView {
 
     @Override
     public void showError(String error) {
+        makeToast(error);
+    }
 
+    private void makeToast(String text) {
+        Snackbar.make(layout, text, Snackbar.LENGTH_LONG).show();
     }
 
     @Override

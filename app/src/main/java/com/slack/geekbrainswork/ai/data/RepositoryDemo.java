@@ -3,6 +3,7 @@ package com.slack.geekbrainswork.ai.data;
 import com.slack.geekbrainswork.ai.data.api.ApiDemo;
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
 import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
+import com.slack.geekbrainswork.ai.data.dto.UserDTO;
 import com.slack.geekbrainswork.ai.data.local.PrefHelper;
 import com.slack.geekbrainswork.ai.data.local.PreferencesDemo;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
@@ -101,6 +102,17 @@ public class RepositoryDemo implements Repository {
             }
         })
                 .compose(this.<TokenResponse>applySchedulers());
+    }
+
+    @Override
+    public Observable<List<UserDTO>> getUsers() {
+        return Observable.defer(new Func0<Observable<List<UserDTO>>>() {
+            @Override
+            public Observable<List<UserDTO>> call() {
+                return Observable.just(api.getUserDTOList());
+            }
+        })
+                .compose(this.<List<UserDTO>>applySchedulers());
     }
 
     @SuppressWarnings("unchecked")

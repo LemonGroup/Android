@@ -5,6 +5,7 @@ import com.slack.geekbrainswork.ai.data.api.ApiClient;
 import com.slack.geekbrainswork.ai.data.api.ApiInterface;
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
 import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
+import com.slack.geekbrainswork.ai.data.dto.UserDTO;
 import com.slack.geekbrainswork.ai.data.local.PrefHelper;
 import com.slack.geekbrainswork.ai.data.local.PreferencesHelper;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
@@ -39,6 +40,12 @@ public class RepositoryImpl implements Repository {
     public Observable<TokenResponse> auth(String login, String password) {
         return loginApiInterface.auth(login, password)
                 .compose(this.<TokenResponse>applySchedulers());
+    }
+
+    @Override
+    public Observable<List<UserDTO>> getUsers() {
+        return apiInterface.getUsers()
+                .compose(this.<List<UserDTO>>applySchedulers());
     }
 
     @Override
