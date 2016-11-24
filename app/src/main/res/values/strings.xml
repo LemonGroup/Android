@@ -2,7 +2,8 @@
     <string name="app_name">LemonStat: Admin App</string>
     <string name="action_settings">Настройки</string>
     <string name="action_catalogs">Справочники</string>
-    <string name="action_users">Настройки доступа</string>
+    <string name="action_users">Пользователи</string>
+    <string name="action_logout">Завершить сеанс</string>
     <string name="cancel_button_text">Отмена</string>
     <string name="save_button_text">Сохранить</string>
     <string name="catalog_edit_title">Редактирование</string>
