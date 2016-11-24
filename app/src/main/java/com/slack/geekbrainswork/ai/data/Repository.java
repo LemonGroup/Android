@@ -28,5 +28,7 @@ public interface Repository {
     Observable<TokenResponse> auth(String login, String password);
 
     Observable<List<UserDTO>> getUsers();
+
+    Observable<UserDTO> updateUser(Integer id, String pass);
 }
 

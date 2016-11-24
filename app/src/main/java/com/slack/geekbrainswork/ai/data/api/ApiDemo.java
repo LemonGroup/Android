@@ -95,4 +95,16 @@ public class ApiDemo {
         Log.d("GET ", Thread.currentThread().getName());
         return userDTOList;
     }
+
+
+    public UserDTO updateUserDTO(Integer id, String pass) {
+        Log.d("UPDATE ", Thread.currentThread().getName());
+        for (int i = 0; i < userDTOList.size(); i++) {
+            if (userDTOList.get(i).getId().intValue() == id) {
+                //userDTOList.get(i).(site.getName());
+                return userDTOList.get(i);
+            }
+        }
+        return null;
+    }
 }

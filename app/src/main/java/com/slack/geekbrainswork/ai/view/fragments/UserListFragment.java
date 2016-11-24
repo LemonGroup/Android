@@ -1,5 +1,6 @@
 package com.slack.geekbrainswork.ai.view.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -10,13 +11,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 import com.slack.geekbrainswork.ai.R;
 import com.slack.geekbrainswork.ai.presenter.BasePresenter;
 import com.slack.geekbrainswork.ai.presenter.UserListPresenter;
 import com.slack.geekbrainswork.ai.presenter.vo.User;
-import com.slack.geekbrainswork.ai.view.activities.MainView;
+import com.slack.geekbrainswork.ai.view.activities.UserUpdateActivity;
 import com.slack.geekbrainswork.ai.view.adapters.UserListAdepter;
 
 import java.util.ArrayList;
@@ -73,8 +73,14 @@ public class UserListFragment extends BaseFragment implements UserListView {
     }
 
     @Override
+    public void navigateToUserDetailsView(User user) {
+        Intent intent = new Intent(getActivity(), UserUpdateActivity.class);
+        intent.putExtra("user", user);
+        startActivityForResult(intent, 10);
+    }
+
+    @Override
     public void showError(String error) {
-        //ToDo error handling
         makeToast(error);
     }
 

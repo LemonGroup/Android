@@ -47,4 +47,7 @@ public interface ApiInterface {
     // Users
     @GET("user")
     Observable<List<UserDTO>> getUsers();
+
+    @PUT("user/{id}/{password}")
+    Observable<UserDTO> updateUser(@Query("id") Integer id, @Query("password") String pass);
 }

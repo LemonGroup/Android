@@ -12,12 +12,7 @@ public class UserListMapper implements Func1<List<UserDTO>, List<User>> {
     @Override
     public List<User> call(List<UserDTO> userDTOs) {
         return Observable.from(userDTOs)
-                .map(new Func1<UserDTO, User>() {
-                    @Override
-                    public User call(UserDTO userDTO) {
-                        return new User(userDTO.getId(), userDTO.getName(), userDTO.getEmail());
-                    }
-                })
+                .map(new UserMapper())
                 .toList()
                 .toBlocking()
                 .first();

@@ -2,6 +2,9 @@ package com.slack.geekbrainswork.ai.presenter;
 
 import android.text.TextUtils;
 
+import com.slack.geekbrainswork.ai.data.Repository;
+import com.slack.geekbrainswork.ai.data.RepositoryDemo;
+import com.slack.geekbrainswork.ai.data.RepositoryImpl;
 import com.slack.geekbrainswork.ai.presenter.mappers.TokenMapper;
 import com.slack.geekbrainswork.ai.view.activities.LoginView;
 
@@ -10,6 +13,8 @@ import rx.Subscription;
 import rx.functions.Action1;
 
 public class LoginActivityPresenter extends BasePresenter {
+
+    protected Repository repository = new RepositoryImpl();
 
     private LoginView view;
     private TokenMapper tokenMapper = new TokenMapper();
