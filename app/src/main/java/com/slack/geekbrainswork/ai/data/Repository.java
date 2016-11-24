@@ -2,7 +2,9 @@ package com.slack.geekbrainswork.ai.data;
 
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
 import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
+import com.slack.geekbrainswork.ai.data.dto.UserDTO;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
+import com.slack.geekbrainswork.ai.presenter.vo.User;
 
 import java.util.List;
 
@@ -25,5 +27,6 @@ public interface Repository {
 
     Observable<TokenResponse> auth(String login, String password);
 
+    Observable<List<UserDTO>> getUsers();
 }
 

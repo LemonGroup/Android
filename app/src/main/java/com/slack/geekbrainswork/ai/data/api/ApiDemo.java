@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
 import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
+import com.slack.geekbrainswork.ai.data.dto.UserDTO;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
 
 import java.util.ArrayList;
@@ -14,11 +15,16 @@ public class ApiDemo {
 
     private static ApiDemo api;
     private static List<SiteDTO> siteDTOList = new ArrayList<>();
+    private static List<UserDTO> userDTOList = new ArrayList<>();
     private static String token = "sa4564asdas4f56af4asasewqjmwer24";
 
     private ApiDemo() {
         siteDTOList.add(new SiteDTO(1, "lenta.ru"));
         siteDTOList.add(new SiteDTO(2, "echo.msk.ru"));
+
+        userDTOList.add(new UserDTO(1,"Andrey","andrey@mail.ru"));
+        userDTOList.add(new UserDTO(3,"Michailov","michailov@gmail.com"));
+        userDTOList.add(new UserDTO(4,"Alex","alex@yandex.ru"));
     }
 
     public static ApiDemo getApi() {
@@ -75,7 +81,6 @@ public class ApiDemo {
     }
 
     public TokenResponse auth(String login, String password) {
-
         // Simulate network access.
         try {
             Thread.sleep(2000);
@@ -84,5 +89,10 @@ public class ApiDemo {
         }
 
         return new TokenResponse(token);
+    }
+
+    public List<UserDTO> getUserDTOList() {
+        Log.d("GET ", Thread.currentThread().getName());
+        return userDTOList;
     }
 }
