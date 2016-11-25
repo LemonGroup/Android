@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.slack.geekbrainswork.ai.presenter.mappers.UserMapper;
 import com.slack.geekbrainswork.ai.presenter.vo.User;
-import com.slack.geekbrainswork.ai.view.activities.UserDetailsView;
+import com.slack.geekbrainswork.ai.view.activities.UserView;
 
 import rx.Observer;
 import rx.Subscription;
@@ -14,10 +14,10 @@ public class UserUpdatePresenter extends BasePresenter {
     private static String BUNDLE_USER_KEY = "BUNDLE_USER_KEY";
 
     private User user;
-    private UserDetailsView view;
+    private UserView view;
     private UserMapper mapper = new UserMapper();
 
-    public UserUpdatePresenter(UserDetailsView userDetailsView) {
+    public UserUpdatePresenter(UserView userDetailsView) {
         view = userDetailsView;
     }
 
@@ -39,6 +39,10 @@ public class UserUpdatePresenter extends BasePresenter {
             return;
         }
 
+        updateUser(pass1);
+    }
+
+    private void updateUser(String pass1) {
         Subscription subscription = repository.updateUser(user.getId(), pass1)
                 .map(mapper)
                 .subscribe(new Observer<User>() {

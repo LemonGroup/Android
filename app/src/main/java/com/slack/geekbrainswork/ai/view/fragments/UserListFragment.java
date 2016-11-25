@@ -20,6 +20,7 @@ import com.slack.geekbrainswork.ai.presenter.BasePresenter;
 import com.slack.geekbrainswork.ai.presenter.UserListPresenter;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
 import com.slack.geekbrainswork.ai.presenter.vo.User;
+import com.slack.geekbrainswork.ai.view.activities.UserAddActivity;
 import com.slack.geekbrainswork.ai.view.activities.UserUpdateActivity;
 import com.slack.geekbrainswork.ai.view.adapters.UserListAdepter;
 
@@ -28,6 +29,8 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static android.app.Activity.RESULT_OK;
 
 public class UserListFragment extends BaseFragment implements UserListView {
 
@@ -77,10 +80,16 @@ public class UserListFragment extends BaseFragment implements UserListView {
     }
 
     @Override
-    public void navigateToUserDetailsView(User user) {
+    public void navigateToUpdateUserView(User user) {
         Intent intent = new Intent(getActivity(), UserUpdateActivity.class);
         intent.putExtra("user", user);
         startActivityForResult(intent, 10);
+    }
+
+    @Override
+    public void navigateToAddUserView() {
+        Intent intent = new Intent(getActivity(), UserAddActivity.class);
+        startActivityForResult(intent, 11);
     }
 
     @Override
@@ -109,6 +118,15 @@ public class UserListFragment extends BaseFragment implements UserListView {
             }
         });
         return dialog;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 10 || requestCode == 11) {
+            if (resultCode == RESULT_OK) {
+                presenter.onActivityResult();
+            }
+        }
     }
 
     @Override

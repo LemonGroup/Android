@@ -5,14 +5,15 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.slack.geekbrainswork.ai.R;
+import com.slack.geekbrainswork.ai.presenter.UserAddPresenter;
 import com.slack.geekbrainswork.ai.presenter.UserUpdatePresenter;
 import com.slack.geekbrainswork.ai.presenter.vo.User;
 
 import butterknife.ButterKnife;
 
-public class UserUpdateActivity extends UserActivity {
+public class UserAddActivity extends UserActivity{
 
-    private UserUpdatePresenter presenter = new UserUpdatePresenter(this);
+    private UserAddPresenter presenter = new UserAddPresenter(this);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,14 +22,8 @@ public class UserUpdateActivity extends UserActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
-        User user = getUserVo();
 
-        setTitle(user.getName());
-        loginEditText.setText(user.getName());
-        emailEditText.setText(user.getEmail());
-
-        loginEditText.setEnabled(false);
-        emailEditText.setEnabled(false);
+        setTitle(getResources().getString(R.string.user_add_title));
 
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,11 +40,8 @@ public class UserUpdateActivity extends UserActivity {
             }
         });
 
-        presenter.onCreate(savedInstanceState, user);
-    }
-
-    private User getUserVo() {
-        return (User) getIntent().getSerializableExtra("user");
+        openKeyboard();
+        presenter.onCreate(savedInstanceState);
     }
 
     @Override
@@ -57,5 +49,4 @@ public class UserUpdateActivity extends UserActivity {
         super.onSaveInstanceState(outState);
         presenter.onSaveInstanceState(outState);
     }
-
 }

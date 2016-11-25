@@ -13,11 +13,18 @@ public class UserDTO {
     @SerializedName("email")
     @Expose
     private String email;
+    private String pass;
 
     public UserDTO(Integer id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
+    }
+
+    public UserDTO(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.pass = password;
     }
 
     public Integer getId() {

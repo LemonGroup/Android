@@ -2,12 +2,8 @@ package com.slack.geekbrainswork.ai.presenter;
 
 import android.os.Bundle;
 
-import com.slack.geekbrainswork.ai.data.Repository;
-import com.slack.geekbrainswork.ai.data.RepositoryDemo;
-import com.slack.geekbrainswork.ai.data.RepositoryImpl;
 import com.slack.geekbrainswork.ai.data.dto.UserDTO;
 import com.slack.geekbrainswork.ai.presenter.mappers.UserListMapper;
-import com.slack.geekbrainswork.ai.presenter.vo.Site;
 import com.slack.geekbrainswork.ai.presenter.vo.User;
 import com.slack.geekbrainswork.ai.view.fragments.UserListView;
 
@@ -67,10 +63,11 @@ public class UserListPresenter extends BasePresenter {
     }
 
     public void onClickUser(User user) {
-        view.navigateToUserDetailsView(user);
+        view.navigateToUpdateUserView(user);
     }
 
     public void onAddButtonClick() {
+        view.navigateToAddUserView();
     }
 
     public void onLongClickUser(User user) {
@@ -106,14 +103,17 @@ public class UserListPresenter extends BasePresenter {
         addSubscription(subscription);
     }
 
-    public void onSaveInstanceState(Bundle outState) {
-        if (!isSiteListEmpty()) {
-            outState.putSerializable(BUNDLE_USER_LIST_KEY, new ArrayList<>(userList));
-        }
+    public void onActivityResult() {
+        loadData();
     }
 
     private boolean isSiteListEmpty() {
         return userList == null || userList.isEmpty();
     }
 
+    public void onSaveInstanceState(Bundle outState) {
+        if (!isSiteListEmpty()) {
+            outState.putSerializable(BUNDLE_USER_LIST_KEY, new ArrayList<>(userList));
+        }
+    }
 }

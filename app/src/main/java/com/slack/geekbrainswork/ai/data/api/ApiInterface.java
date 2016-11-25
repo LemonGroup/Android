@@ -1,5 +1,6 @@
 package com.slack.geekbrainswork.ai.data.api;
 
+import com.slack.geekbrainswork.ai.data.dto.IsBusyResponse;
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
 import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
 import com.slack.geekbrainswork.ai.data.dto.UserDTO;
@@ -53,4 +54,13 @@ public interface ApiInterface {
 
     @DELETE("user/{id}")
     Observable<Void> deleteUser(@Path("id") int id);
+
+    @POST("user")
+    Observable<UserDTO> createUser(@Body UserDTO userDTO);
+
+    @GET("user/isBusyLogin")
+    Observable<IsBusyResponse> isLoginExists(@Query("login") String login);
+
+    @GET("user/isBusyEmail")
+    Observable<IsBusyResponse> isEmailExists(@Query("email") String email);
 }
