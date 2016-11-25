@@ -22,9 +22,9 @@ public class ApiDemo {
         siteDTOList.add(new SiteDTO(1, "lenta.ru"));
         siteDTOList.add(new SiteDTO(2, "echo.msk.ru"));
 
-        userDTOList.add(new UserDTO(1,"Andrey","andrey@mail.ru"));
-        userDTOList.add(new UserDTO(3,"Michailov","michailov@gmail.com"));
-        userDTOList.add(new UserDTO(4,"Alex","alex@yandex.ru"));
+        userDTOList.add(new UserDTO(1, "Andrey", "andrey@mail.ru"));
+        userDTOList.add(new UserDTO(3, "Michailov", "michailov@gmail.com"));
+        userDTOList.add(new UserDTO(4, "Alex", "alex@yandex.ru"));
     }
 
     public static ApiDemo getApi() {
@@ -69,11 +69,11 @@ public class ApiDemo {
         return maxId;
     }
 
-    public Void removeSiteDTO(Site site) {
+    public Void deleteSiteDTO(int id) {
         Log.d("REMOVE ", Thread.currentThread().getName());
         for (Iterator<SiteDTO> iterator = siteDTOList.iterator(); iterator.hasNext(); ) {
             SiteDTO siteDTO = iterator.next();
-            if (siteDTO.getId().intValue() == site.getId().intValue()) {
+            if (siteDTO.getId() == id) {
                 iterator.remove();
             }
         }
@@ -103,6 +103,17 @@ public class ApiDemo {
             if (userDTOList.get(i).getId().intValue() == id) {
                 //userDTOList.get(i).(site.getName());
                 return userDTOList.get(i);
+            }
+        }
+        return null;
+    }
+
+    public Void deleteUserDTO(int id) {
+        Log.d("REMOVE ", Thread.currentThread().getName());
+        for (Iterator<UserDTO> iterator = userDTOList.iterator(); iterator.hasNext(); ) {
+            UserDTO userDTO = iterator.next();
+            if (userDTO.getId() == id) {
+                iterator.remove();
             }
         }
         return null;

@@ -10,4 +10,6 @@ public interface UserListView extends View{
 
 
     void navigateToUserDetailsView(User user);
+
+    void showRemoveUserDialog(User user);
 }

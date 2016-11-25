@@ -1,10 +1,13 @@
 package com.slack.geekbrainswork.ai.view.fragments;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,6 +18,7 @@ import android.widget.FrameLayout;
 import com.slack.geekbrainswork.ai.R;
 import com.slack.geekbrainswork.ai.presenter.BasePresenter;
 import com.slack.geekbrainswork.ai.presenter.UserListPresenter;
+import com.slack.geekbrainswork.ai.presenter.vo.Site;
 import com.slack.geekbrainswork.ai.presenter.vo.User;
 import com.slack.geekbrainswork.ai.view.activities.UserUpdateActivity;
 import com.slack.geekbrainswork.ai.view.adapters.UserListAdepter;
@@ -77,6 +81,34 @@ public class UserListFragment extends BaseFragment implements UserListView {
         Intent intent = new Intent(getActivity(), UserUpdateActivity.class);
         intent.putExtra("user", user);
         startActivityForResult(intent, 10);
+    }
+
+    @Override
+    public void showRemoveUserDialog(final User user) {
+        final AlertDialog dialog = createDialog(user);
+        dialog.show();
+    }
+
+    @NonNull
+    private AlertDialog createDialog(final User user) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle(user.getName());
+        builder.setCancelable(true);
+        builder.setNeutralButton(R.string.action_delete, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                presenter.onClickRemoveButton(user);
+            }
+        });
+        final AlertDialog dialog = builder.create();
+
+        dialog.setOnShowListener(new DialogInterface.OnShowListener() {
+            @Override
+            public void onShow(DialogInterface dialogInterface) {
+                dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setTextColor(getResources().getColor(R.color.text_color));
+            }
+        });
+        return dialog;
     }
 
     @Override

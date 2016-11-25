@@ -6,7 +6,6 @@ import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
 import com.slack.geekbrainswork.ai.data.dto.UserDTO;
 import com.slack.geekbrainswork.ai.data.local.PrefHelper;
 import com.slack.geekbrainswork.ai.data.local.PreferencesDemo;
-import com.slack.geekbrainswork.ai.presenter.vo.Site;
 
 import java.util.List;
 
@@ -83,11 +82,11 @@ public class RepositoryDemo implements Repository {
     }
 
     @Override
-    public Observable<Void> deleteSite(final Site site) {
+    public Observable<Void> deleteSite(final int id) {
         return Observable.defer(new Func0<Observable<Void>>() {
             @Override
             public Observable<Void> call() {
-                return Observable.just(api.removeSiteDTO(site));
+                return Observable.just(api.deleteSiteDTO(id));
             }
         })
                 .compose(this.<Void>applySchedulers());
@@ -124,6 +123,17 @@ public class RepositoryDemo implements Repository {
             }
         })
                 .compose(this.<UserDTO>applySchedulers());
+    }
+
+    @Override
+    public Observable<Void> deleteUser(final int id) {
+        return Observable.defer(new Func0<Observable<Void>>() {
+            @Override
+            public Observable<Void> call() {
+                return Observable.just(api.deleteUserDTO(id));
+            }
+        })
+                .compose(this.<Void>applySchedulers());
     }
 
     @SuppressWarnings("unchecked")
