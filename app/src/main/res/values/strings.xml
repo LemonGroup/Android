@@ -16,7 +16,8 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Пароль</string>
-    <string name="action_sign_in">Вход/Регистрация</string>
+    <string name="action_sign_in">Вход</string>
+    <string name="action_registration_in">Регистрация</string>
     <string name="action_sign_in_short">Вход</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
