@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements MainView, MainAct
 
     public void startCatalogsFragment() {
         fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        replaceFragment(new CatalogsFragment(), false, TAG_CATALOGS);
+        replaceFragment(new CatalogsFragment(), true, TAG_CATALOGS);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements MainView, MainAct
 
     public void startUserListFragment() {
         fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        replaceFragment(new UserListFragment(), false, TAG_USERS);
+        replaceFragment(new UserListFragment(), true, TAG_USERS);
     }
 
     @Override

@@ -2,16 +2,9 @@ package com.slack.geekbrainswork.ai.presenter;
 
 import android.os.Bundle;
 
-import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
-import com.slack.geekbrainswork.ai.data.dto.UserDTO;
-import com.slack.geekbrainswork.ai.presenter.mappers.SiteDtoToSiteMapper;
 import com.slack.geekbrainswork.ai.presenter.mappers.UserMapper;
-import com.slack.geekbrainswork.ai.presenter.vo.Site;
 import com.slack.geekbrainswork.ai.presenter.vo.User;
-import com.slack.geekbrainswork.ai.view.activities.SiteView;
-import com.slack.geekbrainswork.ai.view.activities.UserDetailsActivity;
 import com.slack.geekbrainswork.ai.view.activities.UserDetailsView;
-import com.slack.geekbrainswork.ai.view.fragments.BaseFragment;
 
 import rx.Observer;
 import rx.Subscription;
@@ -39,16 +32,12 @@ public class UserUpdatePresenter extends BasePresenter {
     }
 
     public void onSaveButtonClick() {
-        String login = view.getUserNameTextViewText();
-        String email = view.getEmailTextViewText();
         String pass1 = view.getPasswordTextViewText();
         String pass2 = view.getPassword2TextViewText();
 
-        if (!isValidate(login, pass1, pass2, email)) {
+        if (!isValidPassword(pass1, pass2)) {
             return;
         }
-
-        user.setName(login);
 
         Subscription subscription = repository.updateUser(user.getId(), pass1)
                 .map(mapper)
@@ -72,18 +61,8 @@ public class UserUpdatePresenter extends BasePresenter {
         addSubscription(subscription);
     }
 
-    private boolean isValidate(String login, String pass1, String pass2, String email) {
-        if (login == null || login.isEmpty()) {
-            view.showError("Логин не должен быть пустым");
-            return false;
-        }
-
-        if (email == null || email.isEmpty()) {
-            view.showError("Email не должен быть пустым");
-            return false;
-        }
-
-        if (pass1 == null) {
+    private boolean isValidPassword(String pass1, String pass2) {
+        if (pass1 == null || pass1.isEmpty()) {
             view.showError("Пароль не должен быть пустым");
             return false;
         }
