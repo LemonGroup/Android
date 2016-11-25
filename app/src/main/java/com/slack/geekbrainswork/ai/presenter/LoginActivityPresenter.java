@@ -30,7 +30,7 @@ public class LoginActivityPresenter extends BasePresenter {
 //        }
     }
 
-    public void attemptLogin(String login, String password) {
+    public void onSignInButtonClick(String login, String password) {
         boolean cancel = false;
 
         view.resetErrors();
@@ -81,9 +81,9 @@ public class LoginActivityPresenter extends BasePresenter {
         addSubscription(subscription);
     }
 
-    private boolean isLoginValid(String email) {
+    private boolean isLoginValid(String login) {
         //TODO: Replace this with your own logic
-        return email.contains("");
+        return login.contains("");
     }
 
     private boolean isPasswordValid(String password) {
@@ -92,4 +92,7 @@ public class LoginActivityPresenter extends BasePresenter {
     }
 
 
+    public void onRegButtonClick() {
+        view.navigateToRegistrationUserView();
+    }
 }
