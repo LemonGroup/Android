@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     View progressView;
     @BindView(R.id.login_form)
     View loginFormView;
-    @BindView(R.id.email_sign_in_button)
+    @BindView(R.id.sign_in_button)
     Button button;
 
     private LoginActivityPresenter presenter = new LoginActivityPresenter(this);
