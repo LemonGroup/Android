@@ -1,6 +1,7 @@
 package com.slack.geekbrainswork.ai.data;
 
 import com.slack.geekbrainswork.ai.data.api.ApiDemo;
+import com.slack.geekbrainswork.ai.data.dto.IsBusyResponse;
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
 import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
 import com.slack.geekbrainswork.ai.data.dto.UserDTO;
@@ -37,14 +38,6 @@ public class RepositoryDemo implements Repository {
 
     @Override
     public void updateToken(final String token) {
-//        return Observable.defer(new Func0<Observable<String>>() {
-//            @Override
-//            public Observable<String> call() {
-//                return Observable.just(helper.writeToPref(token));
-//            }
-//        })
-//                .compose(this.<String>applySchedulers());
-
         helper.writeToPref(token);
     }
 
@@ -134,6 +127,39 @@ public class RepositoryDemo implements Repository {
             }
         })
                 .compose(this.<Void>applySchedulers());
+    }
+
+    @Override
+    public Observable<IsBusyResponse> isLoginExists(final String login) {
+        return Observable.defer(new Func0<Observable<IsBusyResponse>>() {
+            @Override
+            public Observable<IsBusyResponse> call() {
+                return Observable.just(api.isLoginExists(login));
+            }
+        })
+                .compose(this.<IsBusyResponse>applySchedulers());
+    }
+
+    @Override
+    public Observable<IsBusyResponse> isEmailExists(final String email) {
+        return Observable.defer(new Func0<Observable<IsBusyResponse>>() {
+            @Override
+            public Observable<IsBusyResponse> call() {
+                return Observable.just(api.isEmailExists(email));
+            }
+        })
+                .compose(this.<IsBusyResponse>applySchedulers());
+    }
+
+    @Override
+    public Observable<UserDTO> createUser(final UserDTO userDTO) {
+        return Observable.defer(new Func0<Observable<UserDTO>>() {
+            @Override
+            public Observable<UserDTO> call() {
+                return Observable.just(api.createUserDTO(userDTO));
+            }
+        })
+                .compose(this.<UserDTO>applySchedulers());
     }
 
     @SuppressWarnings("unchecked")

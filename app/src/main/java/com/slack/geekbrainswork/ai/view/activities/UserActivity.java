@@ -2,7 +2,6 @@ package com.slack.geekbrainswork.ai.view.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -16,7 +15,7 @@ import com.slack.geekbrainswork.ai.presenter.vo.User;
 
 import butterknife.BindView;
 
-public abstract class UserDetailsActivity extends AppCompatActivity implements UserDetailsView{
+public abstract class UserActivity extends AppCompatActivity implements UserView {
     @BindView(R.id.layout)
     LinearLayout layout;
     @BindView(R.id.login_edit_text)

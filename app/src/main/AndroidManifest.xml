@@ -40,7 +40,9 @@
         <activity
             android:name=".view.activities.UserUpdateActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-
+        <activity
+            android:name=".view.activities.UserAddActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

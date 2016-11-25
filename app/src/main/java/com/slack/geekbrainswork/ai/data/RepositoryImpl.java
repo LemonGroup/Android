@@ -3,6 +3,7 @@ package com.slack.geekbrainswork.ai.data;
 import com.slack.geekbrainswork.ai.LemonStateAdminApp;
 import com.slack.geekbrainswork.ai.data.api.ApiClient;
 import com.slack.geekbrainswork.ai.data.api.ApiInterface;
+import com.slack.geekbrainswork.ai.data.dto.IsBusyResponse;
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
 import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
 import com.slack.geekbrainswork.ai.data.dto.UserDTO;
@@ -59,6 +60,24 @@ public class RepositoryImpl implements Repository {
     public Observable<Void> deleteUser(int id) {
         return apiInterface.deleteUser(id)
                 .compose(this.<Void>applySchedulers());
+    }
+
+    @Override
+    public Observable<IsBusyResponse> isLoginExists(String login) {
+        return apiInterface.isLoginExists(login)
+                .compose(this.<IsBusyResponse>applySchedulers());
+    }
+
+    @Override
+    public Observable<IsBusyResponse> isEmailExists(String email) {
+        return apiInterface.isEmailExists(email)
+                .compose(this.<IsBusyResponse>applySchedulers());
+    }
+
+    @Override
+    public Observable<UserDTO> createUser(UserDTO userDTO) {
+        return apiInterface.createUser(userDTO)
+                .compose(this.<UserDTO>applySchedulers());
     }
 
     @Override

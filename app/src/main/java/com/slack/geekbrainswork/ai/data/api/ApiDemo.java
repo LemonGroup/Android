@@ -2,6 +2,7 @@ package com.slack.geekbrainswork.ai.data.api;
 
 import android.util.Log;
 
+import com.slack.geekbrainswork.ai.data.dto.IsBusyResponse;
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
 import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
 import com.slack.geekbrainswork.ai.data.dto.UserDTO;
@@ -117,5 +118,34 @@ public class ApiDemo {
             }
         }
         return null;
+    }
+
+    public UserDTO createUserDTO(UserDTO userDTO) {
+        Log.d("CREATE ", Thread.currentThread().getName());
+        UserDTO newUserDTO = new UserDTO(getMaxId() + 1, userDTO.getName(), userDTO.getEmail());
+        userDTOList.add(newUserDTO);
+        return newUserDTO;
+    }
+
+    public IsBusyResponse isLoginExists(String login) {
+        IsBusyResponse response = new IsBusyResponse();
+        response.setIsBusy(false);
+        for (int i = 0; i < userDTOList.size(); i++) {
+            if (userDTOList.get(i).getName().equals(login)) {
+                response.setIsBusy(true);
+            }
+        }
+        return response;
+    }
+
+    public IsBusyResponse isEmailExists(String email) {
+        IsBusyResponse response = new IsBusyResponse();
+        response.setIsBusy(false);
+        for (int i = 0; i < userDTOList.size(); i++) {
+            if (userDTOList.get(i).getEmail().equals(email)) {
+                response.setIsBusy(true);
+            }
+        }
+        return response;
     }
 }
