@@ -30,7 +30,14 @@
         <activity
             android:name=".view.activities.PersonActivity"
             android:label="@string/title_activity_person"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.activities.AddPersonActivity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".view.activities.UpdatePersonActivity"
+            android:theme="@style/AppTheme" />
+
     </application>
 
 </manifest>
