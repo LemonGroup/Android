@@ -43,6 +43,9 @@
         <activity
             android:name=".view.activities.UserAddActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".view.activities.RegistrationUserActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>

@@ -17,4 +17,6 @@ public interface LoginView {
     void showAuthorizationError(String message);
 
     void navigateToMainView();
+
+    void navigateToRegistrationUserView();
 }

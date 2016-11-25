@@ -31,7 +31,6 @@ public class UserAddPresenter extends BasePresenter {
         }
     }
 
-
     public void onSaveButtonClick() {
         String login = view.getUserNameTextViewText();
         String email = view.getEmailTextViewText();
@@ -42,10 +41,10 @@ public class UserAddPresenter extends BasePresenter {
             return;
         }
 
-        createUser(login, email, pass1);
+        tryCreateUser(login, email, pass1);
     }
 
-    private void createUser(final String login, final String email, final String pass) {
+    private void tryCreateUser(final String login, final String email, final String pass) {
         Subscription loginExistSubscription = repository.isLoginExists(login)
                 .flatMap(new Func1<IsBusyResponse, Observable<IsBusyResponse>>() {
                     @Override
@@ -86,7 +85,6 @@ public class UserAddPresenter extends BasePresenter {
         addSubscription(loginExistSubscription);
     }
 
-
     private boolean isValidData(String login, String email, String pass1, String pass2) {
 
         if (login == null || login.isEmpty()) {
@@ -112,6 +110,8 @@ public class UserAddPresenter extends BasePresenter {
     }
 
     public void onSaveInstanceState(Bundle outState) {
-
+        if (user != null) {
+            outState.putSerializable(BUNDLE_USER_KEY, user);
+        }
     }
 }

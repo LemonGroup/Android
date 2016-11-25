@@ -35,7 +35,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @BindView(R.id.login_form)
     View loginFormView;
     @BindView(R.id.sign_in_button)
-    Button button;
+    Button signInButton;
+    @BindView(R.id.registration_button)
+    Button regButton;
 
     private LoginActivityPresenter presenter = new LoginActivityPresenter(this);
 
@@ -54,17 +56,24 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    presenter.attemptLogin(emailView.getText().toString(), passwordView.getText().toString());
+                    presenter.onSignInButtonClick(emailView.getText().toString(), passwordView.getText().toString());
                     return true;
                 }
                 return false;
             }
         });
 
-        button.setOnClickListener(new OnClickListener() {
+        signInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.attemptLogin(emailView.getText().toString(), passwordView.getText().toString());
+                presenter.onSignInButtonClick(emailView.getText().toString(), passwordView.getText().toString());
+            }
+        });
+
+        regButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onRegButtonClick();
             }
         });
     }
@@ -130,6 +139,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void navigateToRegistrationUserView() {
+        Intent intent = new Intent(this, RegistrationUserActivity.class);
+        startActivity(intent);
     }
 }
 
