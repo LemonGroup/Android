@@ -23,12 +23,14 @@ public interface Repository {
 
     Observable<SiteDTO> createSite(SiteDTO siteDTO);
 
-    Observable<Void> deleteSite(Site site);
+    Observable<Void> deleteSite(int id);
 
     Observable<TokenResponse> auth(String login, String password);
 
     Observable<List<UserDTO>> getUsers();
 
     Observable<UserDTO> updateUser(Integer id, String pass);
+
+    Observable<Void> deleteUser(int id);
 }
 

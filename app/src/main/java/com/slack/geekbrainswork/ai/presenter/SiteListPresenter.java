@@ -82,7 +82,7 @@ public class SiteListPresenter extends BasePresenter {
     }
 
     public void onClickRemoveButton(Site site) {
-        Subscription subscription = repository.deleteSite(site)
+        Subscription subscription = repository.deleteSite(site.getId())
                 .flatMap(new Func1<Void, Observable<List<SiteDTO>>>() {
                     @Override
                     public Observable<List<SiteDTO>> call(Void aVoid) {

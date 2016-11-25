@@ -9,6 +9,7 @@ import com.slack.geekbrainswork.ai.data.dto.UserDTO;
 import com.slack.geekbrainswork.ai.data.local.PrefHelper;
 import com.slack.geekbrainswork.ai.data.local.PreferencesHelper;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
+import com.slack.geekbrainswork.ai.presenter.vo.User;
 
 import java.util.List;
 
@@ -55,6 +56,12 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
+    public Observable<Void> deleteUser(int id) {
+        return apiInterface.deleteUser(id)
+                .compose(this.<Void>applySchedulers());
+    }
+
+    @Override
     public String getTokenFromStorage() {
         return helper.getFromPref();
     }
@@ -83,8 +90,8 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
-    public Observable<Void> deleteSite(Site site) {
-        return apiInterface.deleteSite(site.getId())
+    public Observable<Void> deleteSite(int id) {
+        return apiInterface.deleteSite(id)
                 .compose(this.<Void>applySchedulers());
     }
 
