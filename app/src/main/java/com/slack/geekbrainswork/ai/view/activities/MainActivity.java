@@ -16,6 +16,7 @@ import com.slack.geekbrainswork.ai.R;
 import com.slack.geekbrainswork.ai.presenter.MainPresenter;
 import com.slack.geekbrainswork.ai.view.MainActivityCallback;
 import com.slack.geekbrainswork.ai.view.fragments.CatalogsFragment;
+import com.slack.geekbrainswork.ai.view.fragments.KeywordListFragment;
 import com.slack.geekbrainswork.ai.view.fragments.PersonListFragment;
 import com.slack.geekbrainswork.ai.view.fragments.SiteListFragment;
 
@@ -27,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements MainView, MainAct
     private static String TAG_CATALOGS = "TAG_CATALOGS";
     private static String TAG_SITE_CATALOG = "TAG_SITE_CATALOG";
     private static String TAG_USERS = "TAG_USERS";
+    private static String TAG_PERSONS = "TAG_PERSONS";
+    private static String TAG_KEYWORDS = "TAG_KEYWORDS";
 
     @BindView(R.id.coordinator_layout)
     CoordinatorLayout coordinatorLayout;
@@ -91,7 +94,12 @@ public class MainActivity extends AppCompatActivity implements MainView, MainAct
 
     @Override
     public void startPersonsCatalogFragment() {
-        replaceFragment(new PersonListFragment(), true);
+        replaceFragment(new PersonListFragment(), true, TAG_PERSONS);
+    }
+
+    @Override
+    public void startKeywordsCatalogFragment() {
+        replaceFragment(new KeywordListFragment(), true, TAG_KEYWORDS);
     }
 
     public void startUsersFragment() {

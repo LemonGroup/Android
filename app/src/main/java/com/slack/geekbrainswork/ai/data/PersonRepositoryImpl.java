@@ -1,7 +1,7 @@
 package com.slack.geekbrainswork.ai.data;
 
 import com.slack.geekbrainswork.ai.data.api.ApiClient;
-import com.slack.geekbrainswork.ai.data.api.ApiPersonInterface;
+import com.slack.geekbrainswork.ai.data.api.ApiInterface;
 import com.slack.geekbrainswork.ai.data.dto.PersonDTO;
 import com.slack.geekbrainswork.ai.presenter.vo.Person;
 
@@ -18,7 +18,7 @@ import rx.schedulers.Schedulers;
 public class PersonRepositoryImpl implements PersonRepository {
 
     private final Observable.Transformer schedulersTransformer;
-    private ApiPersonInterface apiPersonInterface = ApiClient.getPersonApiInterface();
+    private ApiInterface apiInterface = ApiClient.getApiInterface();
 
     public PersonRepositoryImpl() {
         schedulersTransformer = new Observable.Transformer() {
@@ -33,21 +33,21 @@ public class PersonRepositoryImpl implements PersonRepository {
     @Override
     public Observable<List<PersonDTO>> getPersons() {
         //ToDo getPersons from Rest
-        return apiPersonInterface.getPersons()
+        return apiInterface.getPersons()
                 .compose(this.<List<PersonDTO>>applySchedulers());
     }
 
     @Override
     public Observable<PersonDTO> updatePerson(final Person person) {
         //ToDo updatePerson by Rest
-        return apiPersonInterface.updatePerson(person.getId(), person.getName())
+        return apiInterface.updatePerson(person.getId(), person.getName())
                 .compose(this.<PersonDTO>applySchedulers());
     }
 
     @Override
     public Observable<PersonDTO> createPerson(final String personName) {
         //ToDo createPerson by Rest
-        return apiPersonInterface.createPerson(personName)
+        return apiInterface.createPerson(personName)
                 .compose(this.<PersonDTO>applySchedulers());
     }
 

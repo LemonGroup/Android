@@ -1,6 +1,8 @@
 package com.slack.geekbrainswork.ai.data.api;
 
 import com.slack.geekbrainswork.ai.data.dto.IsBusyResponse;
+import com.slack.geekbrainswork.ai.data.dto.KeywordDTO;
+import com.slack.geekbrainswork.ai.data.dto.PersonDTO;
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
 import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
 import com.slack.geekbrainswork.ai.data.dto.UserDTO;
@@ -30,7 +32,6 @@ public interface ApiInterface {
     @GET("user/auth")
     Observable<TokenResponse> auth(@Query("user") String email, @Query("pass") String password);
 
-
     // Sites
     @GET("catalog/sites")
     Observable<List<SiteDTO>> getSites();
@@ -43,7 +44,6 @@ public interface ApiInterface {
 
     @DELETE("catalog/sites/{id}")
     Observable<Void> deleteSite(@Path("id") int siteId);
-
 
     // Users
     @GET("user")
@@ -63,4 +63,30 @@ public interface ApiInterface {
 
     @GET("user/isBusyEmail")
     Observable<IsBusyResponse> isEmailExists(@Query("email") String email);
+
+    //Persons
+    @GET("/persons")
+    Observable<List<PersonDTO>> getPersons();
+
+    @PUT("/persons/{id}")
+    Observable<PersonDTO> updatePerson(@Path("ID") int personId, @Field("Name") String name);
+
+    @POST("/person/new")
+    Observable<PersonDTO> createPerson(@Body String person);
+
+    @DELETE("/person/{id}")
+    void deletePerson(@Path("id") int personId);
+
+    //Keywords
+    @GET("/keywords")
+    Observable<List<KeywordDTO>> getKeywords();
+
+    @PUT("/keywords/{id}")
+    Observable<KeywordDTO> updateKeyword(@Path("ID") int keywordID, @Field("Keyword") String keyword);
+
+    @POST("/keyword/new")
+    Observable<KeywordDTO> createKeyword(@Body String keyword);
+
+    @DELETE("/keyword/{id}")
+    void deleteKeyword(@Path("id") int keywordId);
 }

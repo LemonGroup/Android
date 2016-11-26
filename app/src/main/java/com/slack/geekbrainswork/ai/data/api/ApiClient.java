@@ -1,6 +1,12 @@
 package com.slack.geekbrainswork.ai.data.api;
 
+import java.io.IOException;
+
+import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -22,9 +28,27 @@ public class ApiClient {
         return retrofit.create(ApiInterface.class);
     }
 
-    public static ApiPersonInterface getPersonApiInterface() {
+    public static ApiInterface getApiInterface(final String token) {
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        OkHttpClient httpClient = new OkHttpClient();
+        OkHttpClient httpClient = new OkHttpClient.Builder()
+                .addInterceptor(
+                        new Interceptor() {
+                            @Override
+                            public Response intercept(Chain chain) throws IOException {
+                                Request original = chain.request();
+
+                                Request.Builder requestBuilder = original.newBuilder()
+                                        .header("Auth-Token", token)
+                                        .method(original.method(), original.body());
+
+                                Request request = requestBuilder.build();
+                                return chain.proceed(request);
+                            }
+                        })
+                .addInterceptor(logging)
+                .build();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
@@ -33,7 +57,6 @@ public class ApiClient {
                 .client(httpClient)
                 .build();
 
-        return retrofit.create(ApiPersonInterface.class);
+        return retrofit.create(ApiInterface.class);
     }
-
 }

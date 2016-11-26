@@ -43,6 +43,21 @@
         <activity
             android:name=".view.activities.UserAddActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".view.activities.RegistrationUserActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".view.activities.UpdatePersonActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".view.activities.AddPersonActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".view.activities.UpdateKeywordActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".view.activities.AddKeywordActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
