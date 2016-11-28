@@ -62,19 +62,25 @@ public class RepositoryImpl implements Repository {
 
     @Override
     public Observable<Response<Void>> checkLogin(String login) {
-        return apiInterface.checkLogin(login)
+        return loginApiInterface.checkLogin(login)
                 .compose(this.<Response<Void>>applySchedulers());
     }
 
     @Override
     public Observable<Response<Void>> checkEmail(String email) {
-        return apiInterface.checkEmail(email)
+        return loginApiInterface.checkEmail(email)
                 .compose(this.<Response<Void>>applySchedulers());
     }
 
     @Override
     public Observable<UserDTO> createUser(UserDTO userDTO) {
         return apiInterface.createUser(userDTO)
+                .compose(this.<UserDTO>applySchedulers());
+    }
+
+    @Override
+    public Observable<UserDTO> regUser(UserDTO userDTO) {
+        return loginApiInterface.regUser(userDTO)
                 .compose(this.<UserDTO>applySchedulers());
     }
 

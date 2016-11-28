@@ -92,4 +92,5 @@ public abstract class UserActivity extends AppCompatActivity implements UserView
     protected void makeToast(String text) {
         Snackbar.make(layout, text, Snackbar.LENGTH_LONG).show();
     }
+
 }

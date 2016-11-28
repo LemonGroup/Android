@@ -50,7 +50,7 @@ public interface ApiInterface {
     @GET("catalog/accounts")
     Observable<List<UserDTO>> getUsers();
 
-    @PUT("user/{id}/{password}")
+    @PUT("catalog/accounts/password")
     Observable<UserDTO> updateUser(@Query("id") Integer id, @Query("password") String pass);
 
     @DELETE("catalog/accounts/{id}")
@@ -59,10 +59,13 @@ public interface ApiInterface {
     @POST("catalog/accounts")
     Observable<UserDTO> createUser(@Body UserDTO userDTO);
 
-    @GET("user/reguser/checkuser")
+    @POST("user/reguser")
+    Observable<UserDTO> regUser(@Body UserDTO userDTO);
+
+    @POST("user/reguser/check_user")
     Observable<Response<Void>> checkLogin(@Query("username") String userName);
 
-    @GET("user/reguser/checkemail")
+    @POST("user/reguser/check_email")
     Observable<Response<Void>> checkEmail(@Query("email") String email);
 
 }

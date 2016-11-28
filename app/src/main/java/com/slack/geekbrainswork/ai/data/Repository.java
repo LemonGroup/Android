@@ -41,5 +41,7 @@ public interface Repository {
     Observable<Response<Void>> checkEmail(String email);
 
     Observable<UserDTO> createUser(UserDTO userDTO);
+
+    Observable<UserDTO> regUser(UserDTO userDTO);
 }
 

@@ -13,7 +13,7 @@ import butterknife.ButterKnife;
 
 public class UserAddActivity extends UserActivity{
 
-    private UserAddPresenter presenter = new UserAddPresenter(this);
+    protected UserAddPresenter presenter = new UserAddPresenter(this);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -22,9 +22,9 @@ public class UserAddActivity extends UserActivity{
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
-
         setTitle(getResources().getString(R.string.user_add_title));
 
+        isAdminSwitch.setEnabled(true);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,7 +44,7 @@ public class UserAddActivity extends UserActivity{
         presenter.onCreate(savedInstanceState);
     }
 
-    @Override
+   @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         presenter.onSaveInstanceState(outState);

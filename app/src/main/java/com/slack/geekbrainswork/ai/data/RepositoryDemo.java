@@ -164,6 +164,11 @@ public class RepositoryDemo implements Repository {
                 ;
     }
 
+    @Override
+    public Observable<UserDTO> regUser(UserDTO userDTO) {
+        return createUser(userDTO);
+    }
+
     @SuppressWarnings("unchecked")
     private <T> Observable.Transformer<T, T> applySchedulers() {
         return (Observable.Transformer<T, T>) schedulersTransformer;

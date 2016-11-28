@@ -15,11 +15,15 @@ public class User implements Serializable{
     @SerializedName("email")
     @Expose
     private String email;
+    @SerializedName("privilege")
+    @Expose
+    private Integer privilege;
 
-    public User(Integer id, String name, String email) {
+    public User(Integer id, String name, String email, Integer privilege) {
         this.id = id;
         this.name = name;
         this.email = email;
+        this.privilege = privilege;
     }
 
     public Integer getId() {
@@ -44,5 +48,14 @@ public class User implements Serializable{
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+
+    public Integer getPrivilege() {
+        return privilege;
+    }
+
+    public void setPrivilege(Integer privilege) {
+        this.privilege = privilege;
     }
 }
