@@ -18,7 +18,8 @@ public class RegistrationUserActivity extends UserAddActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         presenter = new UserRegisterPresenter(this);
         super.onCreate(savedInstanceState);
-        isAdminSwitch.setEnabled(false);
+        //isAdminSwitch.setEnabled(false);
+        isAdminSwitch.setVisibility(View.INVISIBLE);
     }
 
     @Override
