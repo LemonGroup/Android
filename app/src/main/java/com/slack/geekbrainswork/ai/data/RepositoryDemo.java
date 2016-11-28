@@ -1,7 +1,6 @@
 package com.slack.geekbrainswork.ai.data;
 
 import com.slack.geekbrainswork.ai.data.api.ApiDemo;
-import com.slack.geekbrainswork.ai.data.dto.IsBusyResponse;
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
 import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
 import com.slack.geekbrainswork.ai.data.dto.UserDTO;
@@ -10,6 +9,7 @@ import com.slack.geekbrainswork.ai.data.local.PreferencesDemo;
 
 import java.util.List;
 
+import retrofit2.Response;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func0;
@@ -130,25 +130,26 @@ public class RepositoryDemo implements Repository {
     }
 
     @Override
-    public Observable<IsBusyResponse> isLoginExists(final String login) {
-        return Observable.defer(new Func0<Observable<IsBusyResponse>>() {
+    public Observable<Response<Void>> checkLogin(final String login) {
+        return Observable.defer(new Func0<Observable<Response<Void>>>() {
             @Override
-            public Observable<IsBusyResponse> call() {
-                return Observable.just(api.isLoginExists(login));
+            public Observable<Response<Void>> call() {
+                return Observable.just(api.checkLogin(login));
             }
         })
-                .compose(this.<IsBusyResponse>applySchedulers());
+                .compose(this.<Response<Void>>applySchedulers())
+                ;
     }
 
     @Override
-    public Observable<IsBusyResponse> isEmailExists(final String email) {
-        return Observable.defer(new Func0<Observable<IsBusyResponse>>() {
+    public Observable<Response<Void>> checkEmail(final String email) {
+        return Observable.defer(new Func0<Observable<Response<Void>>>() {
             @Override
-            public Observable<IsBusyResponse> call() {
-                return Observable.just(api.isEmailExists(email));
+            public Observable<Response<Void>> call() {
+                return Observable.just(api.checkEmail(email));
             }
         })
-                .compose(this.<IsBusyResponse>applySchedulers());
+                .compose(this.<Response<Void>>applySchedulers());
     }
 
     @Override
@@ -159,7 +160,8 @@ public class RepositoryDemo implements Repository {
                 return Observable.just(api.createUserDTO(userDTO));
             }
         })
-                .compose(this.<UserDTO>applySchedulers());
+                .compose(this.<UserDTO>applySchedulers())
+                ;
     }
 
     @SuppressWarnings("unchecked")

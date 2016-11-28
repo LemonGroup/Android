@@ -9,6 +9,7 @@ import com.slack.geekbrainswork.ai.presenter.vo.User;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Response;
 import rx.Observable;
 import rx.Subscription;
@@ -35,9 +36,9 @@ public interface Repository {
 
     Observable<Void> deleteUser(int id);
 
-    Observable<IsBusyResponse> isLoginExists(String login);
+    Observable<Response<Void>> checkLogin(String login);
 
-    Observable<IsBusyResponse> isEmailExists(String email);
+    Observable<Response<Void>> checkEmail(String email);
 
     Observable<UserDTO> createUser(UserDTO userDTO);
 }

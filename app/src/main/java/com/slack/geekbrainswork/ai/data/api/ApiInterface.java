@@ -10,6 +10,7 @@ import com.slack.geekbrainswork.ai.presenter.vo.User;
 
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -46,21 +47,22 @@ public interface ApiInterface {
 
 
     // Users
-    @GET("user")
+    @GET("catalog/accounts")
     Observable<List<UserDTO>> getUsers();
 
     @PUT("user/{id}/{password}")
     Observable<UserDTO> updateUser(@Query("id") Integer id, @Query("password") String pass);
 
-    @DELETE("user/{id}")
+    @DELETE("catalog/accounts/{id}")
     Observable<Void> deleteUser(@Path("id") int id);
 
-    @POST("user")
+    @POST("catalog/accounts")
     Observable<UserDTO> createUser(@Body UserDTO userDTO);
 
-    @GET("user/isBusyLogin")
-    Observable<IsBusyResponse> isLoginExists(@Query("login") String login);
+    @GET("user/reguser/checkuser")
+    Observable<Response<Void>> checkLogin(@Query("username") String userName);
 
-    @GET("user/isBusyEmail")
-    Observable<IsBusyResponse> isEmailExists(@Query("email") String email);
+    @GET("user/reguser/checkemail")
+    Observable<Response<Void>> checkEmail(@Query("email") String email);
+
 }

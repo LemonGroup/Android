@@ -8,6 +8,8 @@ import com.slack.geekbrainswork.ai.presenter.mappers.UserMapper;
 import com.slack.geekbrainswork.ai.presenter.vo.User;
 import com.slack.geekbrainswork.ai.view.activities.UserView;
 
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
@@ -36,32 +38,33 @@ public class UserAddPresenter extends BasePresenter {
         String email = view.getEmailTextViewText();
         String pass1 = view.getPasswordTextViewText();
         String pass2 = view.getPassword2TextViewText();
+        Integer privilege = view.getIsAdminValue() ? 2 : 1;
 
         if (!isValidData(login, email, pass1, pass2)) {
             return;
         }
 
-        tryCreateUser(login, email, pass1);
+        tryCreateUser(login, email, pass1, privilege);
     }
 
-    private void tryCreateUser(final String login, final String email, final String pass) {
-        Subscription loginExistSubscription = repository.isLoginExists(login)
-                .flatMap(new Func1<IsBusyResponse, Observable<IsBusyResponse>>() {
+    private void tryCreateUser(final String login, final String email, final String pass, final Integer privilege) {
+        Subscription loginExistSubscription = repository.checkLogin(login)
+                .flatMap(new Func1<Response<Void>, Observable<Response<Void>>>() {
                     @Override
-                    public Observable<IsBusyResponse> call(IsBusyResponse isBusyResponse) {
-                        if (!isBusyResponse.getIsBusy()) {
-                            return repository.isEmailExists(email);
+                    public Observable<Response<Void>> call(Response<Void> response) {
+                        if (response.code() == 409) {
+                            return Observable.error(new Exception("Пользователь с таким логином уже существует"));
                         }
-                        return Observable.error(new Exception("Пользователь с таким логином уже существует"));
+                        return repository.checkEmail(email);
                     }
                 })
-                .flatMap(new Func1<IsBusyResponse, Observable<UserDTO>>() {
+                .flatMap(new Func1<Response<Void>, Observable<UserDTO>>() {
                     @Override
-                    public Observable<UserDTO> call(IsBusyResponse isBusyResponse) {
-                        if (!isBusyResponse.getIsBusy()) {
-                            return repository.createUser(new UserDTO(login, email, pass));
+                    public Observable<UserDTO> call(Response<Void> response) {
+                        if (response.code() == 409) {
+                            return Observable.error(new Exception("Пользователь с таким e-mail уже существует"));
                         }
-                        return Observable.error(new Exception("Пользователь с таким e-mail уже существует"));
+                        return repository.createUser(new UserDTO(login, email, pass, privilege));
                     }
                 })
                 .map(mapper)

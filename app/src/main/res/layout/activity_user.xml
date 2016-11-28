@@ -81,6 +81,14 @@
                     android:inputType="textPassword"
                     android:maxLines="1" />
 
+                <Switch
+                    android:id="@+id/isadmin_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text="@string/action_isadmin_switch"
+                    android:enabled="false"/>
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -110,8 +118,7 @@
                 android:layout_gravity="center"
                 android:contentDescription=""
                 android:src="@drawable/ic_check_circle"
-                android:visibility="gone"
-                />
+                android:visibility="gone" />
 
         </FrameLayout>
     </android.support.v4.widget.NestedScrollView>

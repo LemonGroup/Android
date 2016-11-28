@@ -9,6 +9,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 
 import com.slack.geekbrainswork.ai.R;
 import com.slack.geekbrainswork.ai.presenter.vo.User;
@@ -26,6 +27,8 @@ public abstract class UserActivity extends AppCompatActivity implements UserView
     EditText password2EditText;
     @BindView(R.id.email_edit_text)
     EditText emailEditText;
+    @BindView(R.id.isadmin_switch)
+    Switch isAdminSwitch;
     @BindView(R.id.cancel_button)
     Button cancelButton;
     @BindView(R.id.save_button)
@@ -54,6 +57,11 @@ public abstract class UserActivity extends AppCompatActivity implements UserView
     }
 
     @Override
+    public boolean getIsAdminValue() {
+        return isAdminSwitch.isChecked();
+    }
+
+    @Override
     public void onClose(User user) {
         Intent intent = new Intent();
         intent.putExtra("user", user);
@@ -69,7 +77,7 @@ public abstract class UserActivity extends AppCompatActivity implements UserView
     }
 
     protected void openKeyboard() {
-        InputMethodManager imm =  (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(loginEditText, InputMethodManager.SHOW_IMPLICIT);
     }
 

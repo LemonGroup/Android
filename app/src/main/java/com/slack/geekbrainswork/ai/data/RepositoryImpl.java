@@ -3,17 +3,15 @@ package com.slack.geekbrainswork.ai.data;
 import com.slack.geekbrainswork.ai.LemonStateAdminApp;
 import com.slack.geekbrainswork.ai.data.api.ApiClient;
 import com.slack.geekbrainswork.ai.data.api.ApiInterface;
-import com.slack.geekbrainswork.ai.data.dto.IsBusyResponse;
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
 import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
 import com.slack.geekbrainswork.ai.data.dto.UserDTO;
 import com.slack.geekbrainswork.ai.data.local.PrefHelper;
 import com.slack.geekbrainswork.ai.data.local.PreferencesHelper;
-import com.slack.geekbrainswork.ai.presenter.vo.Site;
-import com.slack.geekbrainswork.ai.presenter.vo.User;
 
 import java.util.List;
 
+import retrofit2.Response;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -63,15 +61,15 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
-    public Observable<IsBusyResponse> isLoginExists(String login) {
-        return apiInterface.isLoginExists(login)
-                .compose(this.<IsBusyResponse>applySchedulers());
+    public Observable<Response<Void>> checkLogin(String login) {
+        return apiInterface.checkLogin(login)
+                .compose(this.<Response<Void>>applySchedulers());
     }
 
     @Override
-    public Observable<IsBusyResponse> isEmailExists(String email) {
-        return apiInterface.isEmailExists(email)
-                .compose(this.<IsBusyResponse>applySchedulers());
+    public Observable<Response<Void>> checkEmail(String email) {
+        return apiInterface.checkEmail(email)
+                .compose(this.<Response<Void>>applySchedulers());
     }
 
     @Override

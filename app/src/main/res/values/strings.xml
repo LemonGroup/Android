@@ -30,4 +30,5 @@
     <string name="email_name_hint">E-mail</string>
     <string name="prompt_password_repeat">Повторите пароль</string>
     <string name="user_add_title">Создание пользователя</string>
+    <string name="action_isadmin_switch">Администратор</string>
 </resources>

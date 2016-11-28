@@ -1,23 +1,12 @@
 package com.slack.geekbrainswork.ai.view.activities;
 
-import android.os.Build;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.transition.Fade;
-import android.transition.Slide;
-import android.transition.TransitionInflater;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.slack.geekbrainswork.ai.R;
-import com.slack.geekbrainswork.ai.presenter.UserAddPresenter;
 import com.slack.geekbrainswork.ai.presenter.vo.User;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class RegistrationUserActivity extends UserAddActivity {
 
@@ -46,17 +35,5 @@ public class RegistrationUserActivity extends UserAddActivity {
 
             }
         });
-
-//        Snackbar.make(layout, "Пользователь " + user.getName() + " успешно создан!", Snackbar.LENGTH_SHORT)
-//                .setCallback(new Snackbar.Callback() {
-//                    @Override
-//                    public void onDismissed(Snackbar snackbar, int event) {
-//                        super.onDismissed(snackbar, event);
-//                        imageView.setVisibility(View.GONE);
-//                        RegistrationUserActivity.super.onClose(user);
-//                        overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
-//                    }
-//                })
-//                .show();
     }
 }

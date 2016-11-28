@@ -5,21 +5,32 @@ import com.google.gson.annotations.SerializedName;
 
 public class IsBusyResponse {
 
-    @SerializedName("isBusy")
+    @SerializedName("usernameIsBusy")
     @Expose
-    private Boolean isBusy;
+    private Boolean usernameIsBusy;
+    @SerializedName("emailIsBusy")
+    @Expose
+    private Boolean emailIsBusy;
 
     /**
-     * @return The isBusy
+     * @return The usernameIsBusy
      */
-    public Boolean getIsBusy() {
-        return isBusy;
+    public Boolean getUsernameIsBusy() {
+        return usernameIsBusy;
     }
 
     /**
-     * @param isBusy The isBusy
+     * @param usernameIsBusy The usernameIsBusy
      */
-    public void setIsBusy(Boolean isBusy) {
-        this.isBusy = isBusy;
+    public void setUsernameIsBusy(Boolean usernameIsBusy) {
+        this.usernameIsBusy = usernameIsBusy;
+    }
+
+    public Boolean getEmailIsBusy() {
+        return emailIsBusy;
+    }
+
+    public void setEmailIsBusy(Boolean emailIsBusy) {
+        this.emailIsBusy = emailIsBusy;
     }
 }

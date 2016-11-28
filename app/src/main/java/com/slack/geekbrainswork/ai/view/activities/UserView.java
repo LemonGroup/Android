@@ -13,5 +13,7 @@ public interface UserView extends View {
 
     String getEmailTextViewText();
 
+    boolean getIsAdminValue();
+
     void onClose(User user);
 }

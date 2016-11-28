@@ -6,11 +6,15 @@ import com.slack.geekbrainswork.ai.data.dto.IsBusyResponse;
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
 import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
 import com.slack.geekbrainswork.ai.data.dto.UserDTO;
-import com.slack.geekbrainswork.ai.presenter.vo.Site;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import okhttp3.MediaType;
+import okhttp3.ResponseBody;
+import okio.BufferedSource;
+import retrofit2.Response;
 
 public class ApiDemo {
 
@@ -23,9 +27,9 @@ public class ApiDemo {
         siteDTOList.add(new SiteDTO(1, "lenta.ru"));
         siteDTOList.add(new SiteDTO(2, "echo.msk.ru"));
 
-        userDTOList.add(new UserDTO(1, "Andrey", "andrey@mail.ru"));
-        userDTOList.add(new UserDTO(3, "Michailov", "michailov@gmail.com"));
-        userDTOList.add(new UserDTO(4, "Alex", "alex@yandex.ru"));
+        userDTOList.add(new UserDTO(1, "Andrey", "andrey@mail.ru", 1));
+        userDTOList.add(new UserDTO(3, "Michailov", "michailov@gmail.com", 2));
+        userDTOList.add(new UserDTO(4, "Alex", "alex@yandex.ru", 1));
     }
 
     public static ApiDemo getApi() {
@@ -122,30 +126,56 @@ public class ApiDemo {
 
     public UserDTO createUserDTO(UserDTO userDTO) {
         Log.d("CREATE ", Thread.currentThread().getName());
-        UserDTO newUserDTO = new UserDTO(getMaxId() + 1, userDTO.getName(), userDTO.getEmail());
+        UserDTO newUserDTO = new UserDTO(getMaxId() + 1, userDTO.getName(), userDTO.getEmail(), userDTO.getPrivilege());
         userDTOList.add(newUserDTO);
         return newUserDTO;
     }
 
-    public IsBusyResponse isLoginExists(String login) {
-        IsBusyResponse response = new IsBusyResponse();
-        response.setIsBusy(false);
+    public Response<Void> checkLogin(String login) {
         for (int i = 0; i < userDTOList.size(); i++) {
             if (userDTOList.get(i).getName().equals(login)) {
-                response.setIsBusy(true);
+                return Response.error(409, new ResponseBody() {
+                    @Override
+                    public MediaType contentType() {
+                        return null;
+                    }
+
+                    @Override
+                    public long contentLength() {
+                        return 0;
+                    }
+
+                    @Override
+                    public BufferedSource source() {
+                        return null;
+                    }
+                });
             }
         }
-        return response;
+        return Response.success(null);
     }
 
-    public IsBusyResponse isEmailExists(String email) {
-        IsBusyResponse response = new IsBusyResponse();
-        response.setIsBusy(false);
+    public Response<Void> checkEmail(String email) {
         for (int i = 0; i < userDTOList.size(); i++) {
             if (userDTOList.get(i).getEmail().equals(email)) {
-                response.setIsBusy(true);
+                return Response.error(409, new ResponseBody() {
+                    @Override
+                    public MediaType contentType() {
+                        return null;
+                    }
+
+                    @Override
+                    public long contentLength() {
+                        return 0;
+                    }
+
+                    @Override
+                    public BufferedSource source() {
+                        return null;
+                    }
+                });
             }
         }
-        return response;
+        return Response.success(null);
     }
 }
