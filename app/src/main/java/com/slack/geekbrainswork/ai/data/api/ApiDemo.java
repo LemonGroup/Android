@@ -101,18 +101,6 @@ public class ApiDemo {
         return userDTOList;
     }
 
-
-    public UserDTO updateUserDTO(Integer id, String pass) {
-        Log.d("UPDATE ", Thread.currentThread().getName());
-        for (int i = 0; i < userDTOList.size(); i++) {
-            if (userDTOList.get(i).getId().intValue() == id) {
-                //userDTOList.get(i).(site.getName());
-                return userDTOList.get(i);
-            }
-        }
-        return null;
-    }
-
     public Void deleteUserDTO(int id) {
         Log.d("REMOVE ", Thread.currentThread().getName());
         for (Iterator<UserDTO> iterator = userDTOList.iterator(); iterator.hasNext(); ) {
@@ -177,5 +165,31 @@ public class ApiDemo {
             }
         }
         return Response.success(null);
+    }
+
+    public Response<Void> changePassword(UserDTO userDTO) {
+        Log.d("UPDATE ", Thread.currentThread().getName());
+        for (int i = 0; i < userDTOList.size(); i++) {
+            if (userDTOList.get(i).getId().intValue() == userDTO.getId()) {
+                //userDTOList.get(i).(site.getName());
+                return Response.success(null);
+            }
+        }
+        return Response.error(400, new ResponseBody() {
+            @Override
+            public MediaType contentType() {
+                return null;
+            }
+
+            @Override
+            public long contentLength() {
+                return 0;
+            }
+
+            @Override
+            public BufferedSource source() {
+                return null;
+            }
+        });
     }
 }

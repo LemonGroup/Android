@@ -62,9 +62,9 @@ public abstract class UserActivity extends AppCompatActivity implements UserView
     }
 
     @Override
-    public void onClose(User user) {
+    public void onClose() {
         Intent intent = new Intent();
-        intent.putExtra("user", user);
+//        intent.putExtra("user", user);
         closeKeyboard();
         setResult(RESULT_OK, intent);
         finish();

@@ -27,7 +27,7 @@ public class UserUpdateActivity extends UserActivity {
         loginEditText.setText(user.getName());
         emailEditText.setText(user.getEmail());
 
-        isAdminSwitch.setEnabled(user.getPrivilege() == 2);
+        isAdminSwitch.setChecked(user.getPrivilege() == 2);
 
         loginEditText.setEnabled(false);
         emailEditText.setEnabled(false);

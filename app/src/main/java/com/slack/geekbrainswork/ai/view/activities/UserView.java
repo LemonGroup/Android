@@ -15,5 +15,7 @@ public interface UserView extends View {
 
     boolean getIsAdminValue();
 
-    void onClose(User user);
+//    void onClose(User user);
+
+    void onClose();
 }

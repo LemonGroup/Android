@@ -49,9 +49,9 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
-    public Observable<UserDTO> updateUser(Integer id, String pass) {
-        return apiInterface.updateUser(id, pass)
-                .compose(this.<UserDTO>applySchedulers());
+    public Observable<Response<Void>> changePassword(UserDTO userDTO) {
+        return apiInterface.changePassword(userDTO)
+                .compose(this.<Response<Void>>applySchedulers());
     }
 
     @Override

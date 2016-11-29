@@ -83,7 +83,7 @@ public class UserAddPresenter extends BasePresenter {
 
                     @Override
                     public void onNext(User user) {
-                        view.onClose(user);
+                        view.onClose();
                     }
                 });
 

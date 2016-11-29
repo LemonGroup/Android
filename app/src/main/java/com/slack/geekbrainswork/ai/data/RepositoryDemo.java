@@ -108,14 +108,14 @@ public class RepositoryDemo implements Repository {
     }
 
     @Override
-    public Observable<UserDTO> updateUser(final Integer id, final String pass) {
-        return Observable.defer(new Func0<Observable<UserDTO>>() {
+    public Observable<Response<Void>> changePassword(final UserDTO userDTO) {
+        return Observable.defer(new Func0<Observable<Response<Void>>>() {
             @Override
-            public Observable<UserDTO> call() {
-                return Observable.just(api.updateUserDTO(id, pass));
+            public Observable<Response<Void>> call() {
+                return Observable.just(api.changePassword(userDTO));
             }
         })
-                .compose(this.<UserDTO>applySchedulers());
+                .compose(this.<Response<Void>>applySchedulers());
     }
 
     @Override

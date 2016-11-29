@@ -20,6 +20,9 @@ public class UserDTO {
     @Expose
     private Integer privilege;
 
+    public UserDTO() {
+    }
+
     public UserDTO(Integer id, String name, String email, Integer privilege) {
         this.id = id;
         this.name = name;
@@ -64,5 +67,9 @@ public class UserDTO {
 
     public void setPrivilege(Integer privilege) {
         this.privilege = privilege;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

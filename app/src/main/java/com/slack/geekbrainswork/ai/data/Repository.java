@@ -32,7 +32,7 @@ public interface Repository {
 
     Observable<List<UserDTO>> getUsers();
 
-    Observable<UserDTO> updateUser(Integer id, String pass);
+    Observable<Response<Void>> changePassword(UserDTO userDTO);
 
     Observable<Void> deleteUser(int id);
 

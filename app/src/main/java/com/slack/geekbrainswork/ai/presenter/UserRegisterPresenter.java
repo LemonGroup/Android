@@ -56,7 +56,7 @@ public class UserRegisterPresenter extends UserAddPresenter {
 
                     @Override
                     public void onNext(User user) {
-                        view.onClose(user);
+                        view.onClose();
                     }
                 });
 

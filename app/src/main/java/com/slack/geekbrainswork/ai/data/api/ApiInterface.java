@@ -51,7 +51,7 @@ public interface ApiInterface {
     Observable<List<UserDTO>> getUsers();
 
     @PUT("catalog/accounts/password")
-    Observable<UserDTO> updateUser(@Query("id") Integer id, @Query("password") String pass);
+    Observable<Response<Void>> changePassword(@Body UserDTO userDTO);
 
     @DELETE("catalog/accounts/{id}")
     Observable<Void> deleteUser(@Path("id") int id);

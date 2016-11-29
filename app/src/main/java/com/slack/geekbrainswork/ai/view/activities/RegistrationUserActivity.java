@@ -23,7 +23,7 @@ public class RegistrationUserActivity extends UserAddActivity {
     }
 
     @Override
-    public void onClose(final User user) {
+    public void onClose() {
         final ImageView imageView = (ImageView) findViewById(R.id.image);
         imageView.setVisibility(View.VISIBLE);
 
@@ -38,7 +38,7 @@ public class RegistrationUserActivity extends UserAddActivity {
             @Override
             public void onAnimationEnd(Animation animation) {
                 imageView.setVisibility(View.GONE);
-                RegistrationUserActivity.super.onClose(user);
+                RegistrationUserActivity.super.onClose();
                 overridePendingTransition(R.anim.anim_slide_in_right, R.anim.anim_slide_out_right);
             }
 
