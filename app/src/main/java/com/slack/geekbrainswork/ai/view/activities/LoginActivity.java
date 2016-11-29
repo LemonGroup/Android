@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +39,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     Button signInButton;
     @BindView(R.id.registration_button)
     Button regButton;
+    @BindView(R.id.forgot_pass_text_view)
+    TextView forgotPassTextView;
 
     private LoginActivityPresenter presenter = new LoginActivityPresenter(this);
 
@@ -46,6 +49,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
+        forgotPassTextView.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
 
         presenter.attemptLoginByToken();
         passwordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
