@@ -1,12 +1,12 @@
 package com.slack.geekbrainswork.ai.view.activities;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -42,6 +42,13 @@ public class MainActivity extends AppCompatActivity implements MainView, MainAct
         ButterKnife.bind(this);
 
         setSupportActionBar(toolbar);
+
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.setDrawerListener(toggle);
+//        toggle.syncState();
+
         fragmentManager = getSupportFragmentManager();
         Fragment fragment = fragmentManager.findFragmentByTag(TAG_CATALOGS);
         if (fragment == null) replaceFragment(new CatalogsFragment(), false, TAG_CATALOGS);
