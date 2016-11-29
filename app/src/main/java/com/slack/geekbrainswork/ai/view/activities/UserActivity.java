@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Switch;
 
 import com.slack.geekbrainswork.ai.R;
@@ -35,6 +37,8 @@ public abstract class UserActivity extends AppCompatActivity implements UserView
     Button saveButton;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     @Override
     public String getUserNameTextViewText() {
@@ -74,6 +78,11 @@ public abstract class UserActivity extends AppCompatActivity implements UserView
     public void showError(String error) {
         closeKeyboard();
         makeToast(error);
+    }
+
+    @Override
+    public void showProgressBar(boolean show) {
+        progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     protected void openKeyboard() {

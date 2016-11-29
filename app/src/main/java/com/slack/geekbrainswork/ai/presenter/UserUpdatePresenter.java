@@ -49,6 +49,8 @@ public class UserUpdatePresenter extends BasePresenter {
         userDTO.setId(user.getId());
         userDTO.setPassword(pass1);
 
+        view.showProgressBar(true);
+
         Subscription subscription = repository.changePassword(userDTO)
                 .subscribe(new Observer<Response<Void>>() {
                     @Override
@@ -58,11 +60,13 @@ public class UserUpdatePresenter extends BasePresenter {
 
                     @Override
                     public void onError(Throwable e) {
+                        view.showProgressBar(false);
                         view.showError(e.getMessage());
                     }
 
                     @Override
                     public void onNext(Response<Void> response) {
+                        view.showProgressBar(false);
                         view.onClose();
                     }
                 });

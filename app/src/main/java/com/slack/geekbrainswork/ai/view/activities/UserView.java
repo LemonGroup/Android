@@ -18,4 +18,6 @@ public interface UserView extends View {
 //    void onClose(User user);
 
     void onClose();
+
+    void showProgressBar(boolean show);
 }

@@ -46,6 +46,8 @@ public class UserAddPresenter extends BasePresenter {
     }
 
     protected void tryCreateUser(final String login, final String email, final String pass, final Integer privilege) {
+        view.showProgressBar(true);
+
         Subscription loginExistSubscription = repository.checkLogin(login)
                 .flatMap(new Func1<Response<Void>, Observable<Response<Void>>>() {
                     @Override
@@ -74,15 +76,13 @@ public class UserAddPresenter extends BasePresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        try {
-                            throw e;
-                        } catch (Throwable throwable) {
-                            throwable.printStackTrace();
-                        }
+                        view.showProgressBar(false);
+                        view.showError(e.getMessage());
                     }
 
                     @Override
                     public void onNext(User user) {
+                        view.showProgressBar(false);
                         view.onClose();
                     }
                 });

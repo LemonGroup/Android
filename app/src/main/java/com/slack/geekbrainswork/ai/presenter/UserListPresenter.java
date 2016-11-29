@@ -10,6 +10,7 @@ import com.slack.geekbrainswork.ai.view.fragments.UserListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.adapter.rxjava.HttpException;
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
@@ -91,7 +92,7 @@ public class UserListPresenter extends BasePresenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        view.showError(e.getMessage());
+                        handleError(e);
                     }
 
                     @Override
@@ -101,6 +102,18 @@ public class UserListPresenter extends BasePresenter {
                 });
 
         addSubscription(subscription);
+    }
+
+    private void handleError(Throwable e) {
+        String message = null;
+        if (e instanceof HttpException) {
+            if (((HttpException) e).code() == 500) {
+                message = "Internal Server Error";
+            }
+        } else {
+            message = e.getMessage();
+        }
+        view.showError(message);
     }
 
     public void onActivityResult() {

@@ -3,11 +3,11 @@ package com.slack.geekbrainswork.ai.presenter;
 import android.text.TextUtils;
 
 import com.slack.geekbrainswork.ai.data.Repository;
-import com.slack.geekbrainswork.ai.data.RepositoryDemo;
 import com.slack.geekbrainswork.ai.data.RepositoryImpl;
 import com.slack.geekbrainswork.ai.presenter.mappers.TokenMapper;
 import com.slack.geekbrainswork.ai.view.activities.LoginView;
 
+import retrofit2.adapter.rxjava.HttpException;
 import rx.Observer;
 import rx.Subscription;
 import rx.functions.Action1;
@@ -69,7 +69,7 @@ public class LoginActivityPresenter extends BasePresenter {
                     @Override
                     public void onError(Throwable e) {
                         view.showProgress(false);
-                        view.showAuthorizationError(e.getMessage());
+                        handleError(e);
                     }
 
                     @Override
@@ -79,6 +79,18 @@ public class LoginActivityPresenter extends BasePresenter {
                 });
 
         addSubscription(subscription);
+    }
+
+    private void handleError(Throwable e) {
+        String message = null;
+        if (e instanceof HttpException) {
+            if (((HttpException) e).code() == 401) {
+                message = "Access allowed only for registered administrators";
+            }
+        } else {
+            message = e.getMessage();
+        }
+        view.showAuthorizationError(message);
     }
 
     private boolean isLoginValid(String login) {
