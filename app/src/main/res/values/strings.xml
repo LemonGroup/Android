@@ -24,10 +24,15 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
+        completions."</string>
     <string name="login_name_hint">Логин</string>
     <string name="email_name_hint">E-mail</string>
     <string name="prompt_password_repeat">Повторите пароль</string>
     <string name="user_add_title">Создание пользователя</string>
+    <!--Strings related to drawer-->
+    <string name="user_login">Логин пользователя</string>
+    <string name="user_name">Имя пользователя</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
 </resources>
