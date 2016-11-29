@@ -1,14 +1,7 @@
 package com.slack.geekbrainswork.ai.data.api;
 
-import com.slack.geekbrainswork.ai.data.dto.IsBusyResponse;
-import com.slack.geekbrainswork.ai.data.dto.KeywordDTO;
-import com.slack.geekbrainswork.ai.data.dto.PersonDTO;
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
-import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
-import com.slack.geekbrainswork.ai.data.dto.UserDTO;
-import com.slack.geekbrainswork.ai.presenter.vo.Catalog;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
-import com.slack.geekbrainswork.ai.presenter.vo.User;
 
 import java.util.List;
 
@@ -18,75 +11,20 @@ import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.PUT;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 import rx.Observable;
 
 public interface ApiInterface {
     //ToDo rest methods
-    // Login
-    @POST("user/{user}/{password}")
-    Observable<String> registration(@Path("user") String email, @Path("password") String password);
-
-    @GET("user/auth")
-    Observable<TokenResponse> auth(@Query("user") String email, @Query("pass") String password);
-
-    // Sites
-    @GET("catalog/sites")
+    @GET("/sites")
     Observable<List<SiteDTO>> getSites();
 
-    @POST("catalog/sites")
-    Observable<SiteDTO> createSite(@Body SiteDTO siteDTO);
+    @POST("/sites/{id}")
+    Observable<SiteDTO> updateSite(@Path("ID") int siteId, @Field("Name") String name);
 
-    @PUT("catalog/sites")
-    Observable<SiteDTO> updateSite(@Body SiteDTO siteDTO);
+    @POST("/sites/new")
+    Observable<SiteDTO> createSite(@Body String site);
 
-    @DELETE("catalog/sites/{id}")
-    Observable<Void> deleteSite(@Path("id") int siteId);
-
-    // Users
-    @GET("user")
-    Observable<List<UserDTO>> getUsers();
-
-    @PUT("user/{id}/{password}")
-    Observable<UserDTO> updateUser(@Query("id") Integer id, @Query("password") String pass);
-
-    @DELETE("user/{id}")
-    Observable<Void> deleteUser(@Path("id") int id);
-
-    @POST("user")
-    Observable<UserDTO> createUser(@Body UserDTO userDTO);
-
-    @GET("user/isBusyLogin")
-    Observable<IsBusyResponse> isLoginExists(@Query("login") String login);
-
-    @GET("user/isBusyEmail")
-    Observable<IsBusyResponse> isEmailExists(@Query("email") String email);
-
-    //Persons
-    @GET("/persons")
-    Observable<List<PersonDTO>> getPersons();
-
-    @PUT("/persons/{id}")
-    Observable<PersonDTO> updatePerson(@Path("ID") int personId, @Field("Name") String name);
-
-    @POST("/person/new")
-    Observable<PersonDTO> createPerson(@Body String person);
-
-    @DELETE("/person/{id}")
-    void deletePerson(@Path("id") int personId);
-
-    //Keywords
-    @GET("/keywords")
-    Observable<List<KeywordDTO>> getKeywords();
-
-    @PUT("/keywords/{id}")
-    Observable<KeywordDTO> updateKeyword(@Path("ID") int keywordID, @Field("Keyword") String keyword);
-
-    @POST("/keyword/new")
-    Observable<KeywordDTO> createKeyword(@Body String keyword);
-
-    @DELETE("/keyword/{id}")
-    void deleteKeyword(@Path("id") int keywordId);
+    @DELETE("/sites/{id}")
+    void deleteSite(@Path("id") int itemId);
 }

@@ -2,12 +2,19 @@ package com.slack.geekbrainswork.ai.presenter;
 
 import android.os.Bundle;
 
+<<<<<<< HEAD
 import com.slack.geekbrainswork.ai.data.dto.IsBusyResponse;
+=======
+>>>>>>> origin/master
 import com.slack.geekbrainswork.ai.data.dto.UserDTO;
 import com.slack.geekbrainswork.ai.presenter.mappers.UserMapper;
 import com.slack.geekbrainswork.ai.presenter.vo.User;
 import com.slack.geekbrainswork.ai.view.activities.UserView;
 
+<<<<<<< HEAD
+=======
+import retrofit2.Response;
+>>>>>>> origin/master
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
@@ -17,9 +24,15 @@ public class UserAddPresenter extends BasePresenter {
 
     private static String BUNDLE_USER_KEY = "BUNDLE_USER_KEY";
 
+<<<<<<< HEAD
     private User user;
     private UserView view;
     private UserMapper mapper = new UserMapper();
+=======
+    protected User user;
+    protected UserView view;
+    protected UserMapper mapper = new UserMapper();
+>>>>>>> origin/master
 
     public UserAddPresenter(UserView view) {
         this.view = view;
@@ -36,11 +49,16 @@ public class UserAddPresenter extends BasePresenter {
         String email = view.getEmailTextViewText();
         String pass1 = view.getPasswordTextViewText();
         String pass2 = view.getPassword2TextViewText();
+<<<<<<< HEAD
+=======
+        Integer privilege = view.getIsAdminValue() ? 2 : 1;
+>>>>>>> origin/master
 
         if (!isValidData(login, email, pass1, pass2)) {
             return;
         }
 
+<<<<<<< HEAD
         tryCreateUser(login, email, pass1);
     }
 
@@ -62,6 +80,31 @@ public class UserAddPresenter extends BasePresenter {
                             return repository.createUser(new UserDTO(login, email, pass));
                         }
                         return Observable.error(new Exception("Пользователь с таким e-mail уже существует"));
+=======
+        tryCreateUser(login, email, pass1, privilege);
+    }
+
+    protected void tryCreateUser(final String login, final String email, final String pass, final Integer privilege) {
+        view.showProgressBar(true);
+
+        Subscription loginExistSubscription = repository.checkLogin(login)
+                .flatMap(new Func1<Response<Void>, Observable<Response<Void>>>() {
+                    @Override
+                    public Observable<Response<Void>> call(Response<Void> response) {
+                        if (response.code() == 409) {
+                            return Observable.error(new Exception("Пользователь с таким логином уже существует"));
+                        }
+                        return repository.checkEmail(email);
+                    }
+                })
+                .flatMap(new Func1<Response<Void>, Observable<UserDTO>>() {
+                    @Override
+                    public Observable<UserDTO> call(Response<Void> response) {
+                        if (response.code() == 409) {
+                            return Observable.error(new Exception("Пользователь с таким e-mail уже существует"));
+                        }
+                        return repository.createUser(new UserDTO(login, email, pass, privilege));
+>>>>>>> origin/master
                     }
                 })
                 .map(mapper)
@@ -73,12 +116,21 @@ public class UserAddPresenter extends BasePresenter {
 
                     @Override
                     public void onError(Throwable e) {
+<<<<<<< HEAD
+=======
+                        view.showProgressBar(false);
+>>>>>>> origin/master
                         view.showError(e.getMessage());
                     }
 
                     @Override
                     public void onNext(User user) {
+<<<<<<< HEAD
                         view.onClose(user);
+=======
+                        view.showProgressBar(false);
+                        view.onClose();
+>>>>>>> origin/master
                     }
                 });
 

@@ -1,15 +1,12 @@
 package com.slack.geekbrainswork.ai.data;
 
 import com.slack.geekbrainswork.ai.data.api.ApiDemo;
-import com.slack.geekbrainswork.ai.data.dto.IsBusyResponse;
 import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
-import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
-import com.slack.geekbrainswork.ai.data.dto.UserDTO;
-import com.slack.geekbrainswork.ai.data.local.PrefHelper;
-import com.slack.geekbrainswork.ai.data.local.PreferencesDemo;
+import com.slack.geekbrainswork.ai.presenter.vo.Site;
 
 import java.util.List;
 
+import retrofit2.Response;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func0;
@@ -19,7 +16,6 @@ public class RepositoryDemo implements Repository {
 
     private final Observable.Transformer schedulersTransformer;
     private ApiDemo api = ApiDemo.getApi();
-    private PrefHelper helper = PreferencesDemo.getPreferences();
 
     public RepositoryDemo() {
         schedulersTransformer = new Observable.Transformer() {
@@ -29,16 +25,6 @@ public class RepositoryDemo implements Repository {
                         .observeOn(AndroidSchedulers.mainThread());
             }
         };
-    }
-
-    @Override
-    public String getTokenFromStorage() {
-        return helper.getFromPref();
-    }
-
-    @Override
-    public void updateToken(final String token) {
-        helper.writeToPref(token);
     }
 
     @Override
@@ -53,113 +39,36 @@ public class RepositoryDemo implements Repository {
     }
 
     @Override
-    public Observable<SiteDTO> updateSite(final SiteDTO siteDTO) {
+    public Observable<SiteDTO> updateSite(final Site site) {
         return Observable.defer(new Func0<Observable<SiteDTO>>() {
             @Override
             public Observable<SiteDTO> call() {
-                return Observable.just(api.updateSiteDTO(siteDTO));
+                return Observable.just(api.updateSiteDTO(site));
             }
         })
                 .compose(this.<SiteDTO>applySchedulers());
     }
 
     @Override
-    public Observable<SiteDTO> createSite(final SiteDTO siteDTO) {
+    public Observable<SiteDTO> createSite(final String siteName) {
         return Observable.defer(new Func0<Observable<SiteDTO>>() {
             @Override
             public Observable<SiteDTO> call() {
-                return Observable.just(api.createSiteDTO(siteDTO));
+                return Observable.just(api.createSiteDTO(siteName));
             }
         })
                 .compose(this.<SiteDTO>applySchedulers());
     }
 
     @Override
-    public Observable<Void> deleteSite(final int id) {
-        return Observable.defer(new Func0<Observable<Void>>() {
+    public Observable<List<SiteDTO>> removeSite(final Site site) {
+        return Observable.defer(new Func0<Observable<List<SiteDTO>>>() {
             @Override
-            public Observable<Void> call() {
-                return Observable.just(api.deleteSiteDTO(id));
+            public Observable<List<SiteDTO>> call() {
+                return Observable.just(api.removeSiteDTO(site));
             }
         })
-                .compose(this.<Void>applySchedulers());
-    }
-
-    @Override
-    public Observable<TokenResponse> auth(final String login, final String password) {
-        return Observable.defer(new Func0<Observable<TokenResponse>>() {
-            @Override
-            public Observable<TokenResponse> call() {
-                return Observable.just(api.auth(login, password));
-            }
-        })
-                .compose(this.<TokenResponse>applySchedulers());
-    }
-
-    @Override
-    public Observable<List<UserDTO>> getUsers() {
-        return Observable.defer(new Func0<Observable<List<UserDTO>>>() {
-            @Override
-            public Observable<List<UserDTO>> call() {
-                return Observable.just(api.getUserDTOList());
-            }
-        })
-                .compose(this.<List<UserDTO>>applySchedulers());
-    }
-
-    @Override
-    public Observable<UserDTO> updateUser(final Integer id, final String pass) {
-        return Observable.defer(new Func0<Observable<UserDTO>>() {
-            @Override
-            public Observable<UserDTO> call() {
-                return Observable.just(api.updateUserDTO(id, pass));
-            }
-        })
-                .compose(this.<UserDTO>applySchedulers());
-    }
-
-    @Override
-    public Observable<Void> deleteUser(final int id) {
-        return Observable.defer(new Func0<Observable<Void>>() {
-            @Override
-            public Observable<Void> call() {
-                return Observable.just(api.deleteUserDTO(id));
-            }
-        })
-                .compose(this.<Void>applySchedulers());
-    }
-
-    @Override
-    public Observable<IsBusyResponse> isLoginExists(final String login) {
-        return Observable.defer(new Func0<Observable<IsBusyResponse>>() {
-            @Override
-            public Observable<IsBusyResponse> call() {
-                return Observable.just(api.isLoginExists(login));
-            }
-        })
-                .compose(this.<IsBusyResponse>applySchedulers());
-    }
-
-    @Override
-    public Observable<IsBusyResponse> isEmailExists(final String email) {
-        return Observable.defer(new Func0<Observable<IsBusyResponse>>() {
-            @Override
-            public Observable<IsBusyResponse> call() {
-                return Observable.just(api.isEmailExists(email));
-            }
-        })
-                .compose(this.<IsBusyResponse>applySchedulers());
-    }
-
-    @Override
-    public Observable<UserDTO> createUser(final UserDTO userDTO) {
-        return Observable.defer(new Func0<Observable<UserDTO>>() {
-            @Override
-            public Observable<UserDTO> call() {
-                return Observable.just(api.createUserDTO(userDTO));
-            }
-        })
-                .compose(this.<UserDTO>applySchedulers());
+                .compose(this.<List<SiteDTO>>applySchedulers());
     }
 
     @SuppressWarnings("unchecked")

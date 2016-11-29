@@ -26,6 +26,18 @@
 
     </android.support.design.widget.AppBarLayout>
 
+<<<<<<< HEAD
+=======
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="8dp"
+        android:layout_gravity="center"
+        android:visibility="gone" />
+
+>>>>>>> origin/master
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -81,6 +93,17 @@
                     android:inputType="textPassword"
                     android:maxLines="1" />
 
+<<<<<<< HEAD
+=======
+                <Switch
+                    android:id="@+id/isadmin_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text="@string/action_isadmin_switch"
+                    android:enabled="false"/>
+
+>>>>>>> origin/master
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -110,8 +133,12 @@
                 android:layout_gravity="center"
                 android:contentDescription=""
                 android:src="@drawable/ic_check_circle"
+<<<<<<< HEAD
                 android:visibility="gone"
                 />
+=======
+                android:visibility="gone" />
+>>>>>>> origin/master
 
         </FrameLayout>
     </android.support.v4.widget.NestedScrollView>

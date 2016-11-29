@@ -1,6 +1,5 @@
 package com.slack.geekbrainswork.ai.view.activities;
 
-import android.content.Intent;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -13,30 +12,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.slack.geekbrainswork.ai.R;
-import com.slack.geekbrainswork.ai.presenter.MainPresenter;
 import com.slack.geekbrainswork.ai.view.MainActivityCallback;
 import com.slack.geekbrainswork.ai.view.fragments.CatalogsFragment;
-import com.slack.geekbrainswork.ai.view.fragments.KeywordListFragment;
-import com.slack.geekbrainswork.ai.view.fragments.PersonListFragment;
 import com.slack.geekbrainswork.ai.view.fragments.SiteListFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements MainView, MainActivityCallback {
+public class MainActivity extends AppCompatActivity implements MainActivityCallback {
 
-    private static String TAG_CATALOGS = "TAG_CATALOGS";
-    private static String TAG_SITE_CATALOG = "TAG_SITE_CATALOG";
-    private static String TAG_USERS = "TAG_USERS";
-    private static String TAG_PERSONS = "TAG_PERSONS";
-    private static String TAG_KEYWORDS = "TAG_KEYWORDS";
+    private static String TAG = "TAG";
 
     @BindView(R.id.coordinator_layout)
     CoordinatorLayout coordinatorLayout;
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    private MainPresenter presenter = new MainPresenter(this);
     private FragmentManager fragmentManager;
 
     @Override
@@ -44,11 +35,11 @@ public class MainActivity extends AppCompatActivity implements MainView, MainAct
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
         setSupportActionBar(toolbar);
+
         fragmentManager = getSupportFragmentManager();
-        Fragment fragment = fragmentManager.findFragmentByTag(TAG_CATALOGS);
-        if (fragment == null) replaceFragment(new CatalogsFragment(), false, TAG_CATALOGS);
+        Fragment fragment = fragmentManager.findFragmentByTag(TAG);
+        if (fragment == null) replaceFragment(new CatalogsFragment(), false);
     }
 
     @Override
@@ -66,58 +57,29 @@ public class MainActivity extends AppCompatActivity implements MainView, MainAct
             case R.id.action_users:
                 startUsersFragment();
                 return true;
-            case R.id.action_logout:
-                presenter.onActionLogOutClick();
-                return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void replaceFragment(Fragment fragment, boolean addBackStack, String tag) {
+    private void replaceFragment(Fragment fragment, boolean addBackStack) {
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.container, fragment, tag);
-        if (addBackStack && fragmentManager.findFragmentByTag(tag) == null) {
-            transaction.addToBackStack(tag);
-        }
+        transaction.replace(R.id.container, fragment, TAG);
+        if (addBackStack) transaction.addToBackStack(null);
         transaction.commit();
     }
 
     public void startCatalogsFragment() {
-        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        replaceFragment(new CatalogsFragment(), false, TAG_CATALOGS);
+        replaceFragment(new CatalogsFragment(), true);
     }
 
     @Override
     public void startSitesCatalogFragment() {
-        replaceFragment(new SiteListFragment(), true, TAG_SITE_CATALOG);
-    }
-
-    @Override
-    public void startPersonsCatalogFragment() {
-        replaceFragment(new PersonListFragment(), true, TAG_PERSONS);
-    }
-
-    @Override
-    public void startKeywordsCatalogFragment() {
-        replaceFragment(new KeywordListFragment(), true, TAG_KEYWORDS);
+        replaceFragment(new SiteListFragment(), true);
     }
 
     public void startUsersFragment() {
         //ToDo updating
         //replaceFragment(UsersFragment, true);
-        //fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        Snackbar.make(coordinatorLayout, "Функционал не реализован", Snackbar.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void navigateToLoginView() {
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    @Override
-    public void showError(String error) {
-
+        Snackbar.make(coordinatorLayout,"Функционал не реализован",Snackbar.LENGTH_LONG).show();
     }
 }
