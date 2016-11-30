@@ -169,6 +169,11 @@ public class RepositoryDemo implements Repository {
         return createUser(userDTO);
     }
 
+    @Override
+    public Observable<Response<Void>> resetPassword(UserDTO userDTO) {
+        return null;
+    }
+
     @SuppressWarnings("unchecked")
     private <T> Observable.Transformer<T, T> applySchedulers() {
         return (Observable.Transformer<T, T>) schedulersTransformer;

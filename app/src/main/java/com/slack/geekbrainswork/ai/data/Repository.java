@@ -43,5 +43,7 @@ public interface Repository {
     Observable<UserDTO> createUser(UserDTO userDTO);
 
     Observable<UserDTO> regUser(UserDTO userDTO);
+
+    Observable<Response<Void>> resetPassword(UserDTO userDTO);
 }
 

@@ -19,4 +19,6 @@ public interface LoginView {
     void navigateToMainView();
 
     void navigateToRegistrationUserView();
+
+    void navigateToSendPasswordView();
 }

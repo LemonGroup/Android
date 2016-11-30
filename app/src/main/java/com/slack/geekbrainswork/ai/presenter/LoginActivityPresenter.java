@@ -108,4 +108,8 @@ public class LoginActivityPresenter extends BasePresenter {
     public void onRegButtonClick() {
         view.navigateToRegistrationUserView();
     }
+
+    public void onForgotPasswordTextViewClick() {
+        view.navigateToSendPasswordView();
+    }
 }

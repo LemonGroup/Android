@@ -51,6 +51,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         ButterKnife.bind(this);
 
         forgotPassTextView.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
+        forgotPassTextView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onForgotPasswordTextViewClick();
+            }
+        });
 
         presenter.attemptLoginByToken();
         passwordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -145,6 +151,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     public void navigateToRegistrationUserView() {
         Intent intent = new Intent(this, RegistrationUserActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void navigateToSendPasswordView() {
+        Intent intent = new Intent(this, SendPasswordActivity.class);
         startActivity(intent);
     }
 }

@@ -32,4 +32,6 @@
     <string name="user_add_title">Создание пользователя</string>
     <string name="action_isadmin_switch">Администратор</string>
     <string name="forgot_password">Забыли пароль?</string>
+    <string name="send_button_text">Отправить</string>
+    <string name="forgot_password_title">Смена пароля</string>
 </resources>

@@ -85,6 +85,12 @@ public class RepositoryImpl implements Repository {
     }
 
     @Override
+    public Observable<Response<Void>> resetPassword(UserDTO userDTO) {
+        return loginApiInterface.resetPassword(userDTO)
+                .compose(this.<Response<Void>>applySchedulers());
+    }
+
+    @Override
     public String getTokenFromStorage() {
         return helper.getFromPref();
     }

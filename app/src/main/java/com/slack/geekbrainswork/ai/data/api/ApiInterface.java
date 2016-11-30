@@ -68,4 +68,6 @@ public interface ApiInterface {
     @POST("user/reguser/check_email")
     Observable<Response<Void>> checkEmail(@Query("email") String email);
 
+    @POST("catalog/accounts/reset_password")
+    Observable<Response<Void>> resetPassword(@Body UserDTO userDTO);
 }
