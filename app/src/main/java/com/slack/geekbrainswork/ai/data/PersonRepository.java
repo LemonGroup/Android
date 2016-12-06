@@ -18,7 +18,7 @@ public interface PersonRepository {
 
     Observable<List<PersonDTO>> getPersons();
 
-    Observable<PersonDTO> updatePerson(Person person);
+    Observable<PersonDTO> updatePerson(PersonDTO person);
 
     Observable<PersonDTO> createPerson(PersonDTO person);
 

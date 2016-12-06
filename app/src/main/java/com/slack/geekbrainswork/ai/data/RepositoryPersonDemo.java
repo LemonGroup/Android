@@ -48,7 +48,7 @@ public class RepositoryPersonDemo implements PersonRepository {
     }
 
     @Override
-    public Observable<PersonDTO> updatePerson(final Person person) {
+    public Observable<PersonDTO> updatePerson(final PersonDTO person) {
         return Observable.defer(new Func0<Observable<PersonDTO>>() {
             @Override
             public Observable<PersonDTO> call() {

@@ -56,8 +56,8 @@ public class PersonRepositoryImpl implements PersonRepository {
     }
 
     @Override
-    public Observable<PersonDTO> updatePerson(final Person person) {
-        return apiInterface.updatePerson(person.getId(), person.getName())
+    public Observable<PersonDTO> updatePerson(PersonDTO person) {
+        return apiInterface.updatePerson(person)
                 .compose(this.<PersonDTO>applySchedulers());
     }
 

@@ -2,6 +2,7 @@ package com.slack.geekbrainswork.ai.presenter;
 
 import android.os.Bundle;
 
+import com.slack.geekbrainswork.ai.data.dto.PersonDTO;
 import com.slack.geekbrainswork.ai.presenter.mappers.PersonDtoToPersonMapper;
 import com.slack.geekbrainswork.ai.presenter.vo.Person;
 import com.slack.geekbrainswork.ai.view.activities.PersonView;
@@ -42,8 +43,8 @@ public class UpdatePersonPresenter extends BasePresenter {
         }
 
         person.setName(siteName);
-
-        Subscription subscription = personRepository.updatePerson(person)
+        PersonDTO personDTO = new PersonDTO(person.getId(), siteName);
+        Subscription subscription = personRepository.updatePerson(personDTO)
                 .map(personMapper)
                 .subscribe(new Observer<Person>() {
                     @Override

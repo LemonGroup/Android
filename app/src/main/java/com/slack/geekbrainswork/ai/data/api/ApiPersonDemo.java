@@ -35,7 +35,7 @@ public class ApiPersonDemo {
         return personDTOList;
     }
 
-    public PersonDTO updatePersonDTO(Person person) {
+    public PersonDTO updatePersonDTO(PersonDTO person) {
         Log.d("UPDATE ", Thread.currentThread().getName());
         for (int i = 0; i < personDTOList.size(); i++) {
             if (personDTOList.get(i).getId().intValue() == person.getId().intValue()) {

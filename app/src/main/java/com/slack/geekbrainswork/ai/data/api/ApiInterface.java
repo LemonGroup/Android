@@ -7,6 +7,7 @@ import com.slack.geekbrainswork.ai.data.dto.SiteDTO;
 import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
 import com.slack.geekbrainswork.ai.data.dto.UserDTO;
 import com.slack.geekbrainswork.ai.presenter.vo.Catalog;
+import com.slack.geekbrainswork.ai.presenter.vo.Person;
 import com.slack.geekbrainswork.ai.presenter.vo.Site;
 import com.slack.geekbrainswork.ai.presenter.vo.User;
 
@@ -79,7 +80,7 @@ public interface ApiInterface {
     Observable<List<PersonDTO>> getPersons();
 
     @PUT("/catalog/persons")
-    Observable<PersonDTO> updatePerson(@Path("ID") int personId, @Field("Name") String name);
+    Observable<PersonDTO> updatePerson(@Body PersonDTO personDTO);
 
     @POST("/catalog/persons")
     Observable<PersonDTO> createPerson(@Body PersonDTO person);

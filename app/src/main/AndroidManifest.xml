@@ -61,5 +61,6 @@
         <activity
             android:name=".view.activities.AddKeywordActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
+
     </application>
 </manifest>
