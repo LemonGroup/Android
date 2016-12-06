@@ -3,6 +3,7 @@ package com.slack.geekbrainswork.ai.presenter.mappers;
 import com.slack.geekbrainswork.ai.data.dto.PersonDTO;
 import com.slack.geekbrainswork.ai.presenter.vo.Person;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
@@ -13,8 +14,13 @@ import rx.functions.Func1;
  */
 
 public class PersonsDtoToPersonsMapper implements Func1<List<PersonDTO>,List<Person>> {
+
+
     @Override
     public List<Person> call(List<PersonDTO> personDTOs) {
+        if (personDTOs == null) {
+            return new ArrayList<>();
+        }
         return Observable.from(personDTOs)
                 .map(new PersonDtoToPersonMapper())
                 .toList()

@@ -1,8 +1,12 @@
 package com.slack.geekbrainswork.ai.data;
 
+import com.slack.geekbrainswork.ai.LemonStateAdminApp;
 import com.slack.geekbrainswork.ai.data.api.ApiClient;
 import com.slack.geekbrainswork.ai.data.api.ApiInterface;
 import com.slack.geekbrainswork.ai.data.dto.KeywordDTO;
+import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
+import com.slack.geekbrainswork.ai.data.local.PrefHelper;
+import com.slack.geekbrainswork.ai.data.local.PreferencesHelper;
 import com.slack.geekbrainswork.ai.presenter.vo.Keyword;
 
 import java.util.List;
@@ -19,6 +23,8 @@ public class KeywordRepositoryImpl implements KeywordRepository {
 
     private final Observable.Transformer schedulersTransformer;
     private ApiInterface apiInterface = ApiClient.getApiInterface();
+    private ApiInterface loginApiInterface;
+    private PrefHelper helper = new PreferencesHelper(LemonStateAdminApp.getContext());
 
     public KeywordRepositoryImpl() {
         schedulersTransformer = new Observable.Transformer() {
@@ -28,33 +34,47 @@ public class KeywordRepositoryImpl implements KeywordRepository {
                         .observeOn(AndroidSchedulers.mainThread());
             }
         };
+
+        loginApiInterface = ApiClient.getApiInterface();
+        apiInterface = ApiClient.getApiInterface(getTokenFromStorage());
     }
 
     @Override
+    public Observable<TokenResponse> auth(String login, String password) {
+        return loginApiInterface.auth(login, password)
+                .compose(this.<TokenResponse>applySchedulers());
+    }
+
+    @Override
+    public String getTokenFromStorage() {
+        return helper.getFromPref();
+    }
+
+
+    @Override
     public Observable<List<KeywordDTO>> getKeywords() {
-        //ToDo getKeywords from Rest
         return apiInterface.getKeywords()
                 .compose(this.<List<KeywordDTO>>applySchedulers());
     }
 
     @Override
     public Observable<KeywordDTO> updateKeyword(final Keyword keyword) {
-        //ToDo updateKeyword by Rest
         return apiInterface.updateKeyword(keyword.getId(), keyword.getKeyword())
                 .compose(this.<KeywordDTO>applySchedulers());
     }
 
     @Override
     public Observable<KeywordDTO> createKeyword(final String keywordName) {
-        //ToDo createKeyword by Rest
         return apiInterface.createKeyword(keywordName)
                 .compose(this.<KeywordDTO>applySchedulers());
     }
 
     @Override
-    public Observable<List<KeywordDTO>> removeKeyword(final Keyword keyword) {
-        return null;
+    public Observable<Void> removeKeyword(final Keyword keyword) {
+        return apiInterface.removeKeyword(keyword.getId())
+                .compose(this.<Void>applySchedulers());
     }
+
 
     @SuppressWarnings("unchecked")
     private <T> Observable.Transformer<T, T> applySchedulers() {

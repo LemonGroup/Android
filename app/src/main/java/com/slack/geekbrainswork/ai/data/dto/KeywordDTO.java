@@ -8,16 +8,28 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class KeywordDTO {
-    @SerializedName("ID")
+    @SerializedName("id")
     @Expose
     private Integer id;
-    @SerializedName("Keyword")
+    @SerializedName("personId")
+    @Expose
+    private Integer personId;
+    @SerializedName("keyword")
     @Expose
     private String keyword;
 
-    public KeywordDTO(Integer id, String keyword) {
+    public KeywordDTO(Integer id, Integer personId, String keyword) {
         this.id = id;
+        this.personId = personId;
         this.keyword = keyword;
+    }
+
+    public Integer getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(Integer personId) {
+        this.personId = personId;
     }
 
     public Integer getId() {

@@ -3,19 +3,6 @@ package com.slack.geekbrainswork.ai.view.activities;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-<<<<<<< HEAD
-
-import com.slack.geekbrainswork.ai.R;
-import com.slack.geekbrainswork.ai.presenter.UserAddPresenter;
-import com.slack.geekbrainswork.ai.presenter.UserUpdatePresenter;
-import com.slack.geekbrainswork.ai.presenter.vo.User;
-
-import butterknife.ButterKnife;
-
-public class UserAddActivity extends UserActivity{
-
-    private UserAddPresenter presenter = new UserAddPresenter(this);
-=======
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -28,7 +15,6 @@ import butterknife.ButterKnife;
 public class UserAddActivity extends UserActivity {
 
     protected UserAddPresenter presenter = new UserAddPresenter(this);
->>>>>>> origin/master
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,15 +23,9 @@ public class UserAddActivity extends UserActivity {
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
 
-<<<<<<< HEAD
-
-        setTitle(getResources().getString(R.string.user_add_title));
-
-=======
         setTitle(getResources().getString(R.string.user_add_title));
 
         isAdminSwitch.setEnabled(true);
->>>>>>> origin/master
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,8 +45,6 @@ public class UserAddActivity extends UserActivity {
         presenter.onCreate(savedInstanceState);
     }
 
-<<<<<<< HEAD
-=======
 
     @Override
     public void onClose() {
@@ -96,7 +74,6 @@ public class UserAddActivity extends UserActivity {
 
     }
 
->>>>>>> origin/master
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

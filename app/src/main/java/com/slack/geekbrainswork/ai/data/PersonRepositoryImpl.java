@@ -1,8 +1,12 @@
 package com.slack.geekbrainswork.ai.data;
 
+import com.slack.geekbrainswork.ai.LemonStateAdminApp;
 import com.slack.geekbrainswork.ai.data.api.ApiClient;
 import com.slack.geekbrainswork.ai.data.api.ApiInterface;
 import com.slack.geekbrainswork.ai.data.dto.PersonDTO;
+import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
+import com.slack.geekbrainswork.ai.data.local.PrefHelper;
+import com.slack.geekbrainswork.ai.data.local.PreferencesHelper;
 import com.slack.geekbrainswork.ai.presenter.vo.Person;
 
 import java.util.List;
@@ -19,6 +23,8 @@ public class PersonRepositoryImpl implements PersonRepository {
 
     private final Observable.Transformer schedulersTransformer;
     private ApiInterface apiInterface = ApiClient.getApiInterface();
+    private ApiInterface loginApiInterface;
+    private PrefHelper helper = new PreferencesHelper(LemonStateAdminApp.getContext());
 
     public PersonRepositoryImpl() {
         schedulersTransformer = new Observable.Transformer() {
@@ -28,32 +34,43 @@ public class PersonRepositoryImpl implements PersonRepository {
                         .observeOn(AndroidSchedulers.mainThread());
             }
         };
+        loginApiInterface = ApiClient.getApiInterface();
+        apiInterface = ApiClient.getApiInterface(getTokenFromStorage());
+    }
+
+    @Override
+    public Observable<TokenResponse> auth(String login, String password) {
+        return loginApiInterface.auth(login, password)
+                .compose(this.<TokenResponse>applySchedulers());
+    }
+
+    @Override
+    public String getTokenFromStorage() {
+        return helper.getFromPref();
     }
 
     @Override
     public Observable<List<PersonDTO>> getPersons() {
-        //ToDo getPersons from Rest
         return apiInterface.getPersons()
                 .compose(this.<List<PersonDTO>>applySchedulers());
     }
 
     @Override
     public Observable<PersonDTO> updatePerson(final Person person) {
-        //ToDo updatePerson by Rest
         return apiInterface.updatePerson(person.getId(), person.getName())
                 .compose(this.<PersonDTO>applySchedulers());
     }
 
     @Override
-    public Observable<PersonDTO> createPerson(final String personName) {
-        //ToDo createPerson by Rest
-        return apiInterface.createPerson(personName)
+    public Observable<PersonDTO> createPerson(final PersonDTO person) {
+        return apiInterface.createPerson(person)
                 .compose(this.<PersonDTO>applySchedulers());
     }
 
     @Override
-    public Observable<List<PersonDTO>> removePerson(final Person person) {
-        return null;
+    public Observable<Void> removePerson(int id) {
+        return apiInterface.removePerson(id)
+                .compose(this.<Void>applySchedulers());
     }
 
     @SuppressWarnings("unchecked")

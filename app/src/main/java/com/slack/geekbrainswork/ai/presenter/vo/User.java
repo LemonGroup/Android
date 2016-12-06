@@ -15,13 +15,6 @@ public class User implements Serializable{
     @SerializedName("email")
     @Expose
     private String email;
-<<<<<<< HEAD
-
-    public User(Integer id, String name, String email) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-=======
     @SerializedName("privilege")
     @Expose
     private Integer privilege;
@@ -31,7 +24,6 @@ public class User implements Serializable{
         this.name = name;
         this.email = email;
         this.privilege = privilege;
->>>>>>> origin/master
     }
 
     public Integer getId() {
@@ -57,8 +49,6 @@ public class User implements Serializable{
     public void setEmail(String email) {
         this.email = email;
     }
-<<<<<<< HEAD
-=======
 
 
     public Integer getPrivilege() {
@@ -68,5 +58,4 @@ public class User implements Serializable{
     public void setPrivilege(Integer privilege) {
         this.privilege = privilege;
     }
->>>>>>> origin/master
 }

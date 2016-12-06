@@ -10,10 +10,7 @@ import com.slack.geekbrainswork.ai.view.fragments.UserListView;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
-=======
 import retrofit2.adapter.rxjava.HttpException;
->>>>>>> origin/master
 import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
@@ -95,11 +92,7 @@ public class UserListPresenter extends BasePresenter {
 
                     @Override
                     public void onError(Throwable e) {
-<<<<<<< HEAD
-                        view.showError(e.getMessage());
-=======
                         handleError(e);
->>>>>>> origin/master
                     }
 
                     @Override
@@ -111,8 +104,6 @@ public class UserListPresenter extends BasePresenter {
         addSubscription(subscription);
     }
 
-<<<<<<< HEAD
-=======
     private void handleError(Throwable e) {
         String message = null;
         if (e instanceof HttpException) {
@@ -125,7 +116,6 @@ public class UserListPresenter extends BasePresenter {
         view.showError(message);
     }
 
->>>>>>> origin/master
     public void onActivityResult() {
         loadData();
     }

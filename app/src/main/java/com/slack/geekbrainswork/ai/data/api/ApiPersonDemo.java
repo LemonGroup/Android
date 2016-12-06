@@ -46,9 +46,9 @@ public class ApiPersonDemo {
         return null;
     }
 
-    public PersonDTO createPersonDTO(String personName) {
+    public PersonDTO createPersonDTO(PersonDTO person) {
         Log.d("CREATE ", Thread.currentThread().getName());
-        PersonDTO personDTO = new PersonDTO(getMaxId() + 1, personName);
+        PersonDTO personDTO = new PersonDTO(getMaxId() + 1, person.getName());
         personDTOList.add(personDTO);
         return personDTO;
     }

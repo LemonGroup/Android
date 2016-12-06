@@ -13,6 +13,6 @@ public class KeywordDtoToKeywordMapper implements Func1<KeywordDTO,Keyword> {
 
     @Override
     public Keyword call(KeywordDTO keywordDTO) {
-        return new Keyword(keywordDTO.getId(),keywordDTO.getKeyword());
+        return new Keyword(keywordDTO.getId(),keywordDTO.getPersonId(),keywordDTO.getKeyword());
     }
 }

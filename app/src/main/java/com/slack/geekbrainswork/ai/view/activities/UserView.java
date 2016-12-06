@@ -13,9 +13,6 @@ public interface UserView extends View {
 
     String getEmailTextViewText();
 
-<<<<<<< HEAD
-    void onClose(User user);
-=======
     boolean getIsAdminValue();
 
 //    void onClose(User user);
@@ -23,5 +20,4 @@ public interface UserView extends View {
     void onClose();
 
     void showProgressBar(boolean show);
->>>>>>> origin/master
 }

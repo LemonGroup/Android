@@ -9,11 +9,21 @@ import java.io.Serializable;
 public class Keyword implements Serializable {
 
     private Integer id;
+    private Integer personId;
     private String keyword;
 
-    public Keyword(Integer id, String keyword) {
+    public Keyword(Integer id, Integer personId, String keyword) {
         this.id = id;
+        this.personId = personId;
         this.keyword = keyword;
+    }
+
+    public Integer getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(Integer personId) {
+        this.personId = personId;
     }
 
     public Integer getId() {

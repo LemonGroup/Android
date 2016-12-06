@@ -8,15 +8,19 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class PersonDTO {
-    @SerializedName("ID")
+    @SerializedName("id")
     @Expose
     private Integer id;
-    @SerializedName("Name")
+    @SerializedName("personName")
     @Expose
     private String name;
 
     public PersonDTO(Integer id, String name) {
         this.id = id;
+        this.name = name;
+    }
+
+    public PersonDTO(String name) {
         this.name = name;
     }
 

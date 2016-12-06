@@ -1,6 +1,7 @@
 package com.slack.geekbrainswork.ai.data;
 
 import com.slack.geekbrainswork.ai.data.dto.PersonDTO;
+import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
 import com.slack.geekbrainswork.ai.presenter.vo.Person;
 
 import java.util.List;
@@ -13,12 +14,16 @@ import rx.Observable;
 
 public interface PersonRepository {
 
+    String getTokenFromStorage();
+
     Observable<List<PersonDTO>> getPersons();
 
     Observable<PersonDTO> updatePerson(Person person);
 
-    Observable<PersonDTO> createPerson(String personName);
+    Observable<PersonDTO> createPerson(PersonDTO person);
 
-    Observable<List<PersonDTO>> removePerson(Person person);
+    Observable<Void> removePerson(int id);
+
+    Observable<TokenResponse> auth(String login, String password);
 
 }

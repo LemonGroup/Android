@@ -3,7 +3,7 @@ package com.slack.geekbrainswork.ai.presenter.vo;
 import java.io.Serializable;
 
 /**
- * Created by Dell on 19.11.2016.
+ * Created by Prilepishev Vadim on 19.11.2016.
  */
 
 public class Person implements Serializable {

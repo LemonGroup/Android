@@ -2,6 +2,7 @@ package com.slack.geekbrainswork.ai.presenter;
 
 import android.os.Bundle;
 
+import com.slack.geekbrainswork.ai.data.dto.PersonDTO;
 import com.slack.geekbrainswork.ai.presenter.mappers.PersonDtoToPersonMapper;
 import com.slack.geekbrainswork.ai.presenter.vo.Person;
 import com.slack.geekbrainswork.ai.view.activities.PersonView;
@@ -34,12 +35,13 @@ public class AddPersonPresenter extends BasePresenter {
     public void onSaveButtonClick() {
 
         String personName = personView.getPersonNameTextViewText();
+        PersonDTO personDTO = new PersonDTO(personName);
         if (personName == null || personName.isEmpty()) {
             personView.showError("Имя не должно быть пустым");
             return;
         }
 
-        Subscription subscription = personRepository.createPerson(personName)
+        Subscription subscription = personRepository.createPerson(personDTO)
                 .map(mapper)
                 .subscribe(new Observer<Person>() {
                     @Override

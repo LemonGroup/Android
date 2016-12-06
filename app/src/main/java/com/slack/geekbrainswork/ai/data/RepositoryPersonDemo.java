@@ -2,6 +2,7 @@ package com.slack.geekbrainswork.ai.data;
 
 import com.slack.geekbrainswork.ai.data.api.ApiPersonDemo;
 import com.slack.geekbrainswork.ai.data.dto.PersonDTO;
+import com.slack.geekbrainswork.ai.data.dto.TokenResponse;
 import com.slack.geekbrainswork.ai.presenter.vo.Person;
 
 import java.util.List;
@@ -31,6 +32,11 @@ public class RepositoryPersonDemo implements PersonRepository {
     }
 
     @Override
+    public String getTokenFromStorage() {
+        return null;
+    }
+
+    @Override
     public Observable<List<PersonDTO>> getPersons() {
         return Observable.defer(new Func0<Observable<List<PersonDTO>>>() {
             @Override
@@ -53,25 +59,24 @@ public class RepositoryPersonDemo implements PersonRepository {
     }
 
     @Override
-    public Observable<PersonDTO> createPerson(final String personName) {
+    public Observable<PersonDTO> createPerson(final PersonDTO person) {
         return Observable.defer(new Func0<Observable<PersonDTO>>() {
             @Override
             public Observable<PersonDTO> call() {
-                return Observable.just(personApi.createPersonDTO(personName));
+                return Observable.just(personApi.createPersonDTO(person));
             }
         })
                 .compose(this.<PersonDTO>applySchedulers());
     }
 
     @Override
-    public Observable<List<PersonDTO>> removePerson(final Person person) {
-        return Observable.defer(new Func0<Observable<List<PersonDTO>>>() {
-            @Override
-            public Observable<List<PersonDTO>> call() {
-                return Observable.just(personApi.removePersonDTO(person));
-            }
-        })
-                .compose(this.<List<PersonDTO>>applySchedulers());
+    public Observable<Void> removePerson(int id) {
+        return null;
+    }
+
+    @Override
+    public Observable<TokenResponse> auth(String login, String password) {
+        return null;
     }
 
     @SuppressWarnings("unchecked")

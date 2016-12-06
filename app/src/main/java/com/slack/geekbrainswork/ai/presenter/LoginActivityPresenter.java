@@ -3,18 +3,11 @@ package com.slack.geekbrainswork.ai.presenter;
 import android.text.TextUtils;
 
 import com.slack.geekbrainswork.ai.data.Repository;
-<<<<<<< HEAD
-import com.slack.geekbrainswork.ai.data.RepositoryDemo;
-=======
->>>>>>> origin/master
 import com.slack.geekbrainswork.ai.data.RepositoryImpl;
 import com.slack.geekbrainswork.ai.presenter.mappers.TokenMapper;
 import com.slack.geekbrainswork.ai.view.activities.LoginView;
 
-<<<<<<< HEAD
-=======
 import retrofit2.adapter.rxjava.HttpException;
->>>>>>> origin/master
 import rx.Observer;
 import rx.Subscription;
 import rx.functions.Action1;
@@ -76,11 +69,7 @@ public class LoginActivityPresenter extends BasePresenter {
                     @Override
                     public void onError(Throwable e) {
                         view.showProgress(false);
-<<<<<<< HEAD
-                        view.showAuthorizationError(e.getMessage());
-=======
                         handleError(e);
->>>>>>> origin/master
                     }
 
                     @Override
@@ -92,8 +81,6 @@ public class LoginActivityPresenter extends BasePresenter {
         addSubscription(subscription);
     }
 
-<<<<<<< HEAD
-=======
     private void handleError(Throwable e) {
         String message = null;
         if (e instanceof HttpException) {
@@ -106,7 +93,6 @@ public class LoginActivityPresenter extends BasePresenter {
         view.showAuthorizationError(message);
     }
 
->>>>>>> origin/master
     private boolean isLoginValid(String login) {
         //TODO: Replace this with your own logic
         return login.contains("");
@@ -114,16 +100,16 @@ public class LoginActivityPresenter extends BasePresenter {
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-<<<<<<< HEAD
-        return password.length() > 4;
-=======
         return true;
 //        return password.length() > 4;
->>>>>>> origin/master
     }
 
 
     public void onRegButtonClick() {
         view.navigateToRegistrationUserView();
+    }
+
+    public void onForgotPasswordTextViewClick() {
+        view.navigateToSendPasswordView();
     }
 }

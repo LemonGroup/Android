@@ -2,6 +2,7 @@ package com.slack.geekbrainswork.ai.presenter;
 
 import android.os.Bundle;
 
+import com.slack.geekbrainswork.ai.data.dto.KeywordDTO;
 import com.slack.geekbrainswork.ai.presenter.mappers.KeywordsDtoToKeywordsMapper;
 import com.slack.geekbrainswork.ai.presenter.vo.Keyword;
 import com.slack.geekbrainswork.ai.view.fragments.KeywordListView;
@@ -9,8 +10,10 @@ import com.slack.geekbrainswork.ai.view.fragments.KeywordListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
+import rx.functions.Func1;
 
 /**
  * Created by Prilepishev Vadim on 26.11.2016.
@@ -91,6 +94,12 @@ public class KeywordListPresenter extends BasePresenter {
 
     public void onClickRemoveButton(Keyword keyword) {
         Subscription subscription = keywordRepository.removeKeyword(keyword)
+                .flatMap(new Func1<Void, Observable<List<KeywordDTO>>>() {
+                    @Override
+                    public Observable<List<KeywordDTO>> call(Void aVoid) {
+                        return keywordRepository.getKeywords();
+                    }
+                })
                 .map(keywordListMapper)
                 .subscribe(new Observer<List<Keyword>>() {
                     @Override

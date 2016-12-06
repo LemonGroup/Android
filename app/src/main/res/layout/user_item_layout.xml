@@ -34,4 +34,3 @@
         android:textSize="@dimen/big_text_size"
         android:textColor="@color/colorAccent" />
 </android.support.v7.widget.CardView>
-

@@ -2,18 +2,12 @@ package com.slack.geekbrainswork.ai.presenter;
 
 import android.os.Bundle;
 
-<<<<<<< HEAD
-=======
 import com.slack.geekbrainswork.ai.data.dto.UserDTO;
->>>>>>> origin/master
 import com.slack.geekbrainswork.ai.presenter.mappers.UserMapper;
 import com.slack.geekbrainswork.ai.presenter.vo.User;
 import com.slack.geekbrainswork.ai.view.activities.UserView;
 
-<<<<<<< HEAD
-=======
 import retrofit2.Response;
->>>>>>> origin/master
 import rx.Observer;
 import rx.Subscription;
 
@@ -51,11 +45,6 @@ public class UserUpdatePresenter extends BasePresenter {
     }
 
     private void updateUser(String pass1) {
-<<<<<<< HEAD
-        Subscription subscription = repository.updateUser(user.getId(), pass1)
-                .map(mapper)
-                .subscribe(new Observer<User>() {
-=======
         UserDTO userDTO = new UserDTO();
         userDTO.setId(user.getId());
         userDTO.setPassword(pass1);
@@ -64,7 +53,6 @@ public class UserUpdatePresenter extends BasePresenter {
 
         Subscription subscription = repository.changePassword(userDTO)
                 .subscribe(new Observer<Response<Void>>() {
->>>>>>> origin/master
                     @Override
                     public void onCompleted() {
 
@@ -72,22 +60,14 @@ public class UserUpdatePresenter extends BasePresenter {
 
                     @Override
                     public void onError(Throwable e) {
-<<<<<<< HEAD
-=======
                         view.showProgressBar(false);
->>>>>>> origin/master
                         view.showError(e.getMessage());
                     }
 
                     @Override
-<<<<<<< HEAD
-                    public void onNext(User user) {
-                        view.onClose(user);
-=======
                     public void onNext(Response<Void> response) {
                         view.showProgressBar(false);
                         view.onClose();
->>>>>>> origin/master
                     }
                 });
 

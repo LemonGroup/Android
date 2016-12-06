@@ -13,20 +13,6 @@ public class UserDTO {
     @SerializedName("email")
     @Expose
     private String email;
-<<<<<<< HEAD
-    private String pass;
-
-    public UserDTO(Integer id, String name, String email) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-    }
-
-    public UserDTO(String name, String email, String password) {
-        this.name = name;
-        this.email = email;
-        this.pass = password;
-=======
     @SerializedName("password")
     @Expose
     private String password;
@@ -49,7 +35,6 @@ public class UserDTO {
         this.email = email;
         this.password = password;
         this.privilege = privilege;
->>>>>>> origin/master
     }
 
     public Integer getId() {
@@ -75,8 +60,6 @@ public class UserDTO {
     public void setEmail(String email) {
         this.email = email;
     }
-<<<<<<< HEAD
-=======
 
     public Integer getPrivilege() {
         return privilege;
@@ -89,5 +72,4 @@ public class UserDTO {
     public void setPassword(String password) {
         this.password = password;
     }
->>>>>>> origin/master
 }

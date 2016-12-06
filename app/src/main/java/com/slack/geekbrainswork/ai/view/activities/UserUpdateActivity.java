@@ -27,11 +27,8 @@ public class UserUpdateActivity extends UserActivity {
         loginEditText.setText(user.getName());
         emailEditText.setText(user.getEmail());
 
-<<<<<<< HEAD
-=======
         isAdminSwitch.setChecked(user.getPrivilege() == 2);
 
->>>>>>> origin/master
         loginEditText.setEnabled(false);
         emailEditText.setEnabled(false);
 

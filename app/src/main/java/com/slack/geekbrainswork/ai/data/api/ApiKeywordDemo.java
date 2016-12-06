@@ -19,8 +19,8 @@ public class ApiKeywordDemo {
     private static List<KeywordDTO> keywordDTOList = new ArrayList<>();
 
     private ApiKeywordDemo() {
-        keywordDTOList.add(new KeywordDTO(1, "Путин"));
-        keywordDTOList.add(new KeywordDTO(2, "Медведев"));
+        keywordDTOList.add(new KeywordDTO(1,1, "Путин"));
+        keywordDTOList.add(new KeywordDTO(2,1, "Медведев"));
     }
 
     public static ApiKeywordDemo getkeywordApi() {
@@ -48,7 +48,7 @@ public class ApiKeywordDemo {
 
     public KeywordDTO createKeywordDTO(String KeywordName) {
         Log.d("CREATE ", Thread.currentThread().getName());
-        KeywordDTO KeywordDTO = new KeywordDTO(getMaxId() + 1, KeywordName);
+        KeywordDTO KeywordDTO = new KeywordDTO(getMaxId() + 1,1, KeywordName);
         keywordDTOList.add(KeywordDTO);
         return KeywordDTO;
     }

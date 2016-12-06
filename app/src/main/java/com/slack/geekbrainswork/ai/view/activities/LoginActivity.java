@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -17,9 +18,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.slack.geekbrainswork.ai.R;
+
 import com.slack.geekbrainswork.ai.presenter.LoginActivityPresenter;
 
+import com.slack.geekbrainswork.ai.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -38,6 +40,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     Button signInButton;
     @BindView(R.id.registration_button)
     Button regButton;
+    @BindView(R.id.forgot_pass_text_view)
+    TextView forgotPassTextView;
 
     private LoginActivityPresenter presenter = new LoginActivityPresenter(this);
 
@@ -47,14 +51,15 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
+        forgotPassTextView.setPaintFlags(Paint.UNDERLINE_TEXT_FLAG);
+        forgotPassTextView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.onForgotPasswordTextViewClick();
+            }
+        });
+
         presenter.attemptLoginByToken();
-<<<<<<< HEAD
-
-        emailView.setText("testuser");
-        passwordView.setText("testpass");
-
-=======
->>>>>>> origin/master
         passwordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -149,5 +154,10 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         Intent intent = new Intent(this, RegistrationUserActivity.class);
         startActivity(intent);
     }
-}
 
+    @Override
+    public void navigateToSendPasswordView() {
+        Intent intent = new Intent(this, SendPasswordActivity.class);
+        startActivity(intent);
+    }
+}

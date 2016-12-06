@@ -2,7 +2,8 @@
     <string name="app_name">LemonStat: Admin App</string>
     <string name="action_settings">Настройки</string>
     <string name="action_catalogs">Справочники</string>
-    <string name="action_users">Настройки доступа</string>
+    <string name="action_users">Пользователи</string>
+    <string name="action_logout">Завершить сеанс</string>
     <string name="cancel_button_text">Отмена</string>
     <string name="save_button_text">Сохранить</string>
     <string name="catalog_edit_title">Редактирование</string>
@@ -10,4 +11,27 @@
     <string name="catalog_add_title">Добавление</string>
     <string name="dialog_remove_message">Удалить?</string>
     <string name="action_delete">Удалить</string>
+    <string name="title_activity_login">Авторизация</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Логин</string>
+    <string name="prompt_password">Пароль</string>
+    <string name="action_sign_in">Вход</string>
+    <string name="action_registration_in">Регистрация</string>
+    <string name="action_sign_in_short">Вход</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="login_name_hint">Логин</string>
+    <string name="email_name_hint">E-mail</string>
+    <string name="prompt_password_repeat">Повторите пароль</string>
+    <string name="user_add_title">Создание пользователя</string>
+    <string name="action_isadmin_switch">Администратор</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="send_button_text">Отправить</string>
+    <string name="forgot_password_title">Смена пароля</string>
 </resources>

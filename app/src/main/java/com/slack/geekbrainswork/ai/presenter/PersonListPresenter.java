@@ -2,6 +2,7 @@ package com.slack.geekbrainswork.ai.presenter;
 
 import android.os.Bundle;
 
+import com.slack.geekbrainswork.ai.data.dto.PersonDTO;
 import com.slack.geekbrainswork.ai.presenter.mappers.PersonsDtoToPersonsMapper;
 import com.slack.geekbrainswork.ai.presenter.vo.Person;
 import com.slack.geekbrainswork.ai.view.fragments.PersonListView;
@@ -9,8 +10,10 @@ import com.slack.geekbrainswork.ai.view.fragments.PersonListView;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Observable;
 import rx.Observer;
 import rx.Subscription;
+import rx.functions.Func1;
 
 /**
  * Created by Prilepishev Vadim on 19.11.2016.
@@ -90,7 +93,13 @@ public class PersonListPresenter extends BasePresenter {
     }
 
     public void onClickRemoveButton(Person person) {
-        Subscription subscription = personRepository.removePerson(person)
+        Subscription subscription = personRepository.removePerson(person.getId())
+                .flatMap(new Func1<Void, Observable<List<PersonDTO>>>() {
+                    @Override
+                    public Observable<List<PersonDTO>> call(Void aVoid) {
+                        return personRepository.getPersons();
+                    }
+                })
                 .map(personListMapper)
                 .subscribe(new Observer<List<Person>>() {
                     @Override
